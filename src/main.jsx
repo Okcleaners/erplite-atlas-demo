@@ -19,8 +19,10 @@ import {
   UsersRound,
   Workflow,
 } from "lucide-react";
+import ContentStudioSection from "./ContentStudioSection.jsx";
 import atlasData from "../atlas-data.json";
 import "./styles.css";
+import "./contentStudio.css";
 
 const navItems = [
   ["Home", "home"],
@@ -580,7 +582,7 @@ function AlphaSection() {
               <span key={merchant}>{merchant}</span>
             ))}
           </div>
-          <a className="button primary" href="mailto:alpha@atlasade.com?subject=AtlasADE%20Alpha%20Access">
+          <a className="button primary" href="mailto:jwong@atlasade.com?subject=AtlasADE%20Alpha%20Access">
             Request Alpha Access <ArrowRight size={18} />
           </a>
         </motion.div>
@@ -601,8 +603,8 @@ function ContactSection() {
       <div className="section-inner contact-inner">
         <p className="eyebrow">Contact</p>
         <h2>Ready to map your business?</h2>
-        <a className="contact-link" href="mailto:hello@atlasade.com">
-          hello@atlasade.com
+        <a className="contact-link" href="mailto:jwong@atlasade.com">
+          jwong@atlasade.com
         </a>
         <div className="footer-line">
           <BrandMark />
@@ -620,6 +622,7 @@ function App() {
       <main>
         <Hero />
         <InteractiveAtlasSection />
+        <ContentStudioSection />
         <ErpLiteSection />
         <FlowSection />
         <ModulesSection />

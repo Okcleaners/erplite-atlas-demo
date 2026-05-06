@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { BrainCircuit, CheckCircle2, Eye, Megaphone, PenLine, Radio, ShieldCheck, TrendingUp, Workflow } from "lucide-react";
-import "./contentStudio.css";
 
 const studioSignals = [
   ["Sales signals", "Turn best-selling products and services into promotion ideas."],
