@@ -69,6 +69,36 @@ const flowSteps = [
   "Operational Insight",
 ];
 
+const disclosureSections = [
+  {
+    id: "accessibility-statement",
+    title: "Accessibility Statement",
+    body: [
+      "AtlasADE is committed to making its website accessible to all users. We aim to conform to WCAG 2.2 Level AA and are continuously improving accessibility.",
+      "If you have difficulty accessing content, email jwong@atlasade.com. Please include the page or section, the issue encountered, assistive technology or browser if relevant, and your preferred contact method.",
+      "We will make reasonable efforts to provide information in an alternative format when needed.",
+    ],
+  },
+  {
+    id: "privacy-policy",
+    title: "Privacy Policy",
+    body: [
+      "This alpha website is informational. No payment information is collected on the website, and no account login is provided on the website.",
+      "If you email us, we use your email address and message only to respond to your inquiry.",
+      "We do not overstate tracking practices here because this alpha site has not been represented as having a full analytics or tracking audit.",
+    ],
+  },
+  {
+    id: "terms",
+    title: "Terms",
+    body: [
+      "Website content is provided for informational purposes. Alpha availability is limited and subject to change.",
+      "AtlasADE is not represented as a full enterprise ERP replacement.",
+      "The website is provided without a guarantee that every detail will be uninterrupted or error-free. For questions, email jwong@atlasade.com.",
+    ],
+  },
+];
+
 function getAccent(index) {
   return accentCycle[index % accentCycle.length];
 }
@@ -609,9 +639,26 @@ function ContactSection() {
         <a className="contact-link" href="mailto:jwong@atlasade.com">
           jwong@atlasade.com
         </a>
+        <nav className="footer-nav" aria-label="Footer disclosures">
+          <a href="#accessibility-statement">Accessibility Statement</a>
+          <a href="#privacy-policy">Privacy Policy</a>
+          <a href="#terms">Terms</a>
+          <a href="mailto:jwong@atlasade.com">Contact</a>
+        </nav>
+        <div className="disclosure-grid" aria-label="Website policies and accessibility information">
+          {disclosureSections.map((section) => (
+            <section className="disclosure-panel" id={section.id} key={section.id} aria-labelledby={`${section.id}-title`}>
+              <h3 id={`${section.id}-title`}>{section.title}</h3>
+              {section.body.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </section>
+          ))}
+        </div>
         <div className="footer-line">
           <BrandMark />
           <span>Operational Intelligence for Merchants</span>
+          <span>© 2026 AtlasADE. All rights reserved.</span>
         </div>
       </div>
     </footer>
@@ -621,8 +668,11 @@ function ContactSection() {
 function App() {
   return (
     <MotionConfig reducedMotion="user">
+      <a className="skip-link" href="#main">
+        Skip to main content
+      </a>
       <Navigation />
-      <main>
+      <main id="main">
         <Hero />
         <InteractiveAtlasSection />
         <ContentStudioSection />
