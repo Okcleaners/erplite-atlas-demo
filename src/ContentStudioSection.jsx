@@ -43,13 +43,13 @@ export default function ContentStudioSection() {
             real activity into content opportunities, campaign ideas, and safer AI-assisted drafts.
           </p>
           <div className="studio-proof">
-            <ShieldCheck size={22} />
+            <ShieldCheck size={22} aria-hidden="true" />
             <span>Operationally-informed content guidance. Not social media autopilot.</span>
           </div>
           <div className="safeguard-grid" aria-label="Social Observer safeguards">
             {safeguards.map((item) => (
               <span key={item}>
-                <CheckCircle2 size={16} />
+                <CheckCircle2 size={16} aria-hidden="true" />
                 {item}
               </span>
             ))}
@@ -85,7 +85,7 @@ export default function ContentStudioSection() {
                   viewport={{ once: true, amount: 0.4 }}
                   transition={{ delay: index * 0.07, duration: 0.45 }}
                 >
-                  <Icon size={20} />
+                  <Icon size={20} aria-hidden="true" />
                   <h3>{title}</h3>
                   <p>{copy}</p>
                 </motion.article>
@@ -111,7 +111,7 @@ export default function ContentStudioSection() {
           </div>
 
           <div className="draft-card">
-            <div className="draft-icon">
+            <div className="draft-icon" aria-hidden="true">
               <PenLine size={20} />
             </div>
             <div>
@@ -125,7 +125,7 @@ export default function ContentStudioSection() {
           </div>
 
           <div className="observer-strip">
-            <Radio size={17} />
+            <Radio size={17} aria-hidden="true" />
             <span>Observe signals. Recommend opportunities. Keep the merchant in control.</span>
           </div>
         </motion.div>

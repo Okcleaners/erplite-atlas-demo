@@ -282,7 +282,7 @@ function Hero() {
           </p>
           <div className="hero-actions">
             <button className="button primary" type="button" onClick={() => scrollToSection("alpha")}>
-              Apply For Alpha <ArrowRight size={18} />
+              Apply For Alpha <ArrowRight size={18} aria-hidden="true" />
             </button>
             <button className="button secondary" type="button" onClick={() => scrollToSection("atlas")}>
               Explore Atlas
@@ -323,13 +323,13 @@ function InteractiveAtlasSection() {
           <p className="eyebrow">Interactive Atlas</p>
           <h2>Explore the operational map behind a merchant business.</h2>
           <p>
-            Click any module to see the merchant outcome, what the system touches, and how each
+            Select any module to see the merchant outcome, what the system touches, and how each
             piece connects into a customer purchase flow.
           </p>
         </div>
 
         <div className="atlas-workbench">
-          <div className="atlas-module-map" aria-label="Clickable Atlas modules">
+          <div className="atlas-module-map" aria-label="Atlas modules">
             <div className="atlas-map-orbit" aria-hidden="true" />
             {modules.map((module, index) => {
               const Icon = iconByModule[module.id] ?? Network;
@@ -370,7 +370,7 @@ function InteractiveAtlasSection() {
             transition={{ duration: 0.35, ease: "easeOut" }}
           >
             <div className="atlas-detail-top">
-              <span className="card-icon">
+              <span className="card-icon" aria-hidden="true">
                 <SelectedIcon size={24} />
               </span>
               <div>
@@ -402,7 +402,7 @@ function InteractiveAtlasSection() {
               </div>
             </div>
             <div className="merchant-conversation">
-              <Sparkles size={17} />
+              <Sparkles size={17} aria-hidden="true" />
               <span>{selectedModule.merchantConversation}</span>
             </div>
             <div className="flow-chip-row">
@@ -542,7 +542,7 @@ function ModulesSection() {
                 transition={{ duration: 0.55, delay: (index % 3) * 0.08 }}
                 whileHover={{ y: -6, scale: 1.015 }}
               >
-                <div className="card-icon">
+                <div className="card-icon" aria-hidden="true">
                   <Icon size={24} />
                 </div>
                 <h3>{module.name}</h3>
@@ -568,7 +568,7 @@ function MerchantsSection() {
             or stitching together a maze of point solutions.
           </p>
           <div className="fee-callout">
-            <ShieldCheck size={22} />
+            <ShieldCheck size={22} aria-hidden="true" />
             <span>No monthly software fee for processing merchants.</span>
           </div>
         </div>
@@ -581,7 +581,7 @@ function MerchantsSection() {
               viewport={{ once: true, amount: 0.35 }}
               transition={{ delay: index * 0.05, duration: 0.45 }}
             >
-              <Sparkles size={17} />
+              <Sparkles size={17} aria-hidden="true" />
               <h3>{title}</h3>
               <p>{copy}</p>
             </motion.article>
@@ -616,7 +616,7 @@ function AlphaSection() {
             ))}
           </div>
           <a className="button primary" href="mailto:jwong@atlasade.com?subject=AtlasADE%20Alpha%20Access">
-            Request Alpha Access <ArrowRight size={18} />
+            Request Alpha Access <ArrowRight size={18} aria-hidden="true" />
           </a>
         </motion.div>
         <div className="alpha-signal" aria-hidden="true">
