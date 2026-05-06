@@ -1,0 +1,422 @@
+{
+  "title": "ERP-Lite Operational Atlas",
+  "subtitle": "A business-facing map of how ERP-lite connects daily selling, customers, stock, payments, reporting, and recovery.",
+  "audience": [
+    "Merchants",
+    "Sales teams",
+    "Implementation partners",
+    "Non-technical operators"
+  ],
+  "modules": [
+    {
+      "id": "sales-register",
+      "name": "Sales Register",
+      "tagline": "Fast checkout with the business record built in.",
+      "description": "The register is where staff add items, attach a customer when useful, take payment, and complete a sale without leaving the selling flow.",
+      "whyItMatters": "A focused register keeps lines moving while still creating the records the business needs later for reporting, support, and customer follow-up.",
+      "connectedEndpoints": [
+        "Menu and item catalog",
+        "Customer lookup",
+        "Tax calculation",
+        "Payments",
+        "Receipts",
+        "Daily reporting"
+      ],
+      "businessOutcomes": [
+        "Faster checkout",
+        "Cleaner tickets",
+        "Fewer end-of-day surprises",
+        "Better customer context without slowing the cashier"
+      ],
+      "replacesOrReduces": [
+        "Paper order pads",
+        "Manual totals",
+        "Separate customer note-taking",
+        "After-the-fact spreadsheet cleanup"
+      ],
+      "relatedFlows": [
+        "Start a sale",
+        "Add items",
+        "Attach a customer",
+        "Take payment",
+        "Create receipt"
+      ],
+      "merchantConversation": "When a cashier rings up a regular, the system can keep the line moving and still remember the visit for future service.",
+      "futureExpansion": [
+        "Role-specific register modes",
+        "More guided selling prompts",
+        "Deeper order handoff to kitchen or fulfillment screens"
+      ]
+    },
+    {
+      "id": "customer-crm",
+      "name": "Customer/CRM",
+      "tagline": "A lightweight customer memory for everyday service.",
+      "description": "Customer/CRM links purchases to a customer profile when the shopper shares a phone number or identity at checkout.",
+      "whyItMatters": "Staff can recognize returning customers and the business can understand repeat visits without turning checkout into a back-office CRM session.",
+      "connectedEndpoints": [
+        "Customer phone lookup",
+        "Customer profile",
+        "Purchase timeline",
+        "Receipts",
+        "Marketing exports",
+        "Privacy controls"
+      ],
+      "businessOutcomes": [
+        "Recognize regulars",
+        "Track visit history",
+        "Support customer questions",
+        "Improve loyalty and retention"
+      ],
+      "replacesOrReduces": [
+        "Loose customer notebooks",
+        "Unlinked receipt searches",
+        "Manual loyalty tracking",
+        "Duplicate customer spreadsheets"
+      ],
+      "relatedFlows": [
+        "Customer lookup",
+        "Quick customer creation",
+        "Purchase history",
+        "Customer-safe reporting"
+      ],
+      "merchantConversation": "If a customer asks what they bought last time, the team can answer without digging through paper receipts.",
+      "futureExpansion": [
+        "Loyalty offers",
+        "Customer segments",
+        "Appointment or service history",
+        "Configurable privacy rules"
+      ]
+    },
+    {
+      "id": "inventory",
+      "name": "Inventory",
+      "tagline": "Know what can be sold and what needs attention.",
+      "description": "Inventory tracks physical goods and stock-sensitive products while allowing everyday prepared items to flow through the register normally.",
+      "whyItMatters": "Operators can protect retail stock from overselling while keeping prepared food and drink sales simple.",
+      "connectedEndpoints": [
+        "Item catalog",
+        "Retail stock",
+        "Receiving",
+        "Counts and adjustments",
+        "Refund policy",
+        "Reporting"
+      ],
+      "businessOutcomes": [
+        "Avoid selling unavailable retail items",
+        "See stock movement",
+        "Separate prepared items from tracked goods",
+        "Improve ordering decisions"
+      ],
+      "replacesOrReduces": [
+        "Manual stock sheets",
+        "End-of-week stock surprises",
+        "Guesswork on retail availability",
+        "Unclear refund restock expectations"
+      ],
+      "relatedFlows": [
+        "Sell a tracked item",
+        "Receive stock",
+        "Count inventory",
+        "Adjust inventory",
+        "Review low stock"
+      ],
+      "merchantConversation": "The register can block a sold-out mug without blocking a made-to-order coffee.",
+      "futureExpansion": [
+        "Low-stock alerts",
+        "Supplier ordering",
+        "Ingredient tracking",
+        "Multi-location inventory"
+      ]
+    },
+    {
+      "id": "payments-recovery",
+      "name": "Payments & Recovery",
+      "tagline": "Take payment and keep a clear path when something interrupts.",
+      "description": "Payments & Recovery manages cash and card sale completion, declined attempts, uncertain payment states, and operator recovery steps.",
+      "whyItMatters": "Payment interruptions are stressful. The system should show the next safe action instead of leaving the register stuck.",
+      "connectedEndpoints": [
+        "Cash drawer process",
+        "Card terminal",
+        "Payment status",
+        "Ticket state",
+        "Manager review",
+        "Receipt"
+      ],
+      "businessOutcomes": [
+        "Clearer tender handling",
+        "Less cashier confusion",
+        "Reduced duplicate charge risk",
+        "Safer recovery after interruption"
+      ],
+      "replacesOrReduces": [
+        "Guessing whether a payment went through",
+        "Manual payment notes",
+        "Untracked void/retry decisions",
+        "Unclear manager escalation"
+      ],
+      "relatedFlows": [
+        "Cash payment",
+        "Card payment",
+        "Declined tender",
+        "Payment recovery",
+        "Manager attention"
+      ],
+      "merchantConversation": "If a card terminal times out, the cashier gets a recovery path instead of starting over and risking a double charge.",
+      "futureExpansion": [
+        "More terminal providers",
+        "Richer reconciliation dashboards",
+        "Guided cashier training prompts",
+        "Offline payment review queues"
+      ]
+    },
+    {
+      "id": "reporting",
+      "name": "Reporting",
+      "tagline": "Daily numbers that match how the business actually runs.",
+      "description": "Reporting summarizes sales, taxes, refunds, corrections, tender activity, and customer activity for operators and owners.",
+      "whyItMatters": "Owners need a clean daily view without rebuilding totals from receipts, payment portals, and spreadsheets.",
+      "connectedEndpoints": [
+        "Sales totals",
+        "Tax totals",
+        "Refunds and corrections",
+        "Tender summaries",
+        "Customer activity",
+        "Exports"
+      ],
+      "businessOutcomes": [
+        "Faster closeout",
+        "Cleaner accounting handoff",
+        "Better owner visibility",
+        "Reduced manual reconciliation"
+      ],
+      "replacesOrReduces": [
+        "Manual daily summary sheets",
+        "Payment portal cross-checking",
+        "Spreadsheet tax calculations",
+        "Receipt pile audits"
+      ],
+      "relatedFlows": [
+        "End-of-day summary",
+        "Tax review",
+        "Refund reporting",
+        "Customer-safe export"
+      ],
+      "merchantConversation": "At close, the owner can see gross sales, refunds, tax, and payment mix without reconstructing the day by hand.",
+      "futureExpansion": [
+        "Scheduled reports",
+        "Accounting integrations",
+        "Multi-store comparisons",
+        "Role-based report views"
+      ]
+    },
+    {
+      "id": "business-operations",
+      "name": "Business Operations",
+      "tagline": "Manager controls for the parts of the day that need structure.",
+      "description": "Business Operations covers business-day status, saved tickets, manager attention, operator roles, and safe closeout behavior.",
+      "whyItMatters": "The day should close only when unresolved work is visible and understood, not silently discarded.",
+      "connectedEndpoints": [
+        "Operator login",
+        "Roles and permissions",
+        "Saved tickets",
+        "Needs-attention queue",
+        "Business-day close",
+        "Manager review"
+      ],
+      "businessOutcomes": [
+        "Clear accountability",
+        "Safer closeout",
+        "Parked tickets stay visible",
+        "Managers see exceptions before closing"
+      ],
+      "replacesOrReduces": [
+        "Sticky notes for held orders",
+        "End-of-shift verbal handoffs",
+        "Silent ticket loss",
+        "Unclear manager overrides"
+      ],
+      "relatedFlows": [
+        "Save a ticket",
+        "Reopen a ticket",
+        "Manager review",
+        "Close business day",
+        "Switch user"
+      ],
+      "merchantConversation": "A saved order stays in the queue with the customer's name and total until someone completes it.",
+      "futureExpansion": [
+        "Shift management",
+        "Labor-aware closeout",
+        "Task checklists",
+        "Approval workflows"
+      ]
+    },
+    {
+      "id": "ai-assistant",
+      "name": "AI Assistant",
+      "tagline": "Operational help without taking over the register.",
+      "description": "The AI Assistant can help staff find items, understand recovery steps, answer operational questions, and recommend follow-up actions.",
+      "whyItMatters": "New or busy staff can get guidance without leaving the POS flow or calling a manager for every small question.",
+      "connectedEndpoints": [
+        "Cashier help",
+        "Item lookup",
+        "Recovery guidance",
+        "Customer follow-up suggestions",
+        "Content guidance",
+        "Policy prompts"
+      ],
+      "businessOutcomes": [
+        "Faster staff training",
+        "More consistent operations",
+        "Less manager interruption",
+        "Better follow-up ideas"
+      ],
+      "replacesOrReduces": [
+        "Printed cheat sheets",
+        "Repeated manager questions",
+        "Unstructured training notes",
+        "Missed follow-up opportunities"
+      ],
+      "relatedFlows": [
+        "Ask for register help",
+        "Find an item",
+        "Explain recovery",
+        "Recommend next action",
+        "Draft business content"
+      ],
+      "merchantConversation": "A cashier can ask how to handle a recovery state and get plain-language guidance at the point of need.",
+      "futureExpansion": [
+        "Store-specific knowledge",
+        "Suggested training paths",
+        "Voice-assisted operations",
+        "Owner-facing business insights"
+      ]
+    },
+    {
+      "id": "integrations",
+      "name": "Integrations",
+      "tagline": "Connect the POS to the tools around the business.",
+      "description": "Integrations are the endpoints ERP-lite can connect to around payments, accounting, inventory, marketing, hardware, and analytics.",
+      "whyItMatters": "A merchant should not have to re-enter the same business facts into every tool they use.",
+      "connectedEndpoints": [
+        "Payment terminals",
+        "Receipt printers",
+        "Cash drawers",
+        "Accounting exports",
+        "Marketing lists",
+        "Analytics storage"
+      ],
+      "businessOutcomes": [
+        "Less duplicate entry",
+        "Cleaner handoffs",
+        "Better operational visibility",
+        "More flexible deployment"
+      ],
+      "replacesOrReduces": [
+        "Manual exports",
+        "Copy-paste accounting",
+        "Disconnected hardware setup",
+        "One-off reporting spreadsheets"
+      ],
+      "relatedFlows": [
+        "Export daily totals",
+        "Connect payment terminal",
+        "Print receipt",
+        "Sync customer-safe data"
+      ],
+      "merchantConversation": "The same completed sale can support the receipt, payment record, customer history, and daily report.",
+      "futureExpansion": [
+        "More accounting packages",
+        "More hardware providers",
+        "Inventory suppliers",
+        "Online ordering"
+      ]
+    },
+    {
+      "id": "backup-replay",
+      "name": "Backup & Replay",
+      "tagline": "Protect the business record when devices restart or recover.",
+      "description": "Backup & Replay protects operational records by preserving the sequence of important business events and allowing recovery after restart.",
+      "whyItMatters": "A register should not lose or duplicate a sale because a device restarts, power blips, or the system needs to recover.",
+      "connectedEndpoints": [
+        "Event history",
+        "Checkpoints",
+        "Sales records",
+        "Customer timeline",
+        "Business-day close",
+        "Recovery review"
+      ],
+      "businessOutcomes": [
+        "More trustworthy records",
+        "Safer recovery after outage",
+        "Less duplicate data",
+        "Better operational continuity"
+      ],
+      "replacesOrReduces": [
+        "Manual incident reconstruction",
+        "Lost receipt searches",
+        "Duplicate purchase history",
+        "Uncertain closeout records"
+      ],
+      "relatedFlows": [
+        "Restart recovery",
+        "Replay events",
+        "Restore checkpoint",
+        "Protect customer history",
+        "Verify close record"
+      ],
+      "merchantConversation": "If the register restarts, the business record should come back consistently instead of doubling purchase history or reopening closed work.",
+      "futureExpansion": [
+        "Cloud backup options",
+        "Cross-device recovery",
+        "Owner-visible recovery logs",
+        "Guided restore workflows"
+      ]
+    }
+  ],
+  "lifecycle": {
+    "title": "Follow a customer purchase",
+    "steps": [
+      {
+        "name": "Customer lookup",
+        "detail": "A customer can be found by phone when they choose to share it."
+      },
+      {
+        "name": "Ticket creation",
+        "detail": "A clean ticket starts the sale and keeps the cart organized."
+      },
+      {
+        "name": "Items added",
+        "detail": "The cashier taps menu items or retail goods into the ticket."
+      },
+      {
+        "name": "Inventory/tax checked",
+        "detail": "The system applies tax rules and checks stock where stock tracking matters."
+      },
+      {
+        "name": "Payment taken",
+        "detail": "Cash or card payment completes the sale, with recovery guidance if something interrupts."
+      },
+      {
+        "name": "Receipt created",
+        "detail": "The sale can produce a customer receipt and an auditable business record."
+      },
+      {
+        "name": "Customer timeline updated",
+        "detail": "When linked, the purchase becomes part of the customer's history."
+      },
+      {
+        "name": "Reports updated",
+        "detail": "Sales, tax, tender, refund, and closeout summaries reflect the completed work."
+      },
+      {
+        "name": "Backup/replay protects the record",
+        "detail": "Recovery systems protect the record from restart and replay issues."
+      },
+      {
+        "name": "AI can recommend next actions",
+        "detail": "The assistant can suggest follow-up, explain an operation, or help staff recover."
+      }
+    ]
+  }
+}
