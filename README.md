@@ -1,47 +1,32 @@
-# ERP-Lite Operational Atlas
+# AtlasADE Public Website
 
-This is a static, business-facing demo atlas for ERP-lite.
+This repository publishes the AtlasADE public website for `atlasade.com`.
 
-It is meant for merchants, salespeople, implementation partners, and non-technical operators. It explains what the system does, why it matters, which business endpoints it touches, and how a customer purchase moves through the business.
+The site is a React + Vite single-page homepage with the original ERP-Lite Operational Atlas demo integrated as the second major scroll section. The Atlas section is powered by the preserved `atlas-data.json` module and lifecycle content.
 
-## Files
+## Local Development
 
-- `index.html`: standalone static atlas UI.
-- `atlas-data.json`: business module and lifecycle content.
-- `README.md`: this usage note.
+```bash
+npm install
+npm run dev
+```
 
-## Open Locally
+## Production Build
 
-Open `docs/erplite-atlas/index.html` directly in a browser.
+```bash
+npm run build
+```
 
-The page tries to load `atlas-data.json`. Some browsers restrict local `file://` JSON loading, so `index.html` includes an embedded fallback data object and still works when opened directly.
+The build output is written to `dist/`.
 
-## What It Shows
+## GitHub Pages
 
-- High-level ERP-lite modules:
-  - Sales Register
-  - Customer/CRM
-  - Inventory
-  - Payments & Recovery
-  - Reporting
-  - Business Operations
-  - AI Assistant
-  - Integrations
-  - Backup & Replay
-- Clickable module details:
-  - What it does
-  - Why it matters
-  - What it touches
-  - Example merchant conversation
-  - Future expansion
-- Lifecycle playback:
-  - Follow a customer purchase from lookup through sale, receipt, reporting, recovery protection, and AI next actions.
+Deployment is handled by `.github/workflows/deploy.yml` on pushes to `main`.
 
-## Boundaries
+The custom domain is configured by `public/CNAME`:
 
-- Static HTML/CSS/JS only.
-- No backend.
-- No build step.
-- No external CDN dependencies.
-- No source paths, tests, Graphify internals, harness details, or implementation-specific files are shown in the UI.
-- This does not change POS runtime behavior, frontend POS behavior, backend truth logic, or generated Graphify files.
+```text
+atlasade.com
+```
+
+Vite is configured with a relative base path so the built site works from both the GitHub Pages preview URL and the custom domain.
