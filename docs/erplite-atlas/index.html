@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Atlas ERP-Lite for Merchants</title>
+  <meta name="description" content="Atlas ERP-Lite helps small and growing merchants lower software costs, run daily operations, and connect sales, customers, inventory, reporting, and payments in one practical business system." />
+  <style>
+    :root {
+      --bg: #f7f3ec;
+      --panel: #fffaf2;
+      --ink: #1f2933;
+      --muted: #5c6670;
+      --line: #dfd5c8;
+      --accent: #8a5a2b;
+      --accent-dark: #563617;
+      --green: #1f6f55;
+      --blue: #264e73;
+      --shadow: 0 18px 50px rgba(31, 41, 51, 0.12);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: radial-gradient(circle at top left, #fff7e8 0, var(--bg) 38%, #efe5d7 100%);
+      line-height: 1.55;
+    }
+
+    a { color: inherit; }
+    .wrap { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(247, 243, 236, 0.84);
+      border-bottom: 1px solid rgba(223, 213, 200, 0.78);
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 0;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: -0.03em; }
+    .mark { width: 34px; height: 34px; border-radius: 12px; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); box-shadow: var(--shadow); }
+    .navlinks { display: flex; gap: 18px; color: var(--muted); font-size: 14px; }
+    .navlinks a { text-decoration: none; }
+    .navlinks a:hover { color: var(--ink); }
+
+    .hero { padding: 86px 0 58px; }
+    .hero-grid { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: 34px; align-items: center; }
+    .eyebrow { color: var(--green); font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-size: 13px; }
+    h1 { font-size: clamp(42px, 7vw, 74px); line-height: 0.96; margin: 16px 0 20px; letter-spacing: -0.07em; }
+    .lead { font-size: clamp(18px, 2.1vw, 23px); color: var(--muted); max-width: 730px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; padding: 13px 18px; text-decoration: none; font-weight: 800; border: 1px solid var(--line); }
+    .btn.primary { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .btn.secondary { background: rgba(255,255,255,0.58); }
+    .note { margin-top: 16px; color: var(--muted); font-size: 14px; }
+
+    .atlas-card { background: rgba(255, 250, 242, 0.92); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 22px; }
+    .status { display: grid; gap: 12px; }
+    .status-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--line); padding-bottom: 12px; }
+    .status-row:last-child { border-bottom: 0; padding-bottom: 0; }
+    .pill { border-radius: 999px; background: #ebf5ef; color: var(--green); padding: 6px 10px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+    .price { font-size: 38px; line-height: 1; letter-spacing: -0.05em; font-weight: 900; }
+    .small { color: var(--muted); font-size: 14px; }
+
+    section { padding: 54px 0; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 24px; }
+    h2 { font-size: clamp(30px, 4vw, 48px); line-height: 1.02; letter-spacing: -0.05em; margin: 0; }
+    .section-copy { color: var(--muted); max-width: 640px; margin: 10px 0 0; }
+
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .grid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .card { background: rgba(255, 250, 242, 0.85); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }
+    .card h3 { margin: 0 0 8px; font-size: 21px; letter-spacing: -0.03em; }
+    .card p { margin: 0; color: var(--muted); }
+    .number { font-weight: 900; color: var(--accent); font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; }
+
+    .modules { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 18px; }
+    .module-list { display: grid; gap: 10px; }
+    .module-button { width: 100%; text-align: left; border: 1px solid var(--line); background: rgba(255,255,255,0.55); border-radius: 16px; padding: 14px 15px; cursor: pointer; font: inherit; color: var(--ink); }
+    .module-button strong { display: block; }
+    .module-button span { color: var(--muted); font-size: 13px; }
+    .module-button.active { border-color: var(--accent); background: #fff4df; }
+    .detail ul { margin: 14px 0 0; padding-left: 19px; color: var(--muted); }
+    .quote { margin-top: 18px; padding: 16px; border-radius: 18px; background: #f2eadf; color: var(--ink); }
+
+    .timeline { display: grid; gap: 12px; counter-reset: step; }
+    .step { display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start; background: rgba(255, 250, 242, 0.85); border: 1px solid var(--line); border-radius: 18px; padding: 16px; }
+    .step:before { counter-increment: step; content: counter(step); display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; }
+    .step strong { display: block; margin-bottom: 3px; }
+    .step span { color: var(--muted); }
+
+    .cta { background: linear-gradient(135deg, var(--ink), #3e3022); color: #fff; border-radius: 32px; padding: 40px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 24px; align-items: center; }
+    .cta p { color: rgba(255,255,255,0.72); margin: 12px 0 0; }
+    .cta .btn { background: #fff; color: var(--ink); border-color: #fff; }
+
+    footer { padding: 34px 0 50px; color: var(--muted); font-size: 14px; }
+    .footer-line { border-top: 1px solid var(--line); padding-top: 18px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+    @media (max-width: 860px) {
+      .hero-grid, .modules, .grid3, .grid2, .cta { grid-template-columns: 1fr; }
+      .navlinks { display: none; }
+      .hero { padding-top: 54px; }
+      .section-head { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <nav>
+        <div class="brand"><span class="mark" aria-hidden="true"></span><span>Atlas ERP-Lite</span></div>
+        <div class="navlinks">
+          <a href="#why">Why Atlas</a>
+          <a href="#modules">Modules</a>
+          <a href="#alpha">Alpha</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Merchant operations without enterprise software pricing</div>
+          <h1>ERP-lite for merchants who need more than a register.</h1>
+          <p class="lead">Atlas connects daily sales, customers, inventory, payments, reporting, recovery, and guided AI assistance into one practical operating map for small and growing merchants.</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#alpha">Apply for Alpha Testing</a>
+            <a class="btn secondary" href="#modules">See what it covers</a>
+          </div>
+          <p class="note">Alpha status: early merchant pilots. Not positioned for major corporations yet.</p>
+        </div>
+        <aside class="atlas-card" aria-label="Offer summary">
+          <div class="status">
+            <div class="status-row"><div><strong>Software fee</strong><div class="small">For processing merchants</div></div><div class="price">$0</div></div>
+            <div class="status-row"><div><strong>Processing relationship</strong><div class="small">Use payment processing with us</div></div><span class="pill">No monthly software fee</span></div>
+            <div class="status-row"><div><strong>Best fit today</strong><div class="small">Independent merchants, service businesses, cafes, shops, clinics, and local operators</div></div></div>
+            <div class="status-row"><div><strong>Current phase</strong><div class="small">Alpha: looking for merchants willing to test, give feedback, and shape the product</div></div></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="why">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2>Built to lower merchant operating costs.</h2>
+            <p class="section-copy">Most merchants get forced into separate systems: POS, CRM, inventory, reports, customer notes, exports, spreadsheets, and support tools. Atlas is designed as a lighter operating layer that brings the essentials together.</p>
+          </div>
+        </div>
+        <div class="grid3">
+          <div class="card"><div class="number">01</div><h3>No monthly software fee</h3><p>Merchants who process with us can use the system without a separate recurring software subscription.</p></div>
+          <div class="card"><div class="number">02</div><h3>ERP-lite, not enterprise bloat</h3><p>Atlas focuses on practical daily workflows before trying to serve complex corporate back-office requirements.</p></div>
+          <div class="card"><div class="number">03</div><h3>Built around merchant reality</h3><p>Track what happened, recover from issues, understand customers, and make better daily decisions without hiring a software team.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="modules">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2>The merchant operating map.</h2>
+            <p class="section-copy">Click a module to see how Atlas can fit into a real merchant operation.</p>
+          </div>
+        </div>
+        <div class="modules">
+          <div id="moduleList" class="module-list"></div>
+          <div id="moduleDetail" class="card detail"></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2>From sale to business memory.</h2>
+            <p class="section-copy">Atlas is intended to help the merchant understand the full lifecycle of a transaction, not just whether a card approved.</p>
+          </div>
+        </div>
+        <div class="timeline" id="timeline"></div>
+      </div>
+    </section>
+
+    <section id="alpha">
+      <div class="wrap grid2">
+        <div class="card">
+          <h2>Who should alpha test?</h2>
+          <p class="section-copy">Good early testers are merchants who want lower software costs, have real operational pain, and are willing to give direct feedback while the system is still being shaped.</p>
+          <ul>
+            <li>Independent retail or service merchants</li>
+            <li>Coffee shops, boutiques, salons, med spas, repair shops, and local operators</li>
+            <li>Owners who want better reporting, customer context, and inventory visibility</li>
+            <li>Merchants open to processing with us in exchange for no monthly software fee</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h2>Who is it not for yet?</h2>
+          <p class="section-copy">Atlas is not being sold as a full corporate ERP replacement in Alpha. Large multi-entity, heavily customized enterprise deployments come later.</p>
+          <ul>
+            <li>Major corporations needing full ERP replacement today</li>
+            <li>Complex warehouse, manufacturing, or procurement-heavy organizations</li>
+            <li>Businesses that require a mature enterprise support contract immediately</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="cta">
+          <div>
+            <h2>Looking for Alpha merchants.</h2>
+            <p>Atlas is being built for operators who want lower monthly costs and a simpler way to run the business. Early partners help shape the workflows before public launch.</p>
+          </div>
+          <div>
+            <a class="btn" href="mailto:hello@example.com?subject=Atlas%20ERP-Lite%20Alpha%20Testing">Request Alpha Access</a>
+            <p class="small">Replace this email with your real intake address before launch.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-line">
+      <div>Atlas ERP-Lite · Merchant alpha website</div>
+      <div>No backend · No tracking · Static GitHub Pages site</div>
+    </div>
+  </footer>
+
+  <script>
+    const fallback = {
+      modules: [
+        { name: "Sales Register", summary: "Daily checkout and ticket flow", does: "Handles simple merchant sales workflows and creates clean operational records.", matters: "The register becomes the front door to reporting, customer history, payment status, and business recovery.", touches: ["Tickets", "Payments", "Receipts", "Reports"], conversation: "Can I see what happened with that sale and whether it was actually paid?" },
+        { name: "Customer / CRM", summary: "Customer context without a separate CRM bill", does: "Keeps useful customer relationship context close to the sale.", matters: "Merchants can remember preferences, history, follow-ups, and service context without bouncing between tools.", touches: ["Customer lookup", "Purchase history", "Notes", "Follow-up"], conversation: "What did this customer buy last time, and should I follow up?" },
+        { name: "Inventory", summary: "Know what moved and why", does: "Tracks practical stock movement, receiving, adjustments, and sales-linked changes.", matters: "Inventory problems usually become cash-flow problems. Atlas makes movement easier to inspect.", touches: ["Products", "Stock", "Adjustments", "Movement history"], conversation: "Why is my count off, and when did that product last move?" },
+        { name: "Payments & Recovery", summary: "Payment state that protects the merchant", does: "Separates payment attempts, approvals, failures, and recovery states so the business can see what actually happened.", matters: "Merchants need confidence that an interrupted sale, failed payment, or recovery case is not silently lost.", touches: ["Payment status", "Recovery", "Receipts", "Business-day close"], conversation: "Was this actually approved, declined, or stuck needing recovery?" },
+        { name: "Reporting", summary: "Daily decisions, not report clutter", does: "Turns daily activity into focused summaries for operators.", matters: "Owners need fast answers on sales, payment status, product movement, and daily close without spreadsheet work.", touches: ["Day summary", "Sales totals", "Tender status", "Inventory movement"], conversation: "What happened today, and is anything unresolved before I close?" },
+        { name: "AI Assistant", summary: "Guided help over known business workflows", does: "Helps operators ask business questions and navigate workflows without giving the model unchecked control.", matters: "The goal is safer assistance: explain, find, summarize, and guide based on known actions and business context.", touches: ["Reports", "Customers", "Inventory", "Operational questions"], conversation: "Show me what changed today and what I should check before leaving." }
+      ],
+      timeline: [
+        ["Customer lookup", "Find the customer or start a clean sale."],
+        ["Sale created", "Items, totals, taxes, and payment status are tied together."],
+        ["Payment handled", "The merchant can see approved, declined, interrupted, or recovery-needed states."],
+        ["Inventory and reporting update", "Movement and day summary data become inspectable."],
+        ["Business memory", "Future customer context, reports, and AI-guided questions can use the operational record."]
+      ]
+    };
+
+    async function loadData() {
+      try {
+        const res = await fetch("atlas-data.json", { cache: "no-store" });
+        if (!res.ok) throw new Error("missing data");
+        return await res.json();
+      } catch (_) {
+        return fallback;
+      }
+    }
+
+    function renderModules(data) {
+      const list = document.getElementById("moduleList");
+      const detail = document.getElementById("moduleDetail");
+      let selected = 0;
+      function render() {
+        list.innerHTML = data.modules.map((m, i) => `<button class="module-button ${i === selected ? "active" : ""}" data-i="${i}"><strong>${m.name}</strong><span>${m.summary}</span></button>`).join("");
+        const m = data.modules[selected];
+        detail.innerHTML = `<h3>${m.name}</h3><p>${m.does}</p><div class="quote"><strong>Merchant question:</strong><br>${m.conversation}</div><h3 style="margin-top:20px">Why it matters</h3><p>${m.matters}</p><h3 style="margin-top:20px">Touches</h3><ul>${m.touches.map(t => `<li>${t}</li>`).join("")}</ul>`;
+        list.querySelectorAll("button").forEach(btn => btn.addEventListener("click", () => { selected = Number(btn.dataset.i); render(); }));
+      }
+      render();
+    }
+
+    function renderTimeline(data) {
+      document.getElementById("timeline").innerHTML = data.timeline.map(s => `<div class="step"><div><strong>${s[0]}</strong><span>${s[1]}</span></div></div>`).join("");
+    }
+
+    loadData().then(data => { renderModules(data); renderTimeline(data); });
+  </script>
+</body>
+</html>
