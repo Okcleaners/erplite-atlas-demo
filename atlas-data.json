@@ -293,6 +293,57 @@
       ]
     },
     {
+      "id": "content-studio-social-observer",
+      "name": "Content Studio / Social Observer",
+      "tagline": "Turn real business activity into safer marketing opportunities.",
+      "description": "Content Studio / Social Observer helps merchants observe operational signals, identify content opportunities, and draft merchant-approved marketing ideas based on what is actually happening in the business.",
+      "whyItMatters": "Most merchants know they should post more consistently, but they do not have time to invent content from scratch. AtlasADE can turn sales trends, customer patterns, services, products, and seasonal signals into practical content ideas while keeping the merchant in control.",
+      "connectedEndpoints": [
+        "Sales trends",
+        "Customer activity",
+        "Product and service performance",
+        "Campaign opportunities",
+        "Content drafts",
+        "Merchant approval",
+        "Social publishing checklist",
+        "Business reporting"
+      ],
+      "businessOutcomes": [
+        "More consistent merchant visibility",
+        "Better content ideas from real activity",
+        "Less blank-page marketing work",
+        "Safer AI-assisted drafts",
+        "Campaigns tied to products and services",
+        "Owner-controlled approval before publishing"
+      ],
+      "replacesOrReduces": [
+        "Random last-minute posting",
+        "Generic AI marketing copy",
+        "Disconnected content calendars",
+        "Manual campaign brainstorming",
+        "Expensive lightweight marketing retainers",
+        "Untracked promotion ideas"
+      ],
+      "relatedFlows": [
+        "Observe business signals",
+        "Identify campaign opportunity",
+        "Draft content idea",
+        "Review merchant-safe copy",
+        "Approve before publishing",
+        "Track content opportunity"
+      ],
+      "merchantConversation": "Instead of asking \"what should I post today?\", the merchant can see which products, services, customer patterns, or seasonal moments create a real reason to communicate.",
+      "futureExpansion": [
+        "Content calendar",
+        "Campaign performance review",
+        "Social platform integrations",
+        "Approval queues",
+        "Brand voice controls",
+        "Seasonal promotion planning",
+        "Customer segment content ideas"
+      ]
+    },
+    {
       "id": "integrations",
       "name": "Integrations",
       "tagline": "Connect the POS to the tools around the business.",

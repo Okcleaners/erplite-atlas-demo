@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { MotionConfig, motion, useScroll, useTransform } from "framer-motion";
 import {
   ArrowRight,
   BarChart3,
@@ -11,6 +11,7 @@ import {
   CreditCard,
   DatabaseZap,
   LifeBuoy,
+  Megaphone,
   Network,
   RefreshCcw,
   ShieldCheck,
@@ -44,6 +45,7 @@ const iconByModule = {
   reporting: BarChart3,
   "business-operations": Building2,
   "ai-assistant": BrainCircuit,
+  "content-studio-social-observer": Megaphone,
   integrations: DatabaseZap,
   "backup-replay": RefreshCcw,
 };
@@ -151,7 +153,7 @@ function OperationalMap({ compact = false }) {
       viewport={{ once: true, amount: 0.35 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
     >
-      <div className="map-glow" />
+      <div className="map-glow" aria-hidden="true" />
       <svg viewBox="0 0 100 100" className="map-svg" role="img" aria-label="Animated operational map">
         <defs>
           <filter id={compact ? "softGlowCompact" : "softGlow"}>
@@ -209,7 +211,7 @@ function OperationalMap({ compact = false }) {
           </g>
         ))}
       </svg>
-      <div className="map-labels">
+      <div className="map-labels" aria-hidden="true">
         {nodes.map((node) => (
           <span
             key={node.label}
@@ -230,7 +232,7 @@ function Hero() {
 
   return (
     <section className="hero section" id="home">
-      <motion.div className="hero-bg-orbit" style={{ y, opacity }} />
+      <motion.div className="hero-bg-orbit" style={{ y, opacity }} aria-hidden="true" />
       <div className="hero-inner">
         <motion.div
           className="hero-copy"
@@ -259,7 +261,7 @@ function Hero() {
         </motion.div>
         <OperationalMap />
       </div>
-      <div className="hero-floor">
+      <div className="hero-floor" aria-hidden="true">
         <span />
       </div>
     </section>
@@ -309,14 +311,15 @@ function InteractiveAtlasSection() {
                   className="atlas-node"
                   key={module.id}
                   style={{ "--accent": accent }}
-                  aria-selected={isSelected}
+                  aria-pressed={isSelected}
+                  aria-label={`${module.name}. ${module.tagline}. Select to view merchant outcomes, connected endpoints, and related flows.`}
                   onClick={() => setSelectedId(module.id)}
                   initial={{ opacity: 0, y: 18 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.35 }}
                   transition={{ delay: index * 0.04, duration: 0.45 }}
                 >
-                  <span className="atlas-node-icon">
+                  <span className="atlas-node-icon" aria-hidden="true">
                     <Icon size={20} />
                   </span>
                   <span>
@@ -617,7 +620,7 @@ function ContactSection() {
 
 function App() {
   return (
-    <>
+    <MotionConfig reducedMotion="user">
       <Navigation />
       <main>
         <Hero />
@@ -630,7 +633,7 @@ function App() {
         <AlphaSection />
         <ContactSection />
       </main>
-    </>
+    </MotionConfig>
   );
 }
 
