@@ -626,7 +626,7 @@ h4 {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(360px, 0.58fr);
   gap: 18px;
-  align-items: stretch;
+  align-items: start;
 }
 
 .atlas-module-map,
@@ -736,8 +736,29 @@ h4 {
 }
 
 .atlas-detail-panel {
+  display: flex;
+  flex-direction: column;
+  height: 590px;
+  max-height: 590px;
   padding: 24px;
   overflow: hidden;
+}
+
+.atlas-detail-body {
+  position: relative;
+  z-index: 1;
+  min-height: 0;
+  padding-right: 4px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: color-mix(in srgb, var(--accent), transparent 40%) rgba(255, 255, 255, 0.04);
+  scrollbar-width: thin;
+}
+
+.atlas-detail-body:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 6px rgba(45, 226, 210, 0.14);
 }
 
 .atlas-detail-panel::before {
@@ -755,6 +776,7 @@ h4 {
 .atlas-detail-top {
   position: relative;
   z-index: 1;
+  flex: 0 0 auto;
   display: flex;
   gap: 16px;
   align-items: center;
@@ -1689,6 +1711,16 @@ h4 {
 
   .atlas-module-map {
     min-height: auto;
+  }
+
+  .atlas-detail-panel {
+    height: auto;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .atlas-detail-body {
+    overflow: visible;
   }
 
   .alpha-signal {

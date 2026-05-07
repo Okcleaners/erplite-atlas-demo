@@ -21,7 +21,7 @@ const studioFlow = [
 const safeguards = [
   "Owner approval before publishing",
   "No automatic replies",
-  "No direct-message handling",
+  "No direct message handling",
   "No uncontrolled social actions",
 ];
 

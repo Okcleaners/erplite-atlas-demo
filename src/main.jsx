@@ -20,17 +20,14 @@ import {
   UsersRound,
   Workflow,
 } from "lucide-react";
-import ContentStudioSection from "./ContentStudioSection.jsx";
 import atlasData from "../atlas-data.json";
 import "./styles.css";
-import "./contentStudio.css";
 
 const navItems = [
   ["Home", "home"],
   ["Merchants", "merchant-types"],
   ["Atlas", "atlas"],
   ["Helps", "helps"],
-  ["Content", "content-studio"],
   ["ERP Lite", "erp-lite"],
   ["Partners", "alpha"],
   ["Contact", "contact"],
@@ -82,16 +79,6 @@ const merchantReasons = [
   ["ERP Lite made smaller", "Enterprise Resource Planning, simplified for small merchants."],
 ];
 
-const flowSteps = [
-  "Customer",
-  "Sale",
-  "Payment",
-  "Inventory",
-  "Reporting",
-  "Follow Up",
-  "Daily Insight",
-];
-
 const disclosureSections = [
   {
     id: "accessibility-statement",
@@ -117,7 +104,7 @@ const disclosureSections = [
     body: [
       "Website content is provided for informational purposes. Alpha availability is limited and subject to change.",
       "AtlasADE is not represented as a full enterprise ERP replacement.",
-      "The website is provided without a guarantee that every detail will be uninterrupted or error-free. For questions, email jwong@atlasade.com.",
+      "The website is provided without a guarantee that every detail will be uninterrupted or free of errors. For questions, email jwong@atlasade.com.",
     ],
   },
 ];
@@ -444,37 +431,43 @@ function InteractiveAtlasSection() {
                 <h3>{selectedModule.name}</h3>
               </div>
             </div>
-            <p className="atlas-description">{selectedModule.description}</p>
-            <div className="atlas-outcome-block">
-              <h4>Why the owner cares</h4>
-              <p>{selectedModule.whyItMatters}</p>
-            </div>
-            <div className="atlas-detail-grid">
-              <div>
-                <h4>What this connects</h4>
-                <ul>
-                  {selectedModule.connectedEndpoints.map((endpoint) => (
-                    <li key={endpoint}>{endpoint}</li>
-                  ))}
-                </ul>
+            <div
+              className="atlas-detail-body"
+              tabIndex={0}
+              aria-label={`${selectedModule.name} details. Scroll this area to read longer module information.`}
+            >
+              <p className="atlas-description">{selectedModule.description}</p>
+              <div className="atlas-outcome-block">
+                <h4>Why it matters</h4>
+                <p>{selectedModule.whyItMatters}</p>
               </div>
-              <div>
-                <h4>What this helps you know</h4>
-                <ul>
-                  {selectedModule.businessOutcomes.map((outcome) => (
-                    <li key={outcome}>{outcome}</li>
-                  ))}
-                </ul>
+              <div className="atlas-detail-grid">
+                <div>
+                  <h4>What this connects</h4>
+                  <ul>
+                    {selectedModule.connectedEndpoints.map((endpoint) => (
+                      <li key={endpoint}>{endpoint}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h4>What this helps you know</h4>
+                  <ul>
+                    {selectedModule.businessOutcomes.map((outcome) => (
+                      <li key={outcome}>{outcome}</li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-            </div>
-            <div className="merchant-conversation">
-              <Sparkles size={17} aria-hidden="true" />
-              <span>{selectedModule.merchantConversation}</span>
-            </div>
-            <div className="flow-chip-row">
-              {selectedModule.relatedFlows.map((flow) => (
-                <span key={flow}>{flow}</span>
-              ))}
+              <div className="merchant-conversation">
+                <Sparkles size={17} aria-hidden="true" />
+                <span>{selectedModule.merchantConversation}</span>
+              </div>
+              <div className="flow-chip-row">
+                {selectedModule.relatedFlows.map((flow) => (
+                  <span key={flow}>{flow}</span>
+                ))}
+              </div>
             </div>
           </motion.aside>
         </div>
@@ -583,83 +576,6 @@ function HelpCardsSection() {
                 <Icon size={20} aria-hidden="true" />
                 <h3>{title}</h3>
                 <p>{copy}</p>
-              </motion.article>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function FlowSection() {
-  return (
-    <section className="section flow-section" id="flow">
-      <div className="section-inner">
-        <div className="section-heading narrow">
-          <p className="eyebrow">Merchant Workflow</p>
-          <h2>Atlas is not just a register.</h2>
-          <p>
-            Every action moves through the business. AtlasADE keeps the trail clear so owners can
-            see what happened and what needs attention.
-          </p>
-        </div>
-        <div className="timeline" aria-label="Merchant workflow timeline">
-          <motion.div
-            className="timeline-pulse"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true, amount: 0.45 }}
-            transition={{ duration: 1.4, ease: "easeInOut" }}
-          />
-          {flowSteps.map((step, index) => (
-            <motion.div
-              className="timeline-node"
-              key={step}
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ delay: index * 0.09, duration: 0.5 }}
-            >
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <strong>{step}</strong>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ModulesSection() {
-  const modules = atlasData.modules ?? [];
-
-  return (
-    <section className="section" id="modules">
-      <div className="section-inner">
-        <div className="section-heading">
-          <p className="eyebrow">Module Overview</p>
-          <h2>Connected systems for the work merchants actually do.</h2>
-        </div>
-        <div className="module-grid">
-          {modules.map((module, index) => {
-            const Icon = iconByModule[module.id] ?? Network;
-            return (
-              <motion.article
-                className="module-card"
-                key={module.id}
-                style={{ "--accent": getAccent(index) }}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.25 }}
-                transition={{ duration: 0.55, delay: (index % 3) * 0.08 }}
-                whileHover={{ y: -6, scale: 1.015 }}
-              >
-                <div className="card-icon" aria-hidden="true">
-                  <Icon size={24} />
-                </div>
-                <h3>{module.name}</h3>
-                <p>{module.tagline}</p>
               </motion.article>
             );
           })}
@@ -837,7 +753,6 @@ function App() {
         <MerchantTypesSection />
         <InteractiveAtlasSection />
         <HelpCardsSection />
-        <ContentStudioSection />
         <ErpLiteSection />
         <HardwareSection />
         <MerchantsSection />
