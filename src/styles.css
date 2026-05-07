@@ -359,6 +359,14 @@ h4 {
   margin-bottom: 34px;
 }
 
+.hero-brand-line {
+  margin-bottom: 18px;
+  color: #dff8ff;
+  font-size: clamp(1rem, 1.8vw, 1.28rem);
+  font-weight: 680;
+  letter-spacing: 0.02em;
+}
+
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
@@ -534,6 +542,61 @@ h4 {
 
 .section-heading.narrow {
   max-width: 710px;
+}
+
+.merchant-types-section {
+  background:
+    radial-gradient(circle at 20% 18%, rgba(45, 226, 210, 0.08), transparent 26rem),
+    linear-gradient(180deg, rgba(3, 7, 18, 0), rgba(255, 255, 255, 0.016), rgba(3, 7, 18, 0));
+}
+
+.merchant-types-layout .section-heading {
+  margin-bottom: 28px;
+}
+
+.merchant-type-grid,
+.help-grid,
+.hardware-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.merchant-type-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.merchant-type-card,
+.help-card,
+.hardware-card {
+  position: relative;
+  min-height: 116px;
+  padding: 20px;
+  border: 1px solid color-mix(in srgb, var(--accent), transparent 76%);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 18% 0%, color-mix(in srgb, var(--accent), transparent 89%), transparent 62%),
+    rgba(255, 255, 255, 0.032);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.merchant-type-card svg,
+.help-card svg,
+.hardware-card svg {
+  color: var(--accent);
+}
+
+.merchant-type-card h3,
+.help-card h3,
+.hardware-card h3 {
+  margin: 14px 0 0;
+}
+
+.merchant-fit-note {
+  max-width: 860px;
+  margin: 26px 0 0;
+  color: var(--text-secondary);
+  font-size: clamp(1rem, 1.5vw, 1.12rem);
+  line-height: 1.7;
 }
 
 .interactive-atlas-section {
@@ -870,6 +933,32 @@ h4 {
 .lifecycle-step p {
   margin: 0;
   font-size: 0.92rem;
+}
+
+.helps-section {
+  background:
+    radial-gradient(circle at 82% 20%, rgba(151, 255, 79, 0.08), transparent 26rem),
+    linear-gradient(180deg, rgba(3, 7, 18, 0.08), rgba(7, 17, 31, 0.34), rgba(3, 7, 18, 0.08));
+}
+
+.help-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.help-card {
+  min-height: 210px;
+}
+
+.help-card h3,
+.hardware-card h3 {
+  line-height: 1.2;
+}
+
+.help-card p,
+.hardware-card p {
+  margin: 10px 0 0;
+  color: var(--text-secondary);
+  line-height: 1.62;
 }
 
 .studio-section {
@@ -1210,6 +1299,31 @@ h4 {
   line-height: 1.65;
 }
 
+.hardware-section {
+  background:
+    radial-gradient(circle at 18% 70%, rgba(255, 155, 74, 0.08), transparent 28rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.012), rgba(7, 17, 31, 0.28), rgba(255, 255, 255, 0.012));
+}
+
+.hardware-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+  gap: 46px;
+  align-items: start;
+}
+
+.hardware-layout .section-heading {
+  margin-bottom: 0;
+}
+
+.hardware-grid {
+  grid-template-columns: 1fr;
+}
+
+.hardware-card {
+  min-height: 154px;
+}
+
 .flow-section {
   background:
     radial-gradient(circle at 18% 50%, rgba(45, 226, 210, 0.08), transparent 32rem),
@@ -1291,7 +1405,7 @@ h4 {
   align-items: start;
 }
 
-.fee-callout {
+.owner-callout {
   display: inline-flex;
   gap: 12px;
   align-items: center;
@@ -1305,7 +1419,7 @@ h4 {
   font-weight: 760;
 }
 
-.fee-callout svg {
+.owner-callout svg {
   color: var(--green);
   flex: 0 0 auto;
 }
@@ -1542,6 +1656,7 @@ h4 {
   .split-grid,
   .atlas-workbench,
   .studio-layout,
+  .hardware-layout,
   .merchant-layout,
   .alpha-panel {
     grid-template-columns: 1fr;
@@ -1560,6 +1675,11 @@ h4 {
   }
 
   .module-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .merchant-type-grid,
+  .help-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1666,6 +1786,8 @@ h4 {
   }
 
   .module-grid,
+  .merchant-type-grid,
+  .help-grid,
   .reason-grid,
   .safeguard-grid {
     grid-template-columns: 1fr;

@@ -27,11 +27,12 @@ import "./contentStudio.css";
 
 const navItems = [
   ["Home", "home"],
+  ["Merchants", "merchant-types"],
   ["Atlas", "atlas"],
-  ["ERP-Lite", "erp-lite"],
-  ["Flow", "flow"],
-  ["Modules", "modules"],
-  ["Alpha", "alpha"],
+  ["Helps", "helps"],
+  ["Content", "content-studio"],
+  ["ERP Lite", "erp-lite"],
+  ["Partners", "alpha"],
   ["Contact", "contact"],
 ];
 
@@ -50,13 +51,35 @@ const iconByModule = {
   "backup-replay": RefreshCcw,
 };
 
+const merchantTypes = [
+  "Coffee shops",
+  "Salons",
+  "Med spas",
+  "Local retail",
+  "Service businesses",
+  "Small hospitality",
+  "Specialty shops",
+  "Independent merchants",
+];
+
+const helpCards = [
+  ["Know what sold", "See what moved today without rebuilding the day from receipts."],
+  ["Know who came in", "Connect customer visits and history when the customer chooses to share it."],
+  ["Know what needs restocking", "See which products moved and what may need attention soon."],
+  ["Know what needs follow up", "Keep customer and service follow up visible after the sale."],
+  ["Know what happened today", "Review sales, payments, refunds, saved work, and exceptions before close."],
+  ["Know what to post or promote", "Turn real products, services, and seasonal signals into content ideas for review."],
+  ["Know what needs attention before closing", "Make unresolved work visible so owners are not closing blind."],
+  ["Know where the pieces connect", "See how money, customers, products, and daily work fit together."],
+];
+
 const merchantReasons = [
-  ["Lower software overhead", "Fewer disconnected subscriptions and less operational drag."],
-  ["Unified operational visibility", "Sales, customers, payments, inventory, and reporting in one map."],
-  ["Merchant-first workflows", "Designed around owners, managers, and frontline teams."],
-  ["Recovery-aware systems", "Built with interruptions, exceptions, and continuity in mind."],
-  ["AI-assisted guidance", "Useful recommendations without hype or autopilot theater."],
-  ["ERP-lite simplicity", "Serious coordination without enterprise complexity."],
+  ["Less running between tools", "One operating view for sales, customers, inventory, reporting, and daily work."],
+  ["Cleaner information at close", "Owners can review the day without rebuilding the story by hand."],
+  ["Built for owners", "Designed for owners, managers, and lean teams doing the work."],
+  ["Attention before surprises", "Stock, saved work, payment exceptions, and follow up stay visible."],
+  ["Practical guidance", "Helpful prompts and draft support with the owner still in control."],
+  ["ERP Lite made smaller", "Enterprise Resource Planning, simplified for small merchants."],
 ];
 
 const flowSteps = [
@@ -65,8 +88,8 @@ const flowSteps = [
   "Payment",
   "Inventory",
   "Reporting",
-  "Follow-Up",
-  "Operational Insight",
+  "Follow Up",
+  "Daily Insight",
 ];
 
 const disclosureSections = [
@@ -132,7 +155,7 @@ function Navigation() {
         ))}
       </nav>
       <button className="nav-cta" type="button" onClick={() => scrollToSection("alpha")}>
-        Alpha
+        Partner
       </button>
     </header>
   );
@@ -184,7 +207,7 @@ function OperationalMap({ compact = false }) {
       transition={{ duration: 0.8, ease: "easeOut" }}
     >
       <div className="map-glow" aria-hidden="true" />
-      <svg viewBox="0 0 100 100" className="map-svg" role="img" aria-label="Animated operational map">
+      <svg viewBox="0 0 100 100" className="map-svg" role="img" aria-label="Animated business map">
         <defs>
           <filter id={compact ? "softGlowCompact" : "softGlow"}>
             <feGaussianBlur stdDeviation="1.2" result="blur" />
@@ -272,20 +295,23 @@ function Hero() {
         >
           <div className="brand-panel">
             <BrandMark />
-            <span>Operational Business Map</span>
+            <span>Business System For Merchants</span>
           </div>
-          <p className="eyebrow">Operational Intelligence For Merchants</p>
-          <h1>See Every Connection. Drive Every Outcome.</h1>
+          <p className="eyebrow">Built For Small Merchants</p>
+          <h1>Run your business without running between systems.</h1>
+          <p className="hero-brand-line">Know what sold, what needs attention, and where the day is going.</p>
           <p className="hero-subtitle">
-            AtlasADE is an operational business map designed for merchants who need visibility,
-            workflow intelligence, and ERP-lite coordination without enterprise complexity.
+            AtlasADE is an ERP Lite system for small merchants, solo owners, and lean teams. It
+            helps keep sales, customers, inventory, payments, reporting, content ideas, and daily
+            work connected so owners can spend less time chasing answers and more time running
+            the business.
           </p>
           <div className="hero-actions">
             <button className="button primary" type="button" onClick={() => scrollToSection("alpha")}>
-              Apply For Alpha <ArrowRight size={18} aria-hidden="true" />
+              Join Early Partner Program <ArrowRight size={18} aria-hidden="true" />
             </button>
-            <button className="button secondary" type="button" onClick={() => scrollToSection("atlas")}>
-              Explore Atlas
+            <button className="button secondary" type="button" onClick={() => scrollToSection("merchant-types")}>
+              See Who It Fits
             </button>
           </div>
         </motion.div>
@@ -293,6 +319,44 @@ function Hero() {
       </div>
       <div className="hero-floor" aria-hidden="true">
         <span />
+      </div>
+    </section>
+  );
+}
+
+function MerchantTypesSection() {
+  return (
+    <section className="section merchant-types-section" id="merchant-types">
+      <div className="section-inner merchant-types-layout">
+        <div className="section-heading">
+          <p className="eyebrow">Merchant Fit</p>
+          <h2>Built for merchants like these.</h2>
+          <p>
+            Coffee shops, salons, med spas, local retail, service businesses, small hospitality,
+            specialty shops, and independent merchants all need the same basic thing: a clearer
+            way to see what is happening.
+          </p>
+        </div>
+        <div className="merchant-type-grid" aria-label="Compatible merchant types">
+          {merchantTypes.map((merchant, index) => (
+            <motion.article
+              key={merchant}
+              className="merchant-type-card"
+              style={{ "--accent": getAccent(index) }}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ delay: index * 0.04, duration: 0.4 }}
+            >
+              <Store size={18} aria-hidden="true" />
+              <h3>{merchant}</h3>
+            </motion.article>
+          ))}
+        </div>
+        <p className="merchant-fit-note">
+          AtlasADE is not locked to one industry. It is not built only for restaurants, salons,
+          or retail. It is designed around the daily business patterns most small merchants share.
+        </p>
       </div>
     </section>
   );
@@ -320,11 +384,12 @@ function InteractiveAtlasSection() {
     <section className="section interactive-atlas-section" id="atlas">
       <div className="section-inner">
         <div className="section-heading atlas-heading">
-          <p className="eyebrow">Interactive Atlas</p>
-          <h2>Explore the operational map behind a merchant business.</h2>
+          <p className="eyebrow">See how the business connects</p>
+          <h2>Understand what is happening without jumping between systems.</h2>
           <p>
-            Select any module to see the merchant outcome, what the system touches, and how each
-            piece connects into a customer purchase flow.
+            Select any module to see what sold, who came in, what needs attention, what needs
+            restocking, what needs follow up, what to review before closing, and what content or
+            promotion might be worth considering.
           </p>
         </div>
 
@@ -342,7 +407,8 @@ function InteractiveAtlasSection() {
                   key={module.id}
                   style={{ "--accent": accent }}
                   aria-pressed={isSelected}
-                  aria-label={`${module.name}. ${module.tagline}. Select to view merchant outcomes, connected endpoints, and related flows.`}
+                  aria-selected={isSelected}
+                  aria-label={`${module.name}. ${module.tagline}. Select to see what this area touches and what it helps the owner understand.`}
                   onClick={() => setSelectedId(module.id)}
                   initial={{ opacity: 0, y: 18 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -380,12 +446,12 @@ function InteractiveAtlasSection() {
             </div>
             <p className="atlas-description">{selectedModule.description}</p>
             <div className="atlas-outcome-block">
-              <h4>Plain-English merchant outcome</h4>
+              <h4>Why the owner cares</h4>
               <p>{selectedModule.whyItMatters}</p>
             </div>
             <div className="atlas-detail-grid">
               <div>
-                <h4>What it touches</h4>
+                <h4>What this connects</h4>
                 <ul>
                   {selectedModule.connectedEndpoints.map((endpoint) => (
                     <li key={endpoint}>{endpoint}</li>
@@ -393,7 +459,7 @@ function InteractiveAtlasSection() {
                 </ul>
               </div>
               <div>
-                <h4>Business outcomes</h4>
+                <h4>What this helps you know</h4>
                 <ul>
                   {selectedModule.businessOutcomes.map((outcome) => (
                     <li key={outcome}>{outcome}</li>
@@ -416,7 +482,7 @@ function InteractiveAtlasSection() {
         <div className="purchase-lifecycle">
           <div className="purchase-lifecycle-head">
             <p className="eyebrow">{atlasData.lifecycle?.title ?? "Follow a customer purchase"}</p>
-            <h3>From customer lookup to protected business record.</h3>
+            <h3>From customer lookup to a business record the owner can trust.</h3>
           </div>
           <div className="lifecycle-track">
             {lifecycle.map((step, index) => (
@@ -441,7 +507,15 @@ function InteractiveAtlasSection() {
 }
 
 function ErpLiteSection() {
-  const lines = ["Sales.", "Customers.", "Inventory.", "Payments.", "Reporting.", "Recovery.", "Workflow."];
+  const lines = [
+    "Sales.",
+    "Customers.",
+    "Inventory.",
+    "Payments.",
+    "Reporting.",
+    "Content ideas.",
+    "Daily operations.",
+  ];
 
   return (
     <section className="section split-section" id="erp-lite">
@@ -454,8 +528,8 @@ function ErpLiteSection() {
           viewport={{ once: true, amount: 0.35 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          <p className="eyebrow">ERP-Lite Without Enterprise Weight</p>
-          <h2>AtlasADE maps the operational reality of a business.</h2>
+          <p className="eyebrow">ERP Lite, explained simply</p>
+          <h2>Enterprise Resource Planning, simplified for small merchants.</h2>
           <div className="operational-list">
             {lines.map((line, index) => (
               <motion.span
@@ -470,10 +544,49 @@ function ErpLiteSection() {
             ))}
           </div>
           <p>
-            Everything connected in one operational view, so merchants can understand what is
-            happening, where attention is needed, and which decisions move the business forward.
+            Instead of separate tools for sales, customers, inventory, reports, marketing notes,
+            and daily work, AtlasADE keeps the pieces connected in one practical view.
           </p>
         </motion.div>
+      </div>
+    </section>
+  );
+}
+
+function HelpCardsSection() {
+  const icons = [BarChart3, UsersRound, Boxes, RefreshCcw, Workflow, Megaphone, ShieldCheck, Network];
+
+  return (
+    <section className="section helps-section" id="helps">
+      <div className="section-inner">
+        <div className="section-heading">
+          <p className="eyebrow">What AtlasADE helps with</p>
+          <h2>Know the answers owners ask every day.</h2>
+          <p>
+            Small merchants deserve the same clear view larger companies already have, without
+            needing a software team to get it.
+          </p>
+        </div>
+        <div className="help-grid">
+          {helpCards.map(([title, copy], index) => {
+            const Icon = icons[index] ?? Sparkles;
+            return (
+              <motion.article
+                className="help-card"
+                key={title}
+                style={{ "--accent": getAccent(index) }}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ delay: (index % 4) * 0.05, duration: 0.42 }}
+              >
+                <Icon size={20} aria-hidden="true" />
+                <h3>{title}</h3>
+                <p>{copy}</p>
+              </motion.article>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
@@ -487,8 +600,8 @@ function FlowSection() {
           <p className="eyebrow">Merchant Workflow</p>
           <h2>Atlas is not just a register.</h2>
           <p>
-            Every action moves through the business. AtlasADE keeps the operational trail visible,
-            coordinated, and ready for insight.
+            Every action moves through the business. AtlasADE keeps the trail clear so owners can
+            see what happened and what needs attention.
           </p>
         </div>
         <div className="timeline" aria-label="Merchant workflow timeline">
@@ -556,20 +669,67 @@ function ModulesSection() {
   );
 }
 
+function HardwareSection() {
+  const hardwareCards = [
+    ["Modern workstations", "Designed for modern Apple based merchant workstations."],
+    ["Practical peripherals", "Built to support merchant work without forcing every business into one hardware path."],
+    ["Less vendor lock in", "The system stays focused on the business, not the hardware vendor."],
+  ];
+
+  return (
+    <section className="section hardware-section" id="hardware">
+      <div className="section-inner hardware-layout">
+        <div className="section-heading">
+          <p className="eyebrow">Hardware direction</p>
+          <h2>Hardware flexible by design.</h2>
+          <p>
+            AtlasADE is designed to support merchant work without forcing the business into a
+            single proprietary hardware path. The goal is to let merchants use practical, modern
+            tools while keeping the system focused on the business, not vendor lock in.
+          </p>
+        </div>
+        <div className="hardware-grid">
+          {hardwareCards.map(([title, copy], index) => {
+            const icons = [Store, Workflow, ShieldCheck];
+            const Icon = icons[index];
+            return (
+              <motion.article
+                className="hardware-card"
+                key={title}
+                style={{ "--accent": getAccent(index + 1) }}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.35 }}
+                transition={{ delay: index * 0.06, duration: 0.42 }}
+              >
+                <Icon size={20} aria-hidden="true" />
+                <h3>{title}</h3>
+                <p>{copy}</p>
+              </motion.article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function MerchantsSection() {
   return (
-    <section className="section merchants-section">
+    <section className="section merchants-section" id="owners">
       <div className="section-inner merchant-layout">
         <div className="section-copy">
-          <p className="eyebrow">Why Merchants</p>
-          <h2>Built for operators. Not software departments.</h2>
+          <p className="eyebrow">Owner Time</p>
+          <h2>Built for owners who do not have time to chase the business.</h2>
           <p>
-            AtlasADE is for businesses that need better coordination without hiring a systems team
-            or stitching together a maze of point solutions.
+            Most small business owners are not short on effort. They are short on time, clean
+            information, and systems that work together. AtlasADE is built to reduce the daily
+            search for answers: what sold, what needs attention, what customers need follow up,
+            what inventory moved, what content should be reviewed, and what happened today.
           </p>
-          <div className="fee-callout">
+          <div className="owner-callout">
             <ShieldCheck size={22} aria-hidden="true" />
-            <span>No monthly software fee for processing merchants.</span>
+            <span>One operating view for everyday merchant decisions.</span>
           </div>
         </div>
         <div className="reason-grid">
@@ -593,7 +753,7 @@ function MerchantsSection() {
 }
 
 function AlphaSection() {
-  const merchants = ["coffee shops", "salons", "med spas", "local retail", "service operators", "growing independents"];
+  const merchants = ["coffee shops", "salons", "med spas", "local retail", "service businesses", "specialty shops"];
 
   return (
     <section className="section alpha-section" id="alpha">
@@ -604,11 +764,11 @@ function AlphaSection() {
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.75 }}
         >
-          <p className="eyebrow">Private Alpha</p>
-          <h2>Shape the future of merchant systems.</h2>
+          <p className="eyebrow">Early merchant partner program</p>
+          <h2>Help shape simpler merchant operations.</h2>
           <p>
-            AtlasADE is currently in private Alpha. We are looking for operationally-minded
-            merchants who want to help shape the future of merchant systems.
+            We are working with a small group of merchants who want simpler tools, clearer
+            information, and a system shaped around how their business actually runs.
           </p>
           <div className="merchant-tags">
             {merchants.map((merchant) => (
@@ -616,7 +776,7 @@ function AlphaSection() {
             ))}
           </div>
           <a className="button primary" href="mailto:jwong@atlasade.com?subject=AtlasADE%20Alpha%20Access">
-            Request Alpha Access <ArrowRight size={18} aria-hidden="true" />
+            Request Partner Access <ArrowRight size={18} aria-hidden="true" />
           </a>
         </motion.div>
         <div className="alpha-signal" aria-hidden="true">
@@ -657,8 +817,8 @@ function ContactSection() {
         </div>
         <div className="footer-line">
           <BrandMark />
-          <span>Operational Intelligence for Merchants</span>
-          <span>© 2026 AtlasADE. All rights reserved.</span>
+          <span>ERP Lite system for small merchants</span>
+          <span>(c) 2026 AtlasADE. All rights reserved.</span>
         </div>
       </div>
     </footer>
@@ -674,11 +834,12 @@ function App() {
       <Navigation />
       <main id="main">
         <Hero />
+        <MerchantTypesSection />
         <InteractiveAtlasSection />
+        <HelpCardsSection />
         <ContentStudioSection />
         <ErpLiteSection />
-        <FlowSection />
-        <ModulesSection />
+        <HardwareSection />
         <MerchantsSection />
         <AlphaSection />
         <ContactSection />

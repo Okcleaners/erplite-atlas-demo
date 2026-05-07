@@ -1,19 +1,19 @@
 {
-  "title": "ERP-Lite Operational Atlas",
-  "subtitle": "A business-facing map of how ERP-lite connects daily selling, customers, stock, payments, reporting, and recovery.",
+  "title": "AtlasADE Business Map",
+  "subtitle": "A simple view of how sales, customers, stock, payments, reporting, and recovery connect.",
   "audience": [
     "Merchants",
     "Sales teams",
     "Implementation partners",
-    "Non-technical operators"
+    "Operators"
   ],
   "modules": [
     {
       "id": "sales-register",
       "name": "Sales Register",
-      "tagline": "Fast checkout with the business record built in.",
+      "tagline": "Fast checkout that still keeps a clean record.",
       "description": "The register is where staff add items, attach a customer when useful, take payment, and complete a sale without leaving the selling flow.",
-      "whyItMatters": "A focused register keeps lines moving while still creating the records the business needs later for reporting, support, and customer follow-up.",
+      "whyItMatters": "A focused register keeps lines moving while still creating the records the business needs later for reporting, support, and customer follow up.",
       "connectedEndpoints": [
         "Menu and item catalog",
         "Customer lookup",
@@ -25,14 +25,14 @@
       "businessOutcomes": [
         "Faster checkout",
         "Cleaner tickets",
-        "Fewer end-of-day surprises",
+        "Fewer end of day surprises",
         "Better customer context without slowing the cashier"
       ],
       "replacesOrReduces": [
         "Paper order pads",
         "Manual totals",
-        "Separate customer note-taking",
-        "After-the-fact spreadsheet cleanup"
+        "Separate customer notes",
+        "Spreadsheet cleanup after the day is over"
       ],
       "relatedFlows": [
         "Start a sale",
@@ -43,7 +43,7 @@
       ],
       "merchantConversation": "When a cashier rings up a regular, the system can keep the line moving and still remember the visit for future service.",
       "futureExpansion": [
-        "Role-specific register modes",
+        "Register modes by role",
         "More guided selling prompts",
         "Deeper order handoff to kitchen or fulfillment screens"
       ]
@@ -51,9 +51,9 @@
     {
       "id": "customer-crm",
       "name": "Customer/CRM",
-      "tagline": "A lightweight customer memory for everyday service.",
+      "tagline": "A simple customer memory for everyday service.",
       "description": "Customer/CRM links purchases to a customer profile when the shopper shares a phone number or identity at checkout.",
-      "whyItMatters": "Staff can recognize returning customers and the business can understand repeat visits without turning checkout into a back-office CRM session.",
+      "whyItMatters": "Staff can recognize returning customers and the business can understand repeat visits without turning checkout into a back office CRM session.",
       "connectedEndpoints": [
         "Customer phone lookup",
         "Customer profile",
@@ -66,7 +66,7 @@
         "Recognize regulars",
         "Track visit history",
         "Support customer questions",
-        "Improve loyalty and retention"
+        "Understand who comes back"
       ],
       "replacesOrReduces": [
         "Loose customer notebooks",
@@ -78,7 +78,7 @@
         "Customer lookup",
         "Quick customer creation",
         "Purchase history",
-        "Customer-safe reporting"
+        "Customer safe reporting"
       ],
       "merchantConversation": "If a customer asks what they bought last time, the team can answer without digging through paper receipts.",
       "futureExpansion": [
@@ -92,7 +92,7 @@
       "id": "inventory",
       "name": "Inventory",
       "tagline": "Know what can be sold and what needs attention.",
-      "description": "Inventory tracks physical goods and stock-sensitive products while allowing everyday prepared items to flow through the register normally.",
+      "description": "Inventory tracks physical goods and products where stock matters while allowing everyday prepared items to flow through the register normally.",
       "whyItMatters": "Operators can protect retail stock from overselling while keeping prepared food and drink sales simple.",
       "connectedEndpoints": [
         "Item catalog",
@@ -110,7 +110,7 @@
       ],
       "replacesOrReduces": [
         "Manual stock sheets",
-        "End-of-week stock surprises",
+        "End of week stock surprises",
         "Guesswork on retail availability",
         "Unclear refund restock expectations"
       ],
@@ -121,19 +121,19 @@
         "Adjust inventory",
         "Review low stock"
       ],
-      "merchantConversation": "The register can block a sold-out mug without blocking a made-to-order coffee.",
+      "merchantConversation": "The register can block a sold out mug without blocking a made to order coffee.",
       "futureExpansion": [
-        "Low-stock alerts",
+        "Low stock alerts",
         "Supplier ordering",
         "Ingredient tracking",
-        "Multi-location inventory"
+        "Multi location inventory"
       ]
     },
     {
       "id": "payments-recovery",
       "name": "Payments & Recovery",
       "tagline": "Take payment and keep a clear path when something interrupts.",
-      "description": "Payments & Recovery manages cash and card sale completion, declined attempts, uncertain payment states, and operator recovery steps.",
+      "description": "Payments & Recovery helps staff finish cash and card sales, handle declined attempts, and know what to do when a payment is unclear.",
       "whyItMatters": "Payment interruptions are stressful. The system should show the next safe action instead of leaving the register stuck.",
       "connectedEndpoints": [
         "Cash drawer process",
@@ -166,7 +166,7 @@
       "futureExpansion": [
         "More terminal providers",
         "Richer reconciliation dashboards",
-        "Guided cashier training prompts",
+        "Guided cashier help",
         "Offline payment review queues"
       ]
     },
@@ -187,41 +187,41 @@
       "businessOutcomes": [
         "Faster closeout",
         "Cleaner accounting handoff",
-        "Better owner visibility",
+        "A clearer daily view",
         "Reduced manual reconciliation"
       ],
       "replacesOrReduces": [
-        "Manual daily summary sheets",
-        "Payment portal cross-checking",
+        "Manual daily summary notes",
+        "Payment portal checking",
         "Spreadsheet tax calculations",
         "Receipt pile audits"
       ],
       "relatedFlows": [
-        "End-of-day summary",
+        "End of day summary",
         "Tax review",
         "Refund reporting",
-        "Customer-safe export"
+        "Customer safe export"
       ],
       "merchantConversation": "At close, the owner can see gross sales, refunds, tax, and payment mix without reconstructing the day by hand.",
       "futureExpansion": [
         "Scheduled reports",
         "Accounting integrations",
-        "Multi-store comparisons",
-        "Role-based report views"
+        "Store comparisons",
+        "Report views by role"
       ]
     },
     {
       "id": "business-operations",
       "name": "Business Operations",
       "tagline": "Manager controls for the parts of the day that need structure.",
-      "description": "Business Operations covers business-day status, saved tickets, manager attention, operator roles, and safe closeout behavior.",
+      "description": "Business Operations covers business day status, saved tickets, manager attention, operator roles, and safe closeout behavior.",
       "whyItMatters": "The day should close only when unresolved work is visible and understood, not silently discarded.",
       "connectedEndpoints": [
         "Operator login",
         "Roles and permissions",
         "Saved tickets",
-        "Needs-attention queue",
-        "Business-day close",
+        "Needs attention queue",
+        "Business day close",
         "Manager review"
       ],
       "businessOutcomes": [
@@ -232,7 +232,7 @@
       ],
       "replacesOrReduces": [
         "Sticky notes for held orders",
-        "End-of-shift verbal handoffs",
+        "End of shift verbal handoffs",
         "Silent ticket loss",
         "Unclear manager overrides"
       ],
@@ -246,22 +246,22 @@
       "merchantConversation": "A saved order stays in the queue with the customer's name and total until someone completes it.",
       "futureExpansion": [
         "Shift management",
-        "Labor-aware closeout",
+        "Labor aware closeout",
         "Task checklists",
         "Approval workflows"
       ]
     },
     {
       "id": "ai-assistant",
-      "name": "AI Assistant",
-      "tagline": "Operational help without taking over the register.",
-      "description": "The AI Assistant can help staff find items, understand recovery steps, answer operational questions, and recommend follow-up actions.",
-      "whyItMatters": "New or busy staff can get guidance without leaving the POS flow or calling a manager for every small question.",
+      "name": "Guidance Assistant",
+      "tagline": "Helpful prompts without taking over the register.",
+      "description": "The Guidance Assistant can help staff find items, understand recovery steps, answer common questions, and suggest follow up actions.",
+      "whyItMatters": "New or busy staff can get help without leaving checkout or calling a manager for every small question.",
       "connectedEndpoints": [
         "Cashier help",
         "Item lookup",
         "Recovery guidance",
-        "Customer follow-up suggestions",
+        "Customer follow up suggestions",
         "Content guidance",
         "Policy prompts"
       ],
@@ -269,35 +269,35 @@
         "Faster staff training",
         "More consistent operations",
         "Less manager interruption",
-        "Better follow-up ideas"
+        "Better follow up ideas"
       ],
       "replacesOrReduces": [
         "Printed cheat sheets",
         "Repeated manager questions",
         "Unstructured training notes",
-        "Missed follow-up opportunities"
+        "Missed follow up opportunities"
       ],
       "relatedFlows": [
         "Ask for register help",
         "Find an item",
         "Explain recovery",
-        "Recommend next action",
+        "Recommend the next action",
         "Draft business content"
       ],
-      "merchantConversation": "A cashier can ask how to handle a recovery state and get plain-language guidance at the point of need.",
+      "merchantConversation": "A cashier can ask what to do next and get clear guidance at the point of need.",
       "futureExpansion": [
-        "Store-specific knowledge",
+        "Store specific knowledge",
         "Suggested training paths",
-        "Voice-assisted operations",
-        "Owner-facing business insights"
+        "Voice guided help",
+        "Owner business insights"
       ]
     },
     {
       "id": "content-studio-social-observer",
       "name": "Content Studio / Social Observer",
       "tagline": "Turn real business activity into safer marketing opportunities.",
-      "description": "Content Studio / Social Observer helps merchants observe operational signals, identify content opportunities, and draft merchant-approved marketing ideas based on what is actually happening in the business.",
-      "whyItMatters": "Most merchants know they should post more consistently, but they do not have time to invent content from scratch. AtlasADE can turn sales trends, customer patterns, services, products, and seasonal signals into practical content ideas while keeping the merchant in control.",
+      "description": "Content Studio / Social Observer helps merchants notice business signals, find content ideas, and draft marketing notes based on what is actually happening in the business.",
+      "whyItMatters": "Most merchants know they should post more consistently, but they do not have time to invent content from scratch. AtlasADE can turn sales trends, customer patterns, services, products, and seasonal signals into practical ideas while keeping the merchant in control.",
       "connectedEndpoints": [
         "Sales trends",
         "Customer activity",
@@ -309,26 +309,26 @@
         "Business reporting"
       ],
       "businessOutcomes": [
-        "More consistent merchant visibility",
+        "More consistent public presence",
         "Better content ideas from real activity",
-        "Less blank-page marketing work",
-        "Safer AI-assisted drafts",
+        "Less blank page marketing work",
+        "Merchant reviewed draft ideas",
         "Campaigns tied to products and services",
-        "Owner-controlled approval before publishing"
+        "Owner review before publishing"
       ],
       "replacesOrReduces": [
-        "Random last-minute posting",
-        "Generic AI marketing copy",
+        "Random last minute posting",
+        "Generic marketing copy",
         "Disconnected content calendars",
         "Manual campaign brainstorming",
-        "Expensive lightweight marketing retainers",
+        "Lightweight marketing busywork",
         "Untracked promotion ideas"
       ],
       "relatedFlows": [
         "Observe business signals",
         "Identify campaign opportunity",
         "Draft content idea",
-        "Review merchant-safe copy",
+        "Review merchant safe copy",
         "Approve before publishing",
         "Track content opportunity"
       ],
@@ -336,7 +336,7 @@
       "futureExpansion": [
         "Content calendar",
         "Campaign performance review",
-        "Social platform integrations",
+        "Social tool connections",
         "Approval queues",
         "Brand voice controls",
         "Seasonal promotion planning",
@@ -347,8 +347,8 @@
       "id": "integrations",
       "name": "Integrations",
       "tagline": "Connect the POS to the tools around the business.",
-      "description": "Integrations are the endpoints ERP-lite can connect to around payments, accounting, inventory, marketing, hardware, and analytics.",
-      "whyItMatters": "A merchant should not have to re-enter the same business facts into every tool they use.",
+      "description": "Integrations connect AtlasADE to the tools around payments, accounting, inventory, marketing, hardware, and reporting.",
+      "whyItMatters": "A merchant should not have to enter the same business facts into every tool they use.",
       "connectedEndpoints": [
         "Payment terminals",
         "Receipt printers",
@@ -360,20 +360,20 @@
       "businessOutcomes": [
         "Less duplicate entry",
         "Cleaner handoffs",
-        "Better operational visibility",
+        "A clearer view of the business",
         "More flexible deployment"
       ],
       "replacesOrReduces": [
         "Manual exports",
-        "Copy-paste accounting",
+        "Copy and paste accounting",
         "Disconnected hardware setup",
-        "One-off reporting spreadsheets"
+        "One time reporting spreadsheets"
       ],
       "relatedFlows": [
         "Export daily totals",
         "Connect payment terminal",
         "Print receipt",
-        "Sync customer-safe data"
+        "Sync customer safe data"
       ],
       "merchantConversation": "The same completed sale can support the receipt, payment record, customer history, and daily report.",
       "futureExpansion": [
@@ -387,21 +387,21 @@
       "id": "backup-replay",
       "name": "Backup & Replay",
       "tagline": "Protect the business record when devices restart or recover.",
-      "description": "Backup & Replay protects operational records by preserving the sequence of important business events and allowing recovery after restart.",
+      "description": "Backup & Replay protects business records by preserving the sequence of important events and helping the system recover after restart.",
       "whyItMatters": "A register should not lose or duplicate a sale because a device restarts, power blips, or the system needs to recover.",
       "connectedEndpoints": [
         "Event history",
         "Checkpoints",
         "Sales records",
         "Customer timeline",
-        "Business-day close",
+        "Business day close",
         "Recovery review"
       ],
       "businessOutcomes": [
         "More trustworthy records",
         "Safer recovery after outage",
         "Less duplicate data",
-        "Better operational continuity"
+        "A more dependable business record"
       ],
       "replacesOrReduces": [
         "Manual incident reconstruction",
@@ -419,8 +419,8 @@
       "merchantConversation": "If the register restarts, the business record should come back consistently instead of doubling purchase history or reopening closed work.",
       "futureExpansion": [
         "Cloud backup options",
-        "Cross-device recovery",
-        "Owner-visible recovery logs",
+        "Cross device recovery",
+        "Owner visible recovery logs",
         "Guided restore workflows"
       ]
     }
@@ -465,8 +465,8 @@
         "detail": "Recovery systems protect the record from restart and replay issues."
       },
       {
-        "name": "AI can recommend next actions",
-        "detail": "The assistant can suggest follow-up, explain an operation, or help staff recover."
+        "name": "Guidance can recommend next actions",
+        "detail": "AtlasADE can suggest follow up, explain what happened, or help staff recover."
       }
     ]
   }

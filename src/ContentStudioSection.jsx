@@ -2,27 +2,27 @@ import { motion } from "framer-motion";
 import { BrainCircuit, CheckCircle2, Eye, Megaphone, PenLine, Radio, ShieldCheck, TrendingUp, Workflow } from "lucide-react";
 
 const studioSignals = [
-  ["Sales signals", "Turn best-selling products and services into promotion ideas."],
-  ["Customer trends", "Spot repeat behavior, seasonal demand, and follow-up opportunities."],
+  ["Sales signals", "Turn products and services that are moving into promotion ideas."],
+  ["Customer trends", "Spot repeat visits, seasonal demand, and follow up moments."],
   ["Campaign opportunities", "Find practical reasons to post without inventing marketing noise."],
-  ["Approval workflow", "Drafts stay merchant-controlled before anything goes public."],
+  ["Owner review", "Drafts stay with the merchant before anything goes public."],
 ];
 
 const studioFlow = [
   ["Sales", "Real business activity"],
   ["Customer Trends", "What people return for"],
-  ["Operational Signals", "What changed this week"],
+  ["Business Signals", "What changed this week"],
   ["Campaign Ideas", "What is worth saying"],
-  ["AI Draft Assist", "Copy support, not autopilot"],
+  ["Draft Support", "Copy ideas for review"],
   ["Merchant Approval", "Owner stays in control"],
-  ["Published Content", "Consistent visibility"],
+  ["Published Content", "Stay visible"],
 ];
 
 const safeguards = [
-  "No autonomous posting",
-  "No AI replying",
-  "No AI DMs",
-  "No uncontrolled social automation",
+  "Owner approval before publishing",
+  "No automatic replies",
+  "No direct-message handling",
+  "No uncontrolled social actions",
 ];
 
 export default function ContentStudioSection() {
@@ -37,14 +37,15 @@ export default function ContentStudioSection() {
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
           <p className="eyebrow">Content Studio / Social Observer</p>
-          <h2>Turn operational activity into better merchant marketing.</h2>
+          <h2>Stay visible without starting from a blank page.</h2>
           <p>
-            AtlasADE helps merchants understand what is happening inside the business and turn
-            real activity into content opportunities, campaign ideas, and safer AI-assisted drafts.
+            AtlasADE can help turn real business activity into content ideas for review: popular
+            products, repeat services, seasonal moments, customer trends, and campaign
+            opportunities. The owner stays in control.
           </p>
           <div className="studio-proof">
             <ShieldCheck size={22} aria-hidden="true" />
-            <span>Operationally-informed content guidance. Not social media autopilot.</span>
+            <span>Content ideas based on real business activity, with merchant approval.</span>
           </div>
           <div className="safeguard-grid" aria-label="Social Observer safeguards">
             {safeguards.map((item) => (
@@ -115,9 +116,9 @@ export default function ContentStudioSection() {
               <PenLine size={20} />
             </div>
             <div>
-              <h3>AI-assisted draft generation</h3>
+              <h3>Draft help for merchant review</h3>
               <p>
-                The system can suggest merchant-safe content from real signals, then wait for the
+                The system can suggest merchant reviewed content from real signals, then wait for the
                 owner to review, edit, approve, and publish.
               </p>
             </div>
@@ -126,7 +127,7 @@ export default function ContentStudioSection() {
 
           <div className="observer-strip">
             <Radio size={17} aria-hidden="true" />
-            <span>Observe signals. Recommend opportunities. Keep the merchant in control.</span>
+            <span>Watch the signals. Suggest useful ideas. Keep the merchant in control.</span>
           </div>
         </motion.div>
       </div>
