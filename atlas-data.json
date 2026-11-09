@@ -1,6 +1,6 @@
 {
   "title": "AtlasADE Business Map",
-  "subtitle": "A simple view of how sales, customers, stock, payments, reporting, and recovery connect.",
+  "subtitle": "A product-direction map of sales, customers, stock, payments, reporting, and recovery. Availability varies by workflow and setup.",
   "audience": [
     "Merchants",
     "Sales teams",
@@ -11,9 +11,9 @@
     {
       "id": "sales-register",
       "name": "Sales Register",
-      "tagline": "Fast checkout that still keeps a clean record.",
-      "description": "The register is where staff add items, attach a customer when useful, take payment, and complete a sale without leaving the selling flow.",
-      "whyItMatters": "A focused register keeps lines moving while still creating the records the business needs later for reporting, support, and customer follow up.",
+      "tagline": "Checkout and records, explored together.",
+      "description": "Controlled-beta demonstrations cover adding items, linking a customer, and completing a cash sale with tax and a receipt. Card acceptance and other tender workflows require separate confirmation.",
+      "whyItMatters": "The goal is to keep selling and business records connected. Checkout speed and operating improvements are not guaranteed or measured claims.",
       "connectedEndpoints": [
         "Menu and item catalog",
         "Customer lookup",
@@ -23,16 +23,16 @@
         "Daily reporting"
       ],
       "businessOutcomes": [
-        "Faster checkout",
-        "Cleaner tickets",
-        "Fewer end of day surprises",
-        "Better customer context without slowing the cashier"
+        "How does a cash sale become a record?",
+        "Which ticket details are retained?",
+        "What needs review before close?",
+        "When can a customer be linked?"
       ],
       "replacesOrReduces": [
-        "Paper order pads",
-        "Manual totals",
-        "Separate customer notes",
-        "Spreadsheet cleanup after the day is over"
+        "Potential alternative to paper order pads (product intent, not a measured outcome)",
+        "Potential alternative to manual totals (product intent, not a measured outcome)",
+        "Potential alternative to separate customer notes (product intent, not a measured outcome)",
+        "Potential alternative to spreadsheet cleanup after the day is over (product intent, not a measured outcome)"
       ],
       "relatedFlows": [
         "Start a sale",
@@ -41,38 +41,39 @@
         "Take payment",
         "Create receipt"
       ],
-      "merchantConversation": "When a cashier rings up a regular, the system can keep the line moving and still remember the visit for future service.",
+      "merchantConversation": "Ask to see the complete cash-checkout demonstration, including customer linking, tax, and receipt handling in the proposed setup.",
       "futureExpansion": [
-        "Register modes by role",
-        "More guided selling prompts",
-        "Deeper order handoff to kitchen or fulfillment screens"
-      ]
+        "Roadmap idea: Register modes by role (no availability commitment)",
+        "Roadmap idea: More guided selling prompts (no availability commitment)",
+        "Roadmap idea: Deeper order handoff to kitchen or fulfillment screens (no availability commitment)"
+      ],
+      "status": "Controlled-beta demonstration: cash checkout, tax, and receipts. Confirm the current package and supported workflow; general commercial availability is not established here."
     },
     {
       "id": "customer-crm",
       "name": "Customer/CRM",
-      "tagline": "A simple customer memory for everyday service.",
-      "description": "Customer/CRM links purchases to a customer profile when the shopper shares a phone number or identity at checkout.",
-      "whyItMatters": "Staff can recognize returning customers and the business can understand repeat visits without turning checkout into a back office CRM session.",
+      "tagline": "Explore customer lookup and linked purchase history.",
+      "description": "Bounded demonstrations connect customer lookup with linked purchase history. The wider CRM vision includes customer context and follow up, with availability and data handling confirmed for each proposed setup.",
+      "whyItMatters": "The goal is to help staff understand returning visits when customers choose to share identifying information. A product-map connection does not establish a released CRM or loyalty offering.",
       "connectedEndpoints": [
         "Customer phone lookup",
         "Customer profile",
         "Purchase timeline",
         "Receipts",
-        "Marketing exports",
-        "Privacy controls"
+        "Marketing exports (future direction; confirm availability)",
+        "Privacy controls (scope requires confirmation)"
       ],
       "businessOutcomes": [
-        "Recognize regulars",
-        "Track visit history",
-        "Support customer questions",
-        "Understand who comes back"
+        "How is a returning customer found?",
+        "Which purchases appear in history?",
+        "What information is recorded?",
+        "Which staff can access it?"
       ],
       "replacesOrReduces": [
-        "Loose customer notebooks",
-        "Unlinked receipt searches",
-        "Manual loyalty tracking",
-        "Duplicate customer spreadsheets"
+        "Potential alternative to loose customer notebooks (product intent, not a measured outcome)",
+        "Potential alternative to unlinked receipt searches (product intent, not a measured outcome)",
+        "Potential alternative to manual loyalty tracking (product intent, not a measured outcome)",
+        "Potential alternative to duplicate customer spreadsheets (product intent, not a measured outcome)"
       ],
       "relatedFlows": [
         "Customer lookup",
@@ -80,20 +81,21 @@
         "Purchase history",
         "Customer safe reporting"
       ],
-      "merchantConversation": "If a customer asks what they bought last time, the team can answer without digging through paper receipts.",
+      "merchantConversation": "Ask for a demonstration of customer lookup and purchase history, including what is recorded and who may view it.",
       "futureExpansion": [
-        "Loyalty offers",
-        "Customer segments",
-        "Appointment or service history",
-        "Configurable privacy rules"
-      ]
+        "Roadmap idea: Loyalty offers (no availability commitment)",
+        "Roadmap idea: Customer segments (no availability commitment)",
+        "Roadmap idea: Appointment or service history (no availability commitment)",
+        "Roadmap idea: Configurable privacy rules (no availability commitment)"
+      ],
+      "status": "Bounded demonstration: customer lookup and linked purchase history. Confirm current access, recorded information, and staff permissions. Marketing exports and configurable privacy controls are not promised."
     },
     {
       "id": "inventory",
       "name": "Inventory",
-      "tagline": "Know what can be sold and what needs attention.",
-      "description": "Inventory tracks physical goods and products where stock matters while allowing everyday prepared items to flow through the register normally.",
-      "whyItMatters": "Operators can protect retail stock from overselling while keeping prepared food and drink sales simple.",
+      "tagline": "Explore tracked stock and prepared-item workflows.",
+      "description": "Controlled-beta demonstrations include receiving, counts, adjustments, and checks for tracked stock. The product direction distinguishes tracked physical goods from prepared items; exact item and refund policies need setup-specific confirmation.",
+      "whyItMatters": "The goal is to make stock and availability easier to review. Do not rely on the map as a guarantee that every sale, item type, refund, or location is covered.",
       "connectedEndpoints": [
         "Item catalog",
         "Retail stock",
@@ -103,16 +105,16 @@
         "Reporting"
       ],
       "businessOutcomes": [
-        "Avoid selling unavailable retail items",
-        "See stock movement",
-        "Separate prepared items from tracked goods",
-        "Improve ordering decisions"
+        "When is tracked stock checked?",
+        "How do receiving and counts affect stock?",
+        "Which items are tracked?",
+        "Which refund and restock policies apply?"
       ],
       "replacesOrReduces": [
-        "Manual stock sheets",
-        "End of week stock surprises",
-        "Guesswork on retail availability",
-        "Unclear refund restock expectations"
+        "Potential alternative to manual stock sheets (product intent, not a measured outcome)",
+        "Potential alternative to end of week stock surprises (product intent, not a measured outcome)",
+        "Potential alternative to guesswork on retail availability (product intent, not a measured outcome)",
+        "Potential alternative to unclear refund restock expectations (product intent, not a measured outcome)"
       ],
       "relatedFlows": [
         "Sell a tracked item",
@@ -121,39 +123,40 @@
         "Adjust inventory",
         "Review low stock"
       ],
-      "merchantConversation": "The register can block a sold out mug without blocking a made to order coffee.",
+      "merchantConversation": "Ask to see a tracked item reach zero stock and how the proposed setup treats prepared items, adjustments, and refunds.",
       "futureExpansion": [
-        "Low stock alerts",
-        "Supplier ordering",
-        "Ingredient tracking",
-        "Multi location inventory"
-      ]
+        "Roadmap idea: Low stock alerts (no availability commitment)",
+        "Roadmap idea: Supplier ordering (no availability commitment)",
+        "Roadmap idea: Ingredient tracking (no availability commitment)",
+        "Roadmap idea: Multi location inventory (no availability commitment)"
+      ],
+      "status": "Controlled-beta demonstration: receiving, counts, adjustments, and tracked-stock checks. Confirm supported item types and policies; this is not a universal stock-accuracy or overselling guarantee."
     },
     {
       "id": "payments-recovery",
       "name": "Payments & Recovery",
-      "tagline": "Take payment and keep a clear path when something interrupts.",
-      "description": "Payments & Recovery helps staff finish cash and card sales, handle declined attempts, and know what to do when a payment is unclear.",
-      "whyItMatters": "Payment interruptions are stressful. The system should show the next safe action instead of leaving the register stuck.",
+      "tagline": "Explore tender handling and interruption review.",
+      "description": "Cash checkout has controlled-beta demonstration evidence. Card and recovery demonstrations are bounded; they do not establish general live card acceptance or a supported terminal/provider list.",
+      "whyItMatters": "The goal is to make uncertain payment outcomes and manager review understandable. No recovery or duplicate-charge-prevention guarantee is made.",
       "connectedEndpoints": [
-        "Cash drawer process",
-        "Card terminal",
+        "Cash tender",
+        "Card terminal (support requires confirmation)",
         "Payment status",
         "Ticket state",
         "Manager review",
         "Receipt"
       ],
       "businessOutcomes": [
-        "Clearer tender handling",
-        "Less cashier confusion",
-        "Reduced duplicate charge risk",
-        "Safer recovery after interruption"
+        "Which tenders are supported in this setup?",
+        "What happens after an unclear payment?",
+        "When is manager review needed?",
+        "Which recovery steps have been demonstrated?"
       ],
       "replacesOrReduces": [
-        "Guessing whether a payment went through",
-        "Manual payment notes",
-        "Untracked void/retry decisions",
-        "Unclear manager escalation"
+        "Potential alternative to guessing whether a payment went through (product intent, not a measured outcome)",
+        "Potential alternative to manual payment notes (product intent, not a measured outcome)",
+        "Potential alternative to untracked void/retry decisions (product intent, not a measured outcome)",
+        "Potential alternative to unclear manager escalation (product intent, not a measured outcome)"
       ],
       "relatedFlows": [
         "Cash payment",
@@ -162,20 +165,21 @@
         "Payment recovery",
         "Manager attention"
       ],
-      "merchantConversation": "If a card terminal times out, the cashier gets a recovery path instead of starting over and risking a double charge.",
+      "merchantConversation": "Before relying on card processing, ask which terminal, provider, region, and interrupted-payment scenarios are supported and demonstrated.",
       "futureExpansion": [
-        "More terminal providers",
-        "Richer reconciliation dashboards",
-        "Guided cashier help",
-        "Offline payment review queues"
-      ]
+        "Roadmap idea: More terminal providers (no availability commitment)",
+        "Roadmap idea: Richer reconciliation dashboards (no availability commitment)",
+        "Roadmap idea: Guided cashier help (no availability commitment)",
+        "Roadmap idea: Offline payment review queues (no availability commitment)"
+      ],
+      "status": "Controlled-beta cash demonstration; bounded card and recovery demonstrations. Confirm provider, device, region, and live-processing scope separately. Offline cards, refunds, voids, and settlement are not generally offered by this website."
     },
     {
       "id": "reporting",
       "name": "Reporting",
-      "tagline": "Daily numbers that match how the business actually runs.",
-      "description": "Reporting summarizes sales, taxes, refunds, corrections, tender activity, and customer activity for operators and owners.",
-      "whyItMatters": "Owners need a clean daily view without rebuilding totals from receipts, payment portals, and spreadsheets.",
+      "tagline": "Explore daily totals and review questions.",
+      "description": "Bounded demonstrations include daily sales, tax, tender, and closeout views. Refunds, corrections, customer activity, exports, and accounting handoffs remain subject to confirmation of the specific report and setup.",
+      "whyItMatters": "The goal is to make daily activity easier to review. The map does not promise automated reconciliation, an accounting integration, or a faster close.",
       "connectedEndpoints": [
         "Sales totals",
         "Tax totals",
@@ -185,16 +189,16 @@
         "Exports"
       ],
       "businessOutcomes": [
-        "Faster closeout",
-        "Cleaner accounting handoff",
-        "A clearer daily view",
-        "Reduced manual reconciliation"
+        "Which totals can be reviewed?",
+        "How are tax and tender shown?",
+        "Are refund and correction views included?",
+        "Which exports are currently supported?"
       ],
       "replacesOrReduces": [
-        "Manual daily summary notes",
-        "Payment portal checking",
-        "Spreadsheet tax calculations",
-        "Receipt pile audits"
+        "Potential alternative to manual daily summary notes (product intent, not a measured outcome)",
+        "Potential alternative to payment portal checking (product intent, not a measured outcome)",
+        "Potential alternative to spreadsheet tax calculations (product intent, not a measured outcome)",
+        "Potential alternative to receipt pile audits (product intent, not a measured outcome)"
       ],
       "relatedFlows": [
         "End of day summary",
@@ -202,20 +206,21 @@
         "Refund reporting",
         "Customer safe export"
       ],
-      "merchantConversation": "At close, the owner can see gross sales, refunds, tax, and payment mix without reconstructing the day by hand.",
+      "merchantConversation": "Ask to see the daily report in the proposed package and confirm the included fields, corrections, and export formats.",
       "futureExpansion": [
-        "Scheduled reports",
-        "Accounting integrations",
-        "Store comparisons",
-        "Report views by role"
-      ]
+        "Roadmap idea: Scheduled reports (no availability commitment)",
+        "Roadmap idea: Accounting integrations (no availability commitment)",
+        "Roadmap idea: Store comparisons (no availability commitment)",
+        "Roadmap idea: Report views by role (no availability commitment)"
+      ],
+      "status": "Bounded demonstration: daily sales, tax, tender, and closeout views. Confirm each report, refund/correction view, customer summary, and export in the current package."
     },
     {
       "id": "business-operations",
       "name": "Business Operations",
-      "tagline": "Manager controls for the parts of the day that need structure.",
-      "description": "Business Operations covers business day status, saved tickets, manager attention, operator roles, and safe closeout behavior.",
-      "whyItMatters": "The day should close only when unresolved work is visible and understood, not silently discarded.",
+      "tagline": "Explore saved work, roles, and business-day review.",
+      "description": "Controlled-beta demonstrations cover saved tickets, roles, manager review, and business-day workflows. Exact permissions and the treatment of unresolved work must be confirmed in the current setup.",
+      "whyItMatters": "The goal is to make unfinished work visible before close. This is not a promise that every exception is detected or that work can never be lost.",
       "connectedEndpoints": [
         "Operator login",
         "Roles and permissions",
@@ -225,16 +230,16 @@
         "Manager review"
       ],
       "businessOutcomes": [
-        "Clear accountability",
-        "Safer closeout",
-        "Parked tickets stay visible",
-        "Managers see exceptions before closing"
+        "How is unfinished work shown?",
+        "How are saved tickets reopened?",
+        "Which actions require a manager?",
+        "What must be reviewed before close?"
       ],
       "replacesOrReduces": [
-        "Sticky notes for held orders",
-        "End of shift verbal handoffs",
-        "Silent ticket loss",
-        "Unclear manager overrides"
+        "Potential alternative to sticky notes for held orders (product intent, not a measured outcome)",
+        "Potential alternative to end of shift verbal handoffs (product intent, not a measured outcome)",
+        "Potential alternative to silent ticket loss (product intent, not a measured outcome)",
+        "Potential alternative to unclear manager overrides (product intent, not a measured outcome)"
       ],
       "relatedFlows": [
         "Save a ticket",
@@ -243,20 +248,21 @@
         "Close business day",
         "Switch user"
       ],
-      "merchantConversation": "A saved order stays in the queue with the customer's name and total until someone completes it.",
+      "merchantConversation": "Ask to save and reopen a ticket, review unresolved work, and demonstrate the current business-day close rules.",
       "futureExpansion": [
-        "Shift management",
-        "Labor aware closeout",
-        "Task checklists",
-        "Approval workflows"
-      ]
+        "Roadmap idea: Shift management (no availability commitment)",
+        "Roadmap idea: Labor aware closeout (no availability commitment)",
+        "Roadmap idea: Task checklists (no availability commitment)",
+        "Roadmap idea: Approval workflows (no availability commitment)"
+      ],
+      "status": "Controlled-beta demonstration: saved tickets, roles, manager review, and business-day workflows. Confirm current permissions, unresolved-work handling, and closeout scope."
     },
     {
       "id": "ai-assistant",
       "name": "Guidance Assistant",
-      "tagline": "Helpful prompts without taking over the register.",
-      "description": "The Guidance Assistant can help staff find items, understand recovery steps, answer common questions, and suggest follow up actions.",
-      "whyItMatters": "New or busy staff can get help without leaving checkout or calling a manager for every small question.",
+      "tagline": "Guided help is a development direction.",
+      "description": "The Guidance Assistant vision includes item help, explanations, recovery guidance, and follow up suggestions. Development demonstrations are limited in scope and do not establish a generally available assistant inside a merchant workflow.",
+      "whyItMatters": "The intent is to offer useful guidance while staff and owners retain decisions. Faster training, fewer interruptions, and autonomous operation are not promised.",
       "connectedEndpoints": [
         "Cashier help",
         "Item lookup",
@@ -266,16 +272,16 @@
         "Policy prompts"
       ],
       "businessOutcomes": [
-        "Faster staff training",
-        "More consistent operations",
-        "Less manager interruption",
-        "Better follow up ideas"
+        "What help would staff need?",
+        "Which guidance has been demonstrated?",
+        "How would an owner review suggestions?",
+        "What remains a human decision?"
       ],
       "replacesOrReduces": [
-        "Printed cheat sheets",
-        "Repeated manager questions",
-        "Unstructured training notes",
-        "Missed follow up opportunities"
+        "Potential alternative to printed cheat sheets (product intent, not a measured outcome)",
+        "Potential alternative to repeated manager questions (product intent, not a measured outcome)",
+        "Potential alternative to unstructured training notes (product intent, not a measured outcome)",
+        "Potential alternative to missed follow up opportunities (product intent, not a measured outcome)"
       ],
       "relatedFlows": [
         "Ask for register help",
@@ -284,111 +290,112 @@
         "Recommend the next action",
         "Draft business content"
       ],
-      "merchantConversation": "A cashier can ask what to do next and get clear guidance at the point of need.",
+      "merchantConversation": "Ask which guidance can be demonstrated today and which questions or suggested actions remain planned.",
       "futureExpansion": [
-        "Store specific knowledge",
-        "Suggested training paths",
-        "Voice guided help",
-        "Owner business insights"
-      ]
+        "Roadmap idea: Store specific knowledge (no availability commitment)",
+        "Roadmap idea: Suggested training paths (no availability commitment)",
+        "Roadmap idea: Voice guided help (no availability commitment)",
+        "Roadmap idea: Owner business insights (no availability commitment)"
+      ],
+      "status": "Planned broader guidance, with bounded development demonstrations. General cashier assistance, autonomous decisions, and live customer follow up are not established as commercially available."
     },
     {
       "id": "content-studio-social-observer",
       "name": "Content Studio / Social Observer",
-      "tagline": "Turn real business activity into safer marketing opportunities.",
-      "description": "Content Studio / Social Observer helps merchants notice business signals, find content ideas, and draft marketing notes based on what is actually happening in the business.",
-      "whyItMatters": "Most merchants know they should post more consistently, but they do not have time to invent content from scratch. AtlasADE can turn sales trends, customer patterns, services, products, and seasonal signals into practical ideas while keeping the merchant in control.",
+      "tagline": "Explore business-informed drafts for owner review.",
+      "description": "Local draft components explore business-informed content ideas for merchant review. The broader Content Studio / Social Observer vision includes trends, products, services, and seasonal opportunities; a live connected offering is not established here.",
+      "whyItMatters": "The goal is to give owners material to consider and edit. Drafts need human review; this is not a promise of marketing results, safer copy, live social observation, or automatic publishing.",
       "connectedEndpoints": [
-        "Sales trends",
-        "Customer activity",
-        "Product and service performance",
-        "Campaign opportunities",
+        "Sales trends (product direction)",
+        "Customer activity (scope requires confirmation)",
+        "Products and services (product direction)",
+        "Campaign opportunities (product direction)",
         "Content drafts",
-        "Merchant approval",
-        "Social publishing checklist",
-        "Business reporting"
+        "Merchant review",
+        "Manual publishing considerations",
+        "Business reporting (scope requires confirmation)"
       ],
       "businessOutcomes": [
-        "More consistent public presence",
-        "Better content ideas from real activity",
-        "Less blank page marketing work",
-        "Merchant reviewed draft ideas",
-        "Campaigns tied to products and services",
-        "Owner review before publishing"
+        "What information supports a draft?",
+        "What must the merchant review?",
+        "Which draft tools can be demonstrated?",
+        "What remains manual before publishing?"
       ],
       "replacesOrReduces": [
-        "Random last minute posting",
-        "Generic marketing copy",
-        "Disconnected content calendars",
-        "Manual campaign brainstorming",
-        "Lightweight marketing busywork",
-        "Untracked promotion ideas"
+        "Potential alternative to random last minute posting (product intent, not a measured outcome)",
+        "Potential alternative to generic marketing copy (product intent, not a measured outcome)",
+        "Potential alternative to disconnected content calendars (product intent, not a measured outcome)",
+        "Potential alternative to manual campaign brainstorming (product intent, not a measured outcome)",
+        "Potential alternative to lightweight marketing busywork (product intent, not a measured outcome)",
+        "Potential alternative to untracked promotion ideas (product intent, not a measured outcome)"
       ],
       "relatedFlows": [
-        "Observe business signals",
-        "Identify campaign opportunity",
+        "Review available business signals",
+        "Consider campaign ideas",
         "Draft content idea",
-        "Review merchant safe copy",
-        "Approve before publishing",
-        "Track content opportunity"
+        "Review proposed copy",
+        "Merchant decides whether to publish manually",
+        "Review content opportunities"
       ],
-      "merchantConversation": "Instead of asking \"what should I post today?\", the merchant can see which products, services, customer patterns, or seasonal moments create a real reason to communicate.",
+      "merchantConversation": "Ask to see a local draft demonstration, the information it uses, and the review required before any manual publication.",
       "futureExpansion": [
-        "Content calendar",
-        "Campaign performance review",
-        "Social tool connections",
-        "Approval queues",
-        "Brand voice controls",
-        "Seasonal promotion planning",
-        "Customer segment content ideas"
-      ]
+        "Roadmap idea: Content calendar (no availability commitment)",
+        "Roadmap idea: Campaign performance review (no availability commitment)",
+        "Roadmap idea: Social tool connections (no availability commitment)",
+        "Roadmap idea: Approval queues (no availability commitment)",
+        "Roadmap idea: Brand voice controls (no availability commitment)",
+        "Roadmap idea: Seasonal promotion planning (no availability commitment)",
+        "Roadmap idea: Customer segment content ideas (no availability commitment)"
+      ],
+      "status": "Bounded development: local draft components. A connected live business feed, social-platform integration, automatic posting, and campaign results are not promised."
     },
     {
       "id": "integrations",
       "name": "Integrations",
-      "tagline": "Connect the POS to the tools around the business.",
-      "description": "Integrations connect AtlasADE to the tools around payments, accounting, inventory, marketing, hardware, and reporting.",
-      "whyItMatters": "A merchant should not have to enter the same business facts into every tool they use.",
+      "tagline": "Connections are a product direction, not a compatibility list.",
+      "description": "The integration vision spans payments, accounting, inventory, marketing, hardware, and reporting. These categories describe intended connections, not a list of supported or commercially available connectors.",
+      "whyItMatters": "The aim is to reduce repeated entry and clarify handoffs. No third-party connection, data synchronization, or hardware support is promised by this map.",
       "connectedEndpoints": [
-        "Payment terminals",
-        "Receipt printers",
-        "Cash drawers",
-        "Accounting exports",
-        "Marketing lists",
-        "Analytics storage"
+        "Payment terminals (confirm support)",
+        "Receipt printers (confirm support)",
+        "Cash drawers (confirm support)",
+        "Accounting exports (confirm format and availability)",
+        "Marketing lists (future direction)",
+        "Analytics connections (future direction)"
       ],
       "businessOutcomes": [
-        "Less duplicate entry",
-        "Cleaner handoffs",
-        "A clearer view of the business",
-        "More flexible deployment"
+        "Which connection is needed?",
+        "Is a connector or manual export involved?",
+        "Which exact device or provider is supported?",
+        "What has been demonstrated end to end?"
       ],
       "replacesOrReduces": [
-        "Manual exports",
-        "Copy and paste accounting",
-        "Disconnected hardware setup",
-        "One time reporting spreadsheets"
+        "Potential alternative to manual exports (product intent, not a measured outcome)",
+        "Potential alternative to copy and paste accounting (product intent, not a measured outcome)",
+        "Potential alternative to disconnected hardware setup (product intent, not a measured outcome)",
+        "Potential alternative to one time reporting spreadsheets (product intent, not a measured outcome)"
       ],
       "relatedFlows": [
-        "Export daily totals",
-        "Connect payment terminal",
-        "Print receipt",
-        "Sync customer safe data"
+        "Review export requirements",
+        "Confirm terminal support",
+        "Confirm receipt hardware",
+        "Review customer-data transfer requirements"
       ],
-      "merchantConversation": "The same completed sale can support the receipt, payment record, customer history, and daily report.",
+      "merchantConversation": "Ask for the exact supported connection and an end-to-end demonstration; a related-area label is not a compatibility claim.",
       "futureExpansion": [
-        "More accounting packages",
-        "More hardware providers",
-        "Inventory suppliers",
-        "Online ordering"
-      ]
+        "Roadmap idea: More accounting packages (no availability commitment)",
+        "Roadmap idea: More hardware providers (no availability commitment)",
+        "Roadmap idea: Inventory suppliers (no availability commitment)",
+        "Roadmap idea: Online ordering (no availability commitment)"
+      ],
+      "status": "Product direction; supported commercial integrations are unverified here. Confirm each provider, peripheral, export, and workflow before relying on compatibility."
     },
     {
       "id": "backup-replay",
       "name": "Backup & Replay",
-      "tagline": "Protect the business record when devices restart or recover.",
-      "description": "Backup & Replay protects business records by preserving the sequence of important events and helping the system recover after restart.",
-      "whyItMatters": "A register should not lose or duplicate a sale because a device restarts, power blips, or the system needs to recover.",
+      "tagline": "Explore restart, backup, and recovery limits.",
+      "description": "Backup and restart recovery are related but distinct areas of development. Bounded checks do not establish recovery under every outage, a supported cloud backup service, or a universal restore guarantee.",
+      "whyItMatters": "The goal is a dependable business record. Merchants need a confirmed backup and restore procedure with clear recovery limits rather than an assumption that every incident is covered.",
       "connectedEndpoints": [
         "Event history",
         "Checkpoints",
@@ -398,75 +405,76 @@
         "Recovery review"
       ],
       "businessOutcomes": [
-        "More trustworthy records",
-        "Safer recovery after outage",
-        "Less duplicate data",
-        "A more dependable business record"
+        "What is backed up and when?",
+        "How is a restore checked?",
+        "Which restart cases have been demonstrated?",
+        "What are the recovery limits?"
       ],
       "replacesOrReduces": [
-        "Manual incident reconstruction",
-        "Lost receipt searches",
-        "Duplicate purchase history",
-        "Uncertain closeout records"
+        "Potential alternative to manual incident reconstruction (product intent, not a measured outcome)",
+        "Potential alternative to lost receipt searches (product intent, not a measured outcome)",
+        "Potential alternative to duplicate purchase history (product intent, not a measured outcome)",
+        "Potential alternative to uncertain closeout records (product intent, not a measured outcome)"
       ],
       "relatedFlows": [
-        "Restart recovery",
-        "Replay events",
-        "Restore checkpoint",
-        "Protect customer history",
-        "Verify close record"
+        "Review restart behavior",
+        "Review record consistency",
+        "Demonstrate a restore",
+        "Confirm history recovery scope",
+        "Review close records"
       ],
-      "merchantConversation": "If the register restarts, the business record should come back consistently instead of doubling purchase history or reopening closed work.",
+      "merchantConversation": "Ask to see the supported backup, restore, and restart procedures and confirm the limits before relying on them.",
       "futureExpansion": [
-        "Cloud backup options",
-        "Cross device recovery",
-        "Owner visible recovery logs",
-        "Guided restore workflows"
-      ]
+        "Roadmap idea: Cloud backup options (no availability commitment)",
+        "Roadmap idea: Cross device recovery (no availability commitment)",
+        "Roadmap idea: Owner visible recovery logs (no availability commitment)",
+        "Roadmap idea: Guided restore workflows (no availability commitment)"
+      ],
+      "status": "Bounded development and recovery checks. Confirm backup, restore, and restart procedures for the current package. No zero-loss, zero-duplication, or automatic recovery guarantee is made."
     }
   ],
   "lifecycle": {
-    "title": "Follow a customer purchase",
+    "title": "Explore a purchase workflow",
     "steps": [
       {
         "name": "Customer lookup",
-        "detail": "A customer can be found by phone when they choose to share it."
+        "detail": "Bounded demonstrations include customer lookup when a customer chooses to share identifying information; confirm current access and permissions."
       },
       {
         "name": "Ticket creation",
-        "detail": "A clean ticket starts the sale and keeps the cart organized."
+        "detail": "A controlled-beta cash-sale demonstration starts with a ticket; confirm the workflow in the proposed package."
       },
       {
         "name": "Items added",
-        "detail": "The cashier taps menu items or retail goods into the ticket."
+        "detail": "Demonstrations include adding items; available item types and setup requirements need confirmation."
       },
       {
-        "name": "Inventory/tax checked",
-        "detail": "The system applies tax rules and checks stock where stock tracking matters."
+        "name": "Inventory/tax review",
+        "detail": "Controlled-beta demonstrations include tax and tracked-stock checks; confirm item policies and tax setup for the business."
       },
       {
-        "name": "Payment taken",
-        "detail": "Cash or card payment completes the sale, with recovery guidance if something interrupts."
+        "name": "Payment scope confirmed",
+        "detail": "Cash checkout has controlled-beta evidence. Card acceptance, recovery, refunds, voids, settlement, and offline cards require separate scope confirmation."
       },
       {
-        "name": "Receipt created",
-        "detail": "The sale can produce a customer receipt and an auditable business record."
+        "name": "Receipt reviewed",
+        "detail": "Receipt handling is part of controlled-beta cash demonstrations; confirm format and peripheral support."
       },
       {
-        "name": "Customer timeline updated",
-        "detail": "When linked, the purchase becomes part of the customer's history."
+        "name": "Customer history reviewed",
+        "detail": "Linked history has bounded demonstration evidence; confirm what is recorded and who can view it."
       },
       {
-        "name": "Reports updated",
-        "detail": "Sales, tax, tender, refund, and closeout summaries reflect the completed work."
+        "name": "Reports reviewed",
+        "detail": "Daily totals have bounded demonstration evidence; confirm refund, correction, customer, and export coverage separately."
       },
       {
-        "name": "Backup/replay protects the record",
-        "detail": "Recovery systems protect the record from restart and replay issues."
+        "name": "Recovery limits reviewed",
+        "detail": "Restart checks and backups do not guarantee recovery from every incident. Confirm supported procedures and limits."
       },
       {
-        "name": "Guidance can recommend next actions",
-        "detail": "AtlasADE can suggest follow up, explain what happened, or help staff recover."
+        "name": "Guidance explored",
+        "detail": "Broader guidance and follow up suggestions are development direction, not a generally available autonomous assistant."
       }
     ]
   }

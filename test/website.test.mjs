@@ -6,7 +6,7 @@ import { tmpdir } from "node:os";
 import { fileURLToPath } from "node:url";
 import { spawn } from "node:child_process";
 import { createServer } from "node:net";
-import { pages, site } from "../src/public-content.js";
+import { pages, site, productDescription } from "../src/public-content.js";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const read = (path, variant = "dist") => readFile(join(root, variant, path), "utf8");
@@ -29,7 +29,7 @@ test("the original Vite and sync build stages run before static rendering", asyn
 test("raw homepage has useful content, limitations, and JavaScript-free navigation", async () => {
   const html = await read("index.html");
   const text = visibleText(html);
-  for (const phrase of ["Run your business", "Sales Register", "Inventory", "Privacy Policy", "Alpha product overview", "commercially released"]) assert.ok(text.includes(phrase), phrase);
+  for (const phrase of ["A connected vision", "Sales Register", "Inventory", "Privacy Policy", "Alpha product overview", "commercially released"]) assert.ok(text.includes(phrase), phrase);
   assert.match(html, /<nav aria-label="Primary navigation">[\s\S]*?<a href="#home"/);
   assert.match(html, /<a class="button primary" href="#alpha">/);
   assert.match(html, /<details>/);
@@ -39,6 +39,42 @@ test("raw homepage has useful content, limitations, and JavaScript-free navigati
   assert.match(html, /type="module"[^>]*src="\/assets\//);
   const source = await readFile(join(root, "src/main.jsx"), "utf8");
   assert.match(source, /hydrateRoot\(root, <App \/>\)/);
+});
+
+test("all ten product areas retain readable, local availability qualifications without release promises", async () => {
+  const data = JSON.parse(await readFile(join(root, "atlas-data.json"), "utf8"));
+  assert.deepEqual(data.modules.map((module) => module.id), [
+    "sales-register", "customer-crm", "inventory", "payments-recovery", "reporting",
+    "business-operations", "ai-assistant", "content-studio-social-observer", "integrations", "backup-replay",
+  ]);
+  const html = await read("index.html");
+  const fallback = [...html.matchAll(/<details>([\s\S]*?)<\/details>/g)].map((match) => match[1]);
+  assert.equal(fallback.length, data.modules.length);
+  for (const module of data.modules) {
+    const details = fallback.find((entry) => entry.includes(`<summary>${module.name.replaceAll("&", "&amp;")}</summary>`));
+    assert.ok(details, module.id);
+    assert.match(details, /class="atlas-status"/);
+    assert.ok(visibleText(details).includes(module.status), `${module.id}: qualification must be server delivered beside its description`);
+    assert.match(module.status, /demonstration|development|unverified/i, module.id);
+    assert.ok(module.futureExpansion.every((idea) => idea.startsWith("Roadmap idea:") && idea.includes("no availability commitment")));
+  }
+  const text = visibleText(html);
+  for (const phrase of ["Cash checkout", "Card acceptance", "refunds, voids, settlement", "not a universal stock-accuracy", "Marketing exports", "automatic posting", "No zero-loss", "not verified industry compatibility", "Access, suitability, and release timing are not promised"]) {
+    assert.ok(text.includes(phrase), phrase);
+  }
+  for (const oldPromise of ["We are working with a small group of merchants", "Integrations connect AtlasADE", "Faster checkout", "Faster staff training", "Reduced duplicate charge risk", "the cashier gets a recovery path", "only to respond to your inquiry"]) {
+    assert.ok(!text.includes(oldPromise), oldPromise);
+  }
+  assert.match(html, /aria-label="Intended merchant audiences"/);
+  for (const merchant of ["Coffee shops", "Salons", "Med spas", "Local retail", "Service businesses", "Small hospitality", "Specialty shops", "Independent merchants"]) assert.ok(text.includes(merchant));
+  const product = await read("product/index.html");
+  const schema = JSON.parse(product.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+  assert.equal(schema["@graph"].find((node) => node["@type"] === "SoftwareApplication").description, productDescription);
+  assert.ok(visibleText(product).includes(productDescription));
+  for (const key of ["description", "og:description", "twitter:description"]) {
+    const meta = tags(html, "meta").find((tag) => attribute(tag, "name") === key || attribute(tag, "property") === key);
+    assert.match(attribute(meta, "content"), /controlled-beta demonstrations/);
+  }
 });
 
 test("every canonical page has substantial readable HTML, unique metadata, and matching schema", async () => {
@@ -103,11 +139,24 @@ test("preview exclusion never changes the production artifact", async () => {
   assert.equal(canonical(await read("index.html", "dist-preview")), `${site}/`);
 });
 
-test("robots explicitly allows search; sitemap has only real canonical pages", async () => {
+test("robots permits search and user retrieval while opting GPTBot out; sitemap stays canonical", async () => {
   const robots = (await read("robots.txt")).replaceAll("\r\n", "\n");
-  for (const bot of ["OAI-SearchBot", "Googlebot", "Bingbot"]) assert.ok(robots.includes(`User-agent: ${bot}\nAllow: /`));
+  const groups = [...robots.matchAll(/User-agent: ([^\n]+)\n(Allow|Disallow): ([^\n]+)/g)]
+    .map(([, agent, action, path]) => [agent, action, path]);
+  assert.deepEqual(groups, [
+    ["OAI-SearchBot", "Allow", "/"], ["ChatGPT-User", "Allow", "/"],
+    ["Googlebot", "Allow", "/"], ["Bingbot", "Allow", "/"],
+    ["GPTBot", "Disallow", "/"], ["*", "Allow", "/"],
+  ]);
+  // This deliberately small policy contains root-only directives: an explicit
+  // agent group takes precedence over the wildcard for every public path.
+  for (const agent of ["OAI-SearchBot", "ChatGPT-User", "Googlebot", "Bingbot", "GPTBot", "OtherBot"]) {
+    const group = groups.find(([name]) => name === agent) ?? groups.find(([name]) => name === "*");
+    assert.equal(group[1], agent === "GPTBot" ? "Disallow" : "Allow", agent);
+    assert.equal(group[2], "/");
+  }
+  assert.equal((await read("robots.txt", "dist-preview")).replaceAll("\r\n", "\n"), robots);
   assert.ok(robots.includes(`Sitemap: ${site}/sitemap.xml`));
-  assert.ok(!robots.includes("Disallow: /"));
   const sitemap = await read("sitemap.xml");
   const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
   assert.deepEqual(urls, [`${site}/`, ...pages.map((page) => `${site}${page.path}`)]);
@@ -184,7 +233,7 @@ test("actual Workers asset HTTP behavior: production pages, redirects, assets, a
     for (const path of ["/not-a-real-page", "/product/not-a-real-page", "/assets/missing.js", "/src/App.jsx", "/docs/website-readiness.md"]) {
       const response = await fetch(base + path);
       assert.equal(response.status, 404, path);
-      assert.ok(!(await response.text()).includes("Run your business"));
+      assert.ok(!(await response.text()).includes("A connected vision"));
     }
     const head = await fetch(base + "/product/", { method: "HEAD" });
     assert.equal(head.status, 200);

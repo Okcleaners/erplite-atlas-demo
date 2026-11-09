@@ -29,7 +29,7 @@ const navItems = [
   ["Atlas", "atlas"],
   ["Helps", "helps"],
   ["ERP Lite", "erp-lite"],
-  ["Partners", "alpha"],
+  ["Alpha access", "alpha"],
   ["Contact", "contact"],
 ];
 
@@ -60,23 +60,23 @@ const merchantTypes = [
 ];
 
 const helpCards = [
-  ["Know what sold", "See what moved today without rebuilding the day from receipts."],
-  ["Know who came in", "Connect customer visits and history when the customer chooses to share it."],
-  ["Know what needs restocking", "See which products moved and what may need attention soon."],
-  ["Know what needs follow up", "Keep customer and service follow up visible after the sale."],
-  ["Know what happened today", "Review sales, payments, refunds, saved work, and exceptions before close."],
-  ["Know what to post or promote", "Turn real products, services, and seasonal signals into content ideas for review."],
-  ["Know what needs attention before closing", "Make unresolved work visible so owners are not closing blind."],
-  ["Know where the pieces connect", "See how money, customers, products, and daily work fit together."],
+  ["What sold?", "Ask to see the daily sales view in a bounded demonstration."],
+  ["Who came in?", "Explore customer lookup and linked history, with access and data scope confirmed."],
+  ["What needs restocking?", "Ask which tracked-stock views, counts, and receiving workflows can be demonstrated."],
+  ["What needs follow up?", "Explore the intended customer and service follow up direction; current support needs confirmation."],
+  ["What happened today?", "Confirm which sales, tender, correction, and closeout views are included."],
+  ["What could I post or promote?", "Explore local content drafts for owner review; live feeds and social publishing are not promised."],
+  ["What needs attention before closing?", "Ask for a demonstration of saved work, manager review, and current closeout limits."],
+  ["Where could the pieces connect?", "Explore the intended relationships between money, customers, products, and daily work."],
 ];
 
 const merchantReasons = [
-  ["Less running between tools", "One operating view for sales, customers, inventory, reporting, and daily work."],
-  ["Cleaner information at close", "Owners can review the day without rebuilding the story by hand."],
-  ["Built for owners", "Designed for owners, managers, and lean teams doing the work."],
-  ["Attention before surprises", "Stock, saved work, payment exceptions, and follow up stay visible."],
-  ["Practical guidance", "Helpful prompts and draft support with the owner still in control."],
-  ["ERP Lite made smaller", "Enterprise Resource Planning, simplified for small merchants."],
+  ["Connected-work vision", "The aim is a connected view of sales, customers, inventory, reporting, and daily work."],
+  ["Daily review", "Ask to see the current daily views and their limits, rather than assuming automatic reconciliation."],
+  ["Owner perspective", "Designed with owners, managers, and lean teams in mind; suitability needs confirmation."],
+  ["Unfinished-work questions", "Explore stock, saved work, and exception review in the proposed setup."],
+  ["Guidance direction", "Broader prompts and draft assistance remain development direction, with human decisions."],
+  ["ERP Lite vision", "A simpler merchant-work direction, not a full enterprise ERP replacement."],
 ];
 
 const disclosureSections = [
@@ -94,8 +94,8 @@ const disclosureSections = [
     title: "Privacy Policy",
     body: [
       "This alpha website is informational. No payment information is collected on the website, and no account login is provided on the website.",
-      "If you email us, we use your email address and message only to respond to your inquiry.",
-      "We do not overstate tracking practices here because this alpha site has not been represented as having a full analytics or tracking audit.",
+      "Email us with product questions. Do not include customer records, payment information, or other sensitive business data.",
+      "This website does not make an audited no-tracking claim. Contact us with questions about website privacy before sharing personal information.",
     ],
   },
   {
@@ -138,7 +138,7 @@ function Navigation() {
         ))}
       </nav>
       <a className="nav-cta" href="#alpha">
-        Partner
+        Ask about access
       </a>
     </header>
   );
@@ -280,21 +280,21 @@ function Hero() {
             <BrandMark />
             <span>Business System For Merchants</span>
           </div>
-          <p className="eyebrow">Built For Small Merchants</p>
-          <h1>Run your business without running between systems.</h1>
-          <p className="hero-brand-line">Know what sold, what needs attention, and where the day is going.</p>
+          <p className="eyebrow">In development for small merchants</p>
+          <h1>A connected vision for everyday merchant work.</h1>
+          <p className="hero-brand-line">The goal: understand what sold, what needs attention, and where the day is going.</p>
           <p className="hero-subtitle">
-            AtlasADE is an ERP Lite system for small merchants, solo owners, and lean teams. It
-            helps keep sales, customers, inventory, payments, reporting, content ideas, and daily
-            work connected so owners can spend less time chasing answers and more time running
-            the business.
+            AtlasADE is an early ERP Lite project for small merchants, solo owners, and lean
+            teams. The vision connects sales, customers, inventory, payments, reporting, content
+            ideas, and daily work. Controlled-beta demonstrations cover selected workflows;
+            this overview does not establish a commercially available product or feature set.
           </p>
           <div className="hero-actions">
             <a className="button primary" href="#alpha">
-              Join Early Partner Program <ArrowRight size={18} aria-hidden="true" />
+              Ask About Alpha Access <ArrowRight size={18} aria-hidden="true" />
             </a>
             <a className="button secondary" href="#merchant-types">
-              See Who It Fits
+              Explore Intended Business Models
             </a>
           </div>
         </motion.div>
@@ -313,14 +313,14 @@ function MerchantTypesSection() {
       <div className="section-inner merchant-types-layout">
         <div className="section-heading">
           <p className="eyebrow">Merchant Fit</p>
-          <h2>Built for merchants like these.</h2>
+          <h2>Designed with business models like these in mind.</h2>
           <p>
             Coffee shops, salons, med spas, local retail, service businesses, small hospitality,
-            specialty shops, and independent merchants all need the same basic thing: a clearer
-            way to see what is happening.
+            specialty shops, and independent merchants are intended audiences. These examples
+            describe the vision, not verified industry compatibility or specialized compliance.
           </p>
         </div>
-        <div className="merchant-type-grid" aria-label="Compatible merchant types">
+        <div className="merchant-type-grid" aria-label="Intended merchant audiences">
           {merchantTypes.map((merchant, index) => (
             <motion.article
               key={merchant}
@@ -337,8 +337,9 @@ function MerchantTypesSection() {
           ))}
         </div>
         <p className="merchant-fit-note">
-          AtlasADE is not locked to one industry. It is not built only for restaurants, salons,
-          or retail. It is designed around the daily business patterns most small merchants share.
+          The product direction spans different business models and shared daily workflows.
+          Confirm the current setup against your industry, service, privacy, and regulatory
+          requirements; an audience label does not establish suitability.
         </p>
       </div>
     </section>
@@ -370,11 +371,12 @@ function InteractiveAtlasSection() {
       <div className="section-inner">
         <div className="section-heading atlas-heading">
           <p className="eyebrow">See how the business connects</p>
-          <h2>Understand what is happening without jumping between systems.</h2>
+          <h2>Explore how the pieces could connect.</h2>
           <p>
-            Select any module to see what sold, who came in, what needs attention, what needs
-            restocking, what needs follow up, what to review before closing, and what content or
-            promotion might be worth considering.
+            Select a module to explore the product vision and its current limits. Controlled-beta
+            demonstrations, bounded development work, planned guidance, and roadmap ideas have
+            different scopes. Related areas and illustrative workflows are not a release or
+            compatibility list; confirm the specific setup before relying on a capability.
           </p>
         </div>
 
@@ -434,6 +436,7 @@ function InteractiveAtlasSection() {
               tabIndex={0}
               aria-label={`${selectedModule.name} details. Scroll this area to read longer module information.`}
             >
+              <p className="atlas-status">{selectedModule.status}</p>
               <p className="atlas-description">{selectedModule.description}</p>
               <div className="atlas-outcome-block">
                 <h4>Why it matters</h4>
@@ -441,7 +444,7 @@ function InteractiveAtlasSection() {
               </div>
               <div className="atlas-detail-grid">
                 <div>
-                  <h4>What this connects</h4>
+                  <h4>Related areas to confirm</h4>
                   <ul>
                     {selectedModule.connectedEndpoints.map((endpoint) => (
                       <li key={endpoint}>{endpoint}</li>
@@ -449,7 +452,7 @@ function InteractiveAtlasSection() {
                   </ul>
                 </div>
                 <div>
-                  <h4>What this helps you know</h4>
+                  <h4>Questions to explore</h4>
                   <ul>
                     {selectedModule.businessOutcomes.map((outcome) => (
                       <li key={outcome}>{outcome}</li>
@@ -461,7 +464,7 @@ function InteractiveAtlasSection() {
                 <Sparkles size={17} aria-hidden="true" />
                 <span>{selectedModule.merchantConversation}</span>
               </div>
-              <div className="flow-chip-row">
+              <div className="flow-chip-row" aria-label="Illustrative workflows; confirm availability">
                 {selectedModule.relatedFlows.map((flow) => (
                   <span key={flow}>{flow}</span>
                 ))}
@@ -471,10 +474,11 @@ function InteractiveAtlasSection() {
         </div>
 
         <div className="atlas-readable-modules" aria-label="Atlas product map descriptions">
-          <p>This alpha product map describes areas of development. Confirm current availability before choosing AtlasADE.</p>
+          <p>This alpha product map includes controlled-beta demonstrations and development direction. Confirm current availability before choosing AtlasADE.</p>
           {modules.map((module) => (
             <details key={module.id}>
               <summary>{module.name}</summary>
+              <p className="atlas-status">{module.status}</p>
               <p>{module.description}</p>
               <p>{module.whyItMatters}</p>
             </details>
@@ -483,7 +487,7 @@ function InteractiveAtlasSection() {
         <div className="purchase-lifecycle">
           <div className="purchase-lifecycle-head">
             <p className="eyebrow">{atlasData.lifecycle?.title ?? "Follow a customer purchase"}</p>
-            <h3>From customer lookup to a business record the owner can trust.</h3>
+            <h3>A demonstration outline, with availability confirmed at each step.</h3>
           </div>
           <div className="lifecycle-track">
             {lifecycle.map((step, index) => (
@@ -545,8 +549,9 @@ function ErpLiteSection() {
             ))}
           </div>
           <p>
-            Instead of separate tools for sales, customers, inventory, reports, marketing notes,
-            and daily work, AtlasADE keeps the pieces connected in one practical view.
+            The ERP Lite vision brings sales, customers, inventory, reports, marketing notes,
+            and daily work into a connected view. It is a development direction, not a claim
+            that every area is commercially available or a full enterprise ERP replacement.
           </p>
         </motion.div>
       </div>
@@ -561,11 +566,11 @@ function HelpCardsSection() {
     <section className="section helps-section" id="helps">
       <div className="section-inner">
         <div className="section-heading">
-          <p className="eyebrow">What AtlasADE helps with</p>
-          <h2>Know the answers owners ask every day.</h2>
+          <p className="eyebrow">Questions behind the product vision</p>
+          <h2>Explore the questions owners ask every day.</h2>
           <p>
-            Small merchants deserve the same clear view larger companies already have, without
-            needing a software team to get it.
+            These questions guide development. They are not a list of released capabilities
+            or a guarantee of performance; ask which workflows can be demonstrated today.
           </p>
         </div>
         <div className="help-grid">
@@ -595,9 +600,9 @@ function HelpCardsSection() {
 
 function HardwareSection() {
   const hardwareCards = [
-    ["Modern workstations", "Designed for modern Apple based merchant workstations."],
-    ["Practical peripherals", "Built to support merchant work without forcing every business into one hardware path."],
-    ["Less vendor lock in", "The system stays focused on the business, not the hardware vendor."],
+    ["Workstation direction", "Local Mac setups have controlled deployment rehearsal evidence. Confirm the current package and installation requirements."],
+    ["Peripheral questions", "Confirm each printer, drawer, terminal, and supported workflow; no general compatibility list is offered here."],
+    ["Hardware flexibility as a goal", "A flexible hardware direction is not a promise of universal support or freedom from provider requirements."],
   ];
 
   return (
@@ -605,11 +610,12 @@ function HardwareSection() {
       <div className="section-inner hardware-layout">
         <div className="section-heading">
           <p className="eyebrow">Hardware direction</p>
-          <h2>Hardware flexible by design.</h2>
+          <h2>Hardware flexibility is a direction.</h2>
           <p>
-            AtlasADE is designed to support merchant work without forcing the business into a
-            single proprietary hardware path. The goal is to let merchants use practical, modern
-            tools while keeping the system focused on the business, not vendor lock in.
+            The goal is to support practical merchant workstations and peripherals. Current
+            installation, operating-system, connectivity, and payment-device requirements need
+            confirmation. Local demonstrations do not establish a generally available installer,
+            hosted POS offering, or support for every device.
           </p>
         </div>
         <div className="hardware-grid">
@@ -647,13 +653,13 @@ function MerchantsSection() {
           <h2>Built for owners who do not have time to chase the business.</h2>
           <p>
             Most small business owners are not short on effort. They are short on time, clean
-            information, and systems that work together. AtlasADE is built to reduce the daily
-            search for answers: what sold, what needs attention, what customers need follow up,
+            information, and systems that work together. AtlasADE's development goal is to make
+            daily questions easier to explore: what sold, what needs attention, what customers need follow up,
             what inventory moved, what content should be reviewed, and what happened today.
           </p>
           <div className="owner-callout">
             <ShieldCheck size={22} aria-hidden="true" />
-            <span>One operating view for everyday merchant decisions.</span>
+            <span>The goal: a connected view for everyday merchant decisions.</span>
           </div>
         </div>
         <div className="reason-grid">
@@ -688,11 +694,12 @@ function AlphaSection() {
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.75 }}
         >
-          <p className="eyebrow">Early merchant partner program</p>
+          <p className="eyebrow">Early merchant inquiries</p>
           <h2>Help shape simpler merchant operations.</h2>
           <p>
-            We are working with a small group of merchants who want simpler tools, clearer
-            information, and a system shaped around how their business actually runs.
+            We invite inquiries from merchants interested in simpler tools and clearer business
+            information. Ask about current alpha access and a bounded demonstration of the
+            workflow that matters to you. Access, suitability, and release timing are not promised.
           </p>
           <div className="merchant-tags">
             {merchants.map((merchant) => (
@@ -700,7 +707,7 @@ function AlphaSection() {
             ))}
           </div>
           <a className="button primary" href="mailto:jwong@atlasade.com?subject=AtlasADE%20Alpha%20Access">
-            Request Partner Access <ArrowRight size={18} aria-hidden="true" />
+            Ask About Current Access <ArrowRight size={18} aria-hidden="true" />
           </a>
         </motion.div>
         <div className="alpha-signal" aria-hidden="true">
@@ -741,7 +748,7 @@ function ContactSection() {
         </div>
         <div className="footer-line">
           <BrandMark />
-          <span>ERP Lite system for small merchants</span>
+          <span>ERP Lite in development for small merchants</span>
           <span>(c) 2026 AtlasADE. All rights reserved.</span>
         </div>
       </div>

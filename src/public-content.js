@@ -1,5 +1,6 @@
 export const site = "https://www.atlasade.com";
 export const contact = "jwong@atlasade.com";
+export const productDescription = "AtlasADE is an early ERP Lite project for connected merchant work. Selected workflows have controlled-beta demonstrations; commercial availability and compatibility require setup-specific confirmation.";
 
 // Only existing public statements and explicit availability limits belong here.
 // Pending product claims are tracked in docs/website-readiness.md, not exported.
@@ -10,10 +11,10 @@ export const pages = [
     heading: "A clearer view of everyday merchant work",
     description: "Learn what AtlasADE is designed to connect, who the alpha website is for, and how to check current product availability.",
     sections: [
-      { id: "what-is-atlas", question: "What is AtlasADE?", answer: "AtlasADE is an early merchant business system designed to connect sales, customers, inventory, reporting, content ideas, and daily work. This website explains the product direction and invites inquiries about limited alpha access." },
-      { id: "connected-work", question: "What business problems is it designed to address?", answer: "The product map focuses on questions owners ask during a working day: what sold, which customer needs follow up, what stock needs attention, and what needs review before closing. These are intended areas of support, not a promise that every workflow is commercially available." },
+      { id: "what-is-atlas", question: "What is AtlasADE?", answer: `${productDescription} The vision includes sales, customers, inventory, payments, reporting, content ideas, and daily work. This website invites alpha inquiries without promising access or a release date.` },
+      { id: "connected-work", question: "What business problems is it designed to address?", answer: "The product map focuses on questions owners ask during a working day: what sold, which customer needs follow up, what stock needs attention, and what needs review before closing. Controlled-beta demonstrations include selected cash-checkout, customer, inventory, and daily-work workflows. Other map areas include bounded development, planned guidance, and roadmap ideas. Confirm the specific package and workflow; this is not a release manifest." },
       { id: "erp-lite", question: "Is AtlasADE a full enterprise ERP replacement?", answer: "No. The public product description uses ERP Lite to mean a simpler way to connect everyday merchant work. AtlasADE is not represented as a full enterprise ERP replacement." },
-      { id: "who-it-is-for", question: "Who is the product intended for?", answer: "The public overview addresses small independent merchants, including coffee shops, salons, local retail, service businesses, and specialty shops. A mention of a business type does not establish suitability for every industry requirement. Confirm the fit for your business with the team." },
+      { id: "who-it-is-for", question: "Who is the product intended for?", answer: "The intended audience spans coffee shops, salons, med spas, local retail, service businesses, small hospitality, specialty shops, and independent merchants. A mention of a business type does not establish suitability for every industry requirement. Confirm the fit for your business with the team." },
     ],
   },
   {
@@ -34,9 +35,9 @@ export const pages = [
     heading: "Current access and product limitations",
     description: "AtlasADE alpha availability is limited and subject to change. Learn how to distinguish available functionality, demonstrations, planned work, and roadmap ideas.",
     sections: [
-      { id: "access", question: "Can I sign up and start using AtlasADE today?", answer: "Alpha availability is limited and subject to change. Contact the team to ask about current access and suitability. This website does not provide self-service account creation, a software download, or an online purchase." },
+      { id: "access", question: "Can I sign up and start using AtlasADE today?", answer: "Alpha access requires confirmation and is subject to change. Contact the team to ask about a bounded demonstration, current access, and suitability; no access or release date is promised. This website does not provide self-service account creation, a software download, or an online purchase." },
       { id: "status", question: "Are all areas in the product map commercially available?", answer: "No. The product map explains intended connections between areas of merchant work. It is not a release manifest. Confirm which workflows are available in the specific setup you are considering." },
-      { id: "labels", question: "How should I interpret capability status?", answer: "Shipped means verified in an identified released product and available under stated conditions. Demonstrable means shown in a bounded demonstration, with availability confirmed separately. Planned means development intent. Roadmap means future direction without an availability commitment. This website does not label a capability shipped without an approved release statement." },
+      { id: "labels", question: "How should I interpret capability status?", answer: "Shipped means verified in an identified released product and available under stated conditions. Demonstrable means shown in a bounded demonstration, with availability confirmed separately. Planned means development intent. Roadmap means future direction without an availability commitment. Unverified means current evidence or approved availability is insufficient. This website does not label a merchant capability shipped without an approved release statement. A controlled-beta demonstration is not a commercial release commitment." },
       { id: "payments-and-integrations", question: "Can I assume a payment provider, integration, or hardware device is supported?", answer: "No. Confirm the exact provider, device, region, integration, and supported workflow with the team. A diagram or product category is not a guarantee of compatibility, payment certification, or live processing availability." },
       { id: "pricing", question: "Where can I confirm pricing?", answer: "Contact the team for current terms. These pages do not publish a price, a free plan, or a commercial offer." },
     ],

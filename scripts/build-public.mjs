@@ -3,7 +3,7 @@ import { dirname, resolve, join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { build } from "vite";
 import react from "@vitejs/plugin-react";
-import { pages, site, contact } from "../src/public-content.js";
+import { pages, site, contact, productDescription } from "../src/public-content.js";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const dist = join(root, "dist");
@@ -21,7 +21,7 @@ const escape = (value) => value.replaceAll("&", "&amp;").replaceAll('"', "&quot;
 const json = (value) => JSON.stringify(value).replaceAll("<", "\\u003c");
 const organization = { "@type": "Organization", "@id": `${site}/#organization`, name: "AtlasADE", url: `${site}/`, email: contact };
 const website = { "@type": "WebSite", "@id": `${site}/#website`, name: "AtlasADE", url: `${site}/`, publisher: { "@id": organization["@id"] } };
-const software = { "@type": "SoftwareApplication", "@id": `${site}/product/#software`, name: "AtlasADE", url: `${site}/product/`, applicationCategory: "BusinessApplication", description: "An early merchant business system designed to connect sales, customers, inventory, reporting, content ideas, and daily work. Alpha availability is limited and subject to change.", publisher: { "@id": organization["@id"] } };
+const software = { "@type": "SoftwareApplication", "@id": `${site}/product/#software`, name: "AtlasADE", url: `${site}/product/`, applicationCategory: "BusinessApplication", description: productDescription, publisher: { "@id": organization["@id"] } };
 const graph = (page) => ({ "@context": "https://schema.org", "@graph": [organization, website, ...(page?.path === "/product/" ? [software] : [])] });
 
 function metadata(html, page) {
