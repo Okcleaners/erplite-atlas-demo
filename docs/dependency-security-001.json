@@ -1,0 +1,663 @@
+{
+  "baseline_commit": "90b24516acf2f9d38ac37b1149f3fb7363b5d8cf",
+  "reviewed_utc": "2026-11-09",
+  "baseline_counts": {
+    "info": 0,
+    "low": 0,
+    "moderate": 2,
+    "high": 5,
+    "critical": 0,
+    "total": 7
+  },
+  "packages": [
+    {
+      "package": "miniflare",
+      "installed": "5.20261019.2-beta",
+      "development_dependency": true,
+      "severity": "moderate",
+      "via": [
+        "undici"
+      ],
+      "resolved": "5.20261023.0-beta",
+      "dependency_chain_before": [
+        "wrangler@4.152.0",
+        "miniflare@5.20261019.2-beta"
+      ],
+      "dependency_chain_after": [
+        "wrangler@4.153.0",
+        "miniflare@5.20261023.0-beta"
+      ]
+    },
+    {
+      "package": "nanoid",
+      "installed": "3.3.12",
+      "development_dependency": true,
+      "severity": "high",
+      "via": [
+        "GHSA-28wg-ghj8-5hjv",
+        "GHSA-2v37-7h3g-55p8"
+      ],
+      "resolved": "3.3.20",
+      "dependency_chain_before": [
+        "vite@8.0.10",
+        "postcss@8.5.14",
+        "nanoid@3.3.12"
+      ],
+      "dependency_chain_after": [
+        "vite@8.1.6",
+        "postcss@8.5.32",
+        "nanoid@3.3.20"
+      ]
+    },
+    {
+      "package": "postcss",
+      "installed": "8.5.14",
+      "development_dependency": true,
+      "severity": "high",
+      "via": [
+        "GHSA-fxqj-rqcc-2cmp",
+        "GHSA-r28c-9q8g-f849"
+      ],
+      "resolved": "8.5.32",
+      "dependency_chain_before": [
+        "vite@8.0.10",
+        "postcss@8.5.14"
+      ],
+      "dependency_chain_after": [
+        "vite@8.1.6",
+        "postcss@8.5.32"
+      ]
+    },
+    {
+      "package": "source-map-js",
+      "installed": "1.2.1",
+      "development_dependency": true,
+      "severity": "high",
+      "via": [
+        "GHSA-68fv-2mgg-jv7q"
+      ],
+      "resolved": "1.2.2",
+      "dependency_chain_before": [
+        "vite@8.0.10",
+        "postcss@8.5.14",
+        "source-map-js@1.2.1"
+      ],
+      "dependency_chain_after": [
+        "vite@8.1.6",
+        "postcss@8.5.32",
+        "source-map-js@1.2.2"
+      ]
+    },
+    {
+      "package": "undici",
+      "installed": "7.29.1",
+      "development_dependency": true,
+      "severity": "high",
+      "via": [
+        "GHSA-4qv8-2p9j-2685",
+        "GHSA-f72v-6w45-q472",
+        "GHSA-xjj6-f33q-929c",
+        "GHSA-4w7w-5xrc-9h26",
+        "GHSA-2m5v-pch6-74hx",
+        "GHSA-qrxm-fqhp-jwvm",
+        "GHSA-9fm3-97px-rjf6",
+        "GHSA-55wc-3pg8-jfw6"
+      ],
+      "resolved": "7.30.1",
+      "dependency_chain_before": [
+        "wrangler@4.152.0",
+        "miniflare@5.20261019.2-beta",
+        "undici@7.29.1"
+      ],
+      "dependency_chain_after": [
+        "wrangler@4.153.0",
+        "miniflare@5.20261023.0-beta",
+        "undici@7.30.1"
+      ]
+    },
+    {
+      "package": "vite",
+      "installed": "8.0.10",
+      "development_dependency": true,
+      "severity": "high",
+      "via": [
+        "GHSA-v6wh-96g9-6wx3",
+        "GHSA-698v-4r3x-3vcv",
+        "GHSA-r825-w8mm-5pxw",
+        "GHSA-587h-7wmj-h5pm",
+        "GHSA-9jrq-w75r-8gcw",
+        "GHSA-rq7h-c2jc-7f22",
+        "GHSA-fx2h-pf6j-xcff"
+      ],
+      "resolved": "8.1.6",
+      "dependency_chain_before": [
+        "vite@8.0.10"
+      ],
+      "dependency_chain_after": [
+        "vite@8.1.6"
+      ]
+    },
+    {
+      "package": "wrangler",
+      "installed": "4.152.0",
+      "development_dependency": true,
+      "severity": "moderate",
+      "via": [
+        "miniflare"
+      ],
+      "resolved": "4.153.0",
+      "dependency_chain_before": [
+        "wrangler@4.152.0"
+      ],
+      "dependency_chain_after": [
+        "wrangler@4.153.0"
+      ]
+    }
+  ],
+  "advisories": [
+    {
+      "id": "GHSA-28wg-ghj8-5hjv",
+      "cve": "CVE-2026-67214",
+      "title": "nanoid: non-secure generators can loop indefinitely with negative size",
+      "url": "https://github.com/advisories/GHSA-28wg-ghj8-5hjv",
+      "severity": "high",
+      "versions": [
+        {
+          "package": "nanoid",
+          "affected": "< 3.3.16",
+          "first_patched": "3.3.16"
+        },
+        {
+          "package": "nanoid",
+          "affected": ">= 4.0.0, < 5.1.16",
+          "first_patched": "5.1.16"
+        }
+      ],
+      "reachability": "Build API present through PostCSS, but its Nano ID call uses a fixed positive size of 6, not an attacker-controlled negative size. No current trigger found."
+    },
+    {
+      "id": "GHSA-2m5v-pch6-74hx",
+      "cve": "CVE-2026-109383",
+      "title": "undici vulnerable to TLS certificate validation bypass via dropped tls options in Agent",
+      "url": "https://github.com/advisories/GHSA-2m5v-pch6-74hx",
+      "severity": "high",
+      "versions": [
+        {
+          "package": "undici",
+          "affected": ">= 4.0.0, < 6.29.1",
+          "first_patched": "6.29.1"
+        },
+        {
+          "package": "undici",
+          "affected": ">= 7.0.0, < 7.30.1",
+          "first_patched": "7.30.1"
+        },
+        {
+          "package": "undici",
+          "affected": ">= 8.0.0, < 8.12.2",
+          "first_patched": "8.12.2"
+        }
+      ],
+      "reachability": "Requires function-valued TLS options passed through Agent tls rather than connect. The project configures no custom TLS verification callback. Vendor-internal optional TLS paths are patched through Undici."
+    },
+    {
+      "id": "GHSA-2v37-7h3g-55p8",
+      "cve": "CVE-2026-67213",
+      "title": "nanoid: custom generators can loop indefinitely when size is zero",
+      "url": "https://github.com/advisories/GHSA-2v37-7h3g-55p8",
+      "severity": "high",
+      "versions": [
+        {
+          "package": "nanoid",
+          "affected": ">= 4.0.0, < 5.1.6",
+          "first_patched": "5.1.6"
+        },
+        {
+          "package": "nanoid",
+          "affected": "< 3.3.18",
+          "first_patched": "3.3.18"
+        }
+      ],
+      "reachability": "Requires a custom generator configured with size zero. No such call in website/build code; PostCSS uses a fixed positive size. No current trigger found."
+    },
+    {
+      "id": "GHSA-4qv8-2p9j-2685",
+      "cve": "CVE-2026-109924",
+      "title": "undici vulnerable to Denial of Service via unbounded memory in the EventSource parser",
+      "url": "https://github.com/advisories/GHSA-4qv8-2p9j-2685",
+      "severity": "medium",
+      "versions": [
+        {
+          "package": "undici",
+          "affected": ">= 6.5.0, < 6.29.1",
+          "first_patched": "6.29.1"
+        },
+        {
+          "package": "undici",
+          "affected": ">= 7.0.0, < 7.30.1",
+          "first_patched": "7.30.1"
+        },
+        {
+          "package": "undici",
+          "affected": ">= 8.0.0, < 8.12.2",
+          "first_patched": "8.12.2"
+        }
+      ],
+      "reachability": "Requires an EventSource connection to a hostile SSE peer. No website or test EventSource client exists. Vendor-internal tooling paths were not proven absent; dependency patched rather than excepted."
+    },
+    {
+      "id": "GHSA-4w7w-5xrc-9h26",
+      "cve": "CVE-2026-109829",
+      "title": "undici vulnerable to cache poisoning and cross-user disclosure via cross-origin redirects",
+      "url": "https://github.com/advisories/GHSA-4w7w-5xrc-9h26",
+      "severity": "high",
+      "versions": [
+        {
+          "package": "undici",
+          "affected": ">= 7.0.0, < 7.30.1",
+          "first_patched": "7.30.1"
+        },
+        {
+          "package": "undici",
+          "affected": ">= 8.0.0, < 8.12.2",
+          "first_patched": "8.12.2"
+        }
+      ],
+      "reachability": "Requires an originless Agent, shared cache, and redirect-before-cache interceptor composition. The project configures none of these. Vendor internals are not blanket-exempted; patched transitively."
+    },
+    {
+      "id": "GHSA-55wc-3pg8-jfw6",
+      "cve": "CVE-2026-87029",
+      "title": "undici vulnerable to Denial of Service via unhandled exception in the decompress interceptor",
+      "url": "https://github.com/advisories/GHSA-55wc-3pg8-jfw6",
+      "severity": "medium",
+      "versions": [
+        {
+          "package": "undici",
+          "affected": ">= 7.15.0, < 7.30.1",
+          "first_patched": "7.30.1"
+        },
+        {
+          "package": "undici",
+          "affected": ">= 8.0.0, < 8.12.2",
+          "first_patched": "8.12.2"
+        }
+      ],
+      "reachability": "Requires the decompress interceptor composed with a downstream throwing handler such as dump. No such composition in project code. Tooling dependency patched, without assuming vendor APIs cannot be reached."
+    },
+    {
+      "id": "GHSA-587h-7wmj-h5pm",
+      "cve": "CVE-2026-112942",
+      "title": "launch-editor: `fs.existsSync()` existence check can be bypassed on Windows",
+      "url": "https://github.com/advisories/GHSA-587h-7wmj-h5pm",
+      "severity": "high",
+      "versions": [
+        {
+          "package": "vite",
+          "affected": ">= 8.3.0, <= 8.3.2",
+          "first_patched": "8.3.3"
+        },
+        {
+          "package": "vite",
+          "affected": ">= 8.2.0, <= 8.2.3",
+          "first_patched": "8.2.4"
+        },
+        {
+          "package": "vite",
+          "affected": ">= 8.0.0, <= 8.1.5",
+          "first_patched": "8.1.6"
+        },
+        {
+          "package": "vite",
+          "affected": ">= 7.0.0, <= 7.3.6",
+          "first_patched": "7.3.7"
+        },
+        {
+          "package": "vite",
+          "affected": "<= 6.4.3",
+          "first_patched": "6.4.4"
+        }
+      ],
+      "reachability": "Windows editor path check bypass can compose with command escaping bugs. Relevant to a running development server/editor middleware; not a public static-asset execution path."
+    },
+    {
+      "id": "GHSA-68fv-2mgg-jv7q",
+      "cve": "CVE-2026-93749",
+      "title": "source-map-js allows event-loop denial of service through indexed source-map section offsets",
+      "url": "https://github.com/advisories/GHSA-68fv-2mgg-jv7q",
+      "severity": "high",
+      "versions": [
+        {
+          "package": "source-map-js",
+          "affected": ">= 1.0.0, < 1.2.2",
+          "first_patched": "1.2.2"
+        }
+      ],
+      "reachability": "Requires a hostile indexed source map with huge section offsets. No input map upload endpoint or authored external map annotation exists; conditional build-time denial of service if hostile map input is introduced."
+    },
+    {
+      "id": "GHSA-698v-4r3x-3vcv",
+      "cve": "CVE-2026-112943",
+      "title": "launch-editor: escapeCmdArgs() omits % escaping on Windows",
+      "url": "https://github.com/advisories/GHSA-698v-4r3x-3vcv",
+      "severity": "medium",
+      "versions": [
+        {
+          "package": "vite",
+          "affected": ">= 8.3.0, <= 8.3.2",
+          "first_patched": "8.3.3"
+        },
+        {
+          "package": "vite",
+          "affected": ">= 8.2.0, <= 8.2.3",
+          "first_patched": "8.2.4"
+        },
+        {
+          "package": "vite",
+          "affected": ">= 8.0.0, <= 8.1.5",
+          "first_patched": "8.1.6"
+        },
+        {
+          "package": "vite",
+          "affected": ">= 7.0.0, <= 7.3.6",
+          "first_patched": "7.3.7"
+        },
+        {
+          "package": "vite",
+          "affected": "<= 6.4.3",
+          "first_patched": "6.4.4"
+        }
+      ],
+      "reachability": "Windows editor command escaping, malicious filename/environment or alternate data stream. Relevant to development editor actions; no editor invocation in CI or static assets hosting."
+    },
+    {
+      "id": "GHSA-9fm3-97px-rjf6",
+      "cve": "CVE-2026-109932",
+      "title": "undici WebSocket client vulnerable to Denial of Service via unbounded automatic PONG buffering",
+      "url": "https://github.com/advisories/GHSA-9fm3-97px-rjf6",
+      "severity": "medium",
+      "versions": [
+        {
+          "package": "undici",
+          "affected": ">= 5.15.0, < 6.29.1",
+          "first_patched": "6.29.1"
+        },
+        {
+          "package": "undici",
+          "affected": ">= 7.0.0, < 7.30.1",
+          "first_patched": "7.30.1"
+        },
+        {
+          "package": "undici",
+          "affected": ">= 8.0.0, < 8.12.2",
+          "first_patched": "8.12.2"
+        }
+      ],
+      "reachability": "Requires a WebSocket client connected to a hostile peer that sends PING frames without reading PONGs. No website WebSocket client exists. Local tooling/inspector paths remain a conditional tool risk and are patched."
+    },
+    {
+      "id": "GHSA-9jrq-w75r-8gcw",
+      "cve": "CVE-2026-112945",
+      "title": "Vite: Cross origin script execution through Vite custom middleware",
+      "url": "https://github.com/advisories/GHSA-9jrq-w75r-8gcw",
+      "severity": "low",
+      "versions": [
+        {
+          "package": "vite",
+          "affected": ">= 8.3.0, <= 8.3.2",
+          "first_patched": "8.3.3"
+        },
+        {
+          "package": "vite",
+          "affected": ">= 8.2.0, <= 8.2.3",
+          "first_patched": "8.2.4"
+        },
+        {
+          "package": "vite",
+          "affected": ">= 8.0.0, <= 8.1.5",
+          "first_patched": "8.1.6"
+        },
+        {
+          "package": "vite",
+          "affected": ">= 7.0.0, <= 7.3.6",
+          "first_patched": "7.3.7"
+        },
+        {
+          "package": "vite",
+          "affected": "<= 6.4.3",
+          "first_patched": "6.4.4"
+        }
+      ],
+      "reachability": "Requires custom/middleware-mode transformIndexHtml using the unchanged request URL and an inline module. This site uses appType mpa, no custom request transform, and build-time rendering, so those preconditions are absent."
+    },
+    {
+      "id": "GHSA-f72v-6w45-q472",
+      "cve": "CVE-2026-109841",
+      "title": "undici vulnerable to Subresource Integrity bypass via non-lowercase algorithm tokens",
+      "url": "https://github.com/advisories/GHSA-f72v-6w45-q472",
+      "severity": "medium",
+      "versions": [
+        {
+          "package": "undici",
+          "affected": ">= 7.15.0, < 7.30.1",
+          "first_patched": "7.30.1"
+        },
+        {
+          "package": "undici",
+          "affected": ">= 8.0.0, < 8.12.2",
+          "first_patched": "8.12.2"
+        }
+      ],
+      "reachability": "Requires fetch with a Subresource Integrity value using a non-lowercase algorithm token. No project server-side fetch integrity option exists. Tooling dependency patched; browser-native fetch is a separate implementation."
+    },
+    {
+      "id": "GHSA-fx2h-pf6j-xcff",
+      "cve": "CVE-2026-53571",
+      "title": "vite: `server.fs.deny` bypass on Windows alternate paths",
+      "url": "https://github.com/advisories/GHSA-fx2h-pf6j-xcff",
+      "severity": "medium",
+      "versions": [
+        {
+          "package": "vite",
+          "affected": ">= 8.0.0, <= 8.0.15",
+          "first_patched": "8.0.16"
+        },
+        {
+          "package": "vite",
+          "affected": ">= 7.0.0, <= 7.3.4",
+          "first_patched": "7.3.5"
+        },
+        {
+          "package": "vite",
+          "affected": "<= 6.4.2",
+          "first_patched": "6.4.3"
+        }
+      ],
+      "reachability": "Windows development fs.deny bypass through alternate paths. The public site serves only generated files, not the Vite development filesystem. Patch protects developer tooling."
+    },
+    {
+      "id": "GHSA-fxqj-rqcc-2cmp",
+      "cve": "CVE-2026-69153",
+      "title": "PostCSS: incomplete fix of GHSA-6g55-p6wh-862q \u2014 attacker-controlled sourceMappingURL reads arbitrary .map files when `from` is unset",
+      "url": "https://github.com/advisories/GHSA-fxqj-rqcc-2cmp",
+      "severity": "medium",
+      "versions": [
+        {
+          "package": "postcss",
+          "affected": "<= 8.5.22",
+          "first_patched": "8.5.23"
+        }
+      ],
+      "reachability": "Requires processing hostile CSS with a previous-map annotation while from is unset. Vite sets from to the source path; no CSS upload/parser service or authored map annotation exists. Conditional build risk, no current trigger found."
+    },
+    {
+      "id": "GHSA-qrxm-fqhp-jwvm",
+      "cve": "CVE-2026-87018",
+      "title": "undici vulnerable to Denial of Service via TLS 1.2 certificate-changing renegotiation",
+      "url": "https://github.com/advisories/GHSA-qrxm-fqhp-jwvm",
+      "severity": "high",
+      "versions": [
+        {
+          "package": "undici",
+          "affected": ">= 4.2.1, < 6.29.1",
+          "first_patched": "6.29.1"
+        },
+        {
+          "package": "undici",
+          "affected": ">= 7.0.0, < 7.30.1",
+          "first_patched": "7.30.1"
+        },
+        {
+          "package": "undici",
+          "affected": ">= 8.0.0, < 8.12.2",
+          "first_patched": "8.12.2"
+        }
+      ],
+      "reachability": "A malicious HTTPS peer renegotiating TLS 1.2 can crash a client. Conditional risk for outbound tooling requests; not a visitor-triggered API in this static architecture."
+    },
+    {
+      "id": "GHSA-r28c-9q8g-f849",
+      "cve": "CVE-2026-73646",
+      "title": "PostCSS: Path Traversal in Previous Source Map Auto-Loading (sourceMappingURL) leads to Arbitrary .map File Disclosure",
+      "url": "https://github.com/advisories/GHSA-r28c-9q8g-f849",
+      "severity": "high",
+      "versions": [
+        {
+          "package": "postcss",
+          "affected": "<= 8.5.17",
+          "first_patched": "8.5.18"
+        }
+      ],
+      "reachability": "Earlier traversal variant can process a hostile CSS map even with from set. Trusted repository CSS has no previous-map annotation. A malicious source/dependency change could affect a build; no visitor-facing CSS transformation service exists."
+    },
+    {
+      "id": "GHSA-r825-w8mm-5pxw",
+      "cve": "CVE-2026-112944",
+      "title": "launch-editor: Editor CLI flag misinterpretation causing arbitrary command execution for some editors",
+      "url": "https://github.com/advisories/GHSA-r825-w8mm-5pxw",
+      "severity": "medium",
+      "versions": [
+        {
+          "package": "vite",
+          "affected": ">= 8.3.0, <= 8.3.2",
+          "first_patched": "8.3.3"
+        },
+        {
+          "package": "vite",
+          "affected": ">= 8.2.0, <= 8.2.3",
+          "first_patched": "8.2.4"
+        },
+        {
+          "package": "vite",
+          "affected": ">= 8.0.0, <= 8.1.5",
+          "first_patched": "8.1.6"
+        },
+        {
+          "package": "vite",
+          "affected": ">= 7.0.0, <= 7.3.6",
+          "first_patched": "7.3.7"
+        },
+        {
+          "package": "vite",
+          "affected": "<= 6.4.3",
+          "first_patched": "6.4.4"
+        }
+      ],
+      "reachability": "Editor CLI flag interpretation requires malicious filesystem names and affected editor/WSL conditions. No editor is invoked by the build, tests, or production static hosting."
+    },
+    {
+      "id": "GHSA-rq7h-c2jc-7f22",
+      "cve": "CVE-2026-112946",
+      "title": "Vite: Files outside `server.fs.allow` could be served when project paths match system paths on non-Windows machine",
+      "url": "https://github.com/advisories/GHSA-rq7h-c2jc-7f22",
+      "severity": "medium",
+      "versions": [
+        {
+          "package": "vite",
+          "affected": ">= 8.3.0, <= 8.3.2",
+          "first_patched": "8.3.3"
+        },
+        {
+          "package": "vite",
+          "affected": ">= 8.2.0, <= 8.2.3",
+          "first_patched": "8.2.4"
+        },
+        {
+          "package": "vite",
+          "affected": ">= 8.0.0, <= 8.1.5",
+          "first_patched": "8.1.6"
+        },
+        {
+          "package": "vite",
+          "affected": ">= 7.0.0, <= 7.3.6",
+          "first_patched": "7.3.7"
+        },
+        {
+          "package": "vite",
+          "affected": "<= 6.4.3",
+          "first_patched": "6.4.4"
+        }
+      ],
+      "reachability": "Development file exposure requires matching root-relative imports and host filesystem paths on non-Windows. Current imports do not match this pattern. Build and static preview do not expose the Vite development filesystem middleware."
+    },
+    {
+      "id": "GHSA-v6wh-96g9-6wx3",
+      "cve": "CVE-2026-53632",
+      "title": "launch-editor: NTLMv2 hash disclosure via UNC path handling on Windows",
+      "url": "https://github.com/advisories/GHSA-v6wh-96g9-6wx3",
+      "severity": "medium",
+      "versions": [
+        {
+          "package": "vite",
+          "affected": ">= 8.0.0, <= 8.0.15",
+          "first_patched": "8.0.16"
+        },
+        {
+          "package": "vite",
+          "affected": ">= 7.0.0, <= 7.3.4",
+          "first_patched": "7.3.5"
+        },
+        {
+          "package": "vite",
+          "affected": "<= 6.4.2",
+          "first_patched": "6.4.3"
+        }
+      ],
+      "reachability": "Windows development open-in-editor middleware can cause outbound SMB/NTLM authentication. A malicious browser page may reach loopback; loopback binding alone is not a complete mitigation. No editor middleware runs in static hosting or normal CI builds."
+    },
+    {
+      "id": "GHSA-xjj6-f33q-929c",
+      "cve": "CVE-2026-109869",
+      "title": "undici vulnerable to Denial of Service via unhandled error on excessive content-encodings",
+      "url": "https://github.com/advisories/GHSA-xjj6-f33q-929c",
+      "severity": "high",
+      "versions": [
+        {
+          "package": "undici",
+          "affected": ">= 6.23.0, < 6.29.1",
+          "first_patched": "6.29.1"
+        },
+        {
+          "package": "undici",
+          "affected": ">= 7.18.0, < 7.30.1",
+          "first_patched": "7.30.1"
+        },
+        {
+          "package": "undici",
+          "affected": ">= 8.0.0, < 8.12.2",
+          "first_patched": "8.12.2"
+        }
+      ],
+      "reachability": "A malicious/compromised response with excessive content encodings can crash a fetch client. Wrangler/Miniflare performs outbound tooling requests, so conditional tooling exposure is relevant. No Node fetch server runs on the deployed static website."
+    }
+  ],
+  "resolved_counts": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "assessment_scope": "npm-locked website dependencies; static production assets; build/CI and developer tooling; host Node bundled Undici assessed separately"
+}

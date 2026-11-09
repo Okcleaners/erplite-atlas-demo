@@ -1,0 +1,10 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "atlasade-public-website",
+  "compatibility_date": "2026-10-26",
+  "workers_dev": false,
+  "assets": {
+    "directory": "./dist-preview",
+    "not_found_handling": "none"
+  }
+}
