@@ -19,11 +19,11 @@ const canonical = (html) => attribute(tags(html, "link").find((tag) => attribute
 test("the original Vite and sync build stages run before static rendering", async () => {
   const pkg = JSON.parse(await readFile(join(root, "package.json")));
   assert.equal(pkg.scripts.build, "vite build && node scripts/sync-pages-root.mjs && node scripts/build-public.mjs");
-  assert.equal(pkg.devDependencies.wrangler, "4.152.0");
+  assert.equal(pkg.devDependencies.wrangler, "4.153.0");
   const lock = JSON.parse(await readFile(join(root, "package-lock.json")));
   assert.equal(lock.packages["node_modules/wrangler"].version, pkg.devDependencies.wrangler);
   assert.equal(lock.packages["node_modules/react"].version, "19.2.6");
-  assert.equal(lock.packages["node_modules/vite"].version, "8.0.10");
+  assert.equal(lock.packages["node_modules/vite"].version, "8.1.6");
 });
 
 test("raw homepage has useful content, limitations, and JavaScript-free navigation", async () => {
@@ -141,7 +141,7 @@ async function localAssets(variant, check) {
   const temp = await mkdtemp(join(tmpdir(), "atlas-website-http-"));
   const cli = process.env.WRANGLER_BIN || join(root, "node_modules/wrangler/bin/wrangler.js");
   const version = JSON.parse(await readFile(resolve(dirname(cli), "../package.json"))).version;
-  assert.equal(version, "4.152.0", "HTTP tests must use the pinned Wrangler release");
+  assert.equal(version, "4.153.0", "HTTP tests must use the pinned Wrangler release");
   const port = await unusedPort();
   const config = join(temp, "wrangler.json");
   await writeFile(config, JSON.stringify({ name: "atlas-website-local-test", compatibility_date: JSON.parse(await readFile(join(root, "wrangler.jsonc"))).compatibility_date, workers_dev: false, assets: { directory: join(root, variant), not_found_handling: "none" } }));
@@ -222,4 +222,20 @@ test("Vite local preview also keeps unknown pages as 404", { timeout: 15000 }, a
     server.httpServer.closeAllConnections();
     await new Promise((resolve) => server.httpServer.close(resolve));
   }
+});
+
+
+test("security-patched tooling stays outside the production dependency set", async () => {
+  const lock = JSON.parse(await readFile(join(root, "package-lock.json")));
+  const floors = { vite: "8.1.6", wrangler: "4.153.0", postcss: "8.5.23", nanoid: "3.3.18", "source-map-js": "1.2.2", undici: "7.30.1" };
+  for (const [name, floor] of Object.entries(floors)) {
+    const entry = lock.packages[`node_modules/${name}`];
+    assert.equal(entry.dev, true, name);
+    assert.match(entry.version, /^\d+\.\d+\.\d+$/);
+    const version = entry.version.split(".").map(Number);
+    const minimum = floor.split(".").map(Number);
+    const firstDifference = version.findIndex((value, index) => value !== minimum[index]);
+    assert.ok(firstDifference === -1 || version[firstDifference] > minimum[firstDifference], `${name} below patched floor ${floor}`);
+  }
+  console.info(`Host runtime boundary: Node ${process.version}; bundled Undici ${process.versions.undici}; tests use controlled loopback HTTP.`);
 });
