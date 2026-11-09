@@ -186,7 +186,7 @@ a {
   gap: 4px;
 }
 
-.site-header nav button,
+.site-header nav a,
 .nav-cta {
   color: var(--text-secondary);
   padding: 10px 13px;
@@ -198,7 +198,7 @@ a {
   transition: color 180ms ease, background 180ms ease;
 }
 
-.site-header nav button:hover,
+.site-header nav a:hover,
 .nav-cta:hover {
   color: var(--text-primary);
   background: rgba(255, 255, 255, 0.06);
@@ -1748,7 +1748,7 @@ h4 {
     letter-spacing: 0.12em;
   }
 
-  .site-header nav button,
+  .site-header nav a,
   .nav-cta {
     padding: 8px 10px;
     font-size: 0.72rem;
@@ -1907,3 +1907,21 @@ h4 {
     transition-duration: 0.001ms !important;
   }
 }
+
+
+/* Readable HTML is the baseline; the interactive module map enhances it. */
+[data-enhanced="false"] .atlas-module-map,
+[data-enhanced="true"] .atlas-readable-modules { display: none; }
+.atlas-readable-modules { margin-top: 32px; }
+.atlas-readable-modules details { padding: 16px; border-bottom: 1px solid var(--line); }
+.atlas-readable-modules summary { cursor: pointer; color: var(--teal); }
+.availability-notice { padding: 18px 22px; border: 1px solid var(--line); border-radius: 8px; color: var(--text-secondary); line-height: 1.7; }
+.availability-notice a, .knowledge-nav a, .knowledge-page a { color: var(--teal); text-decoration: underline; text-underline-offset: 4px; }
+.knowledge-nav { display: flex; flex-wrap: wrap; gap: 12px 24px; margin: 24px 0; }
+.knowledge-page { padding-top: 64px; padding-bottom: 80px; }
+.knowledge-page h1 { max-width: 900px; font-size: clamp(2rem, 5vw, 3.8rem); line-height: 1.15; }
+.knowledge-page h2 { margin-top: 40px; font-size: clamp(1.3rem, 3vw, 1.8rem); }
+.knowledge-page p, .knowledge-page li { max-width: 76ch; line-height: 1.8; color: var(--text-secondary); overflow-wrap: anywhere; }
+.knowledge-page .brand { text-decoration: none; margin-bottom: 20px; }
+.knowledge-page section { scroll-margin-top: 24px; }
+@media (max-width: 640px) { .knowledge-page { padding-top: 28px; } .knowledge-nav { gap: 16px; } }
