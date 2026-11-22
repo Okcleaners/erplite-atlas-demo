@@ -1,0 +1,260 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "slug": "open-register",
+      "title": "Opening a register",
+      "category": "Register",
+      "answer": "Begin the fictional café day by opening River’s front counter with a $200.00 float.",
+      "scope": "One register at the River location.",
+      "limitation": "The opening float is part of the café exercise. Confirm the opening workflow for your register.",
+      "lifecycle": "unverified",
+      "availability": "Confirm the current package and supported workflow with Atlasade.",
+      "aliases": [
+        "open the till",
+        "opening float",
+        "start the register",
+        "open the cash drawer"
+      ],
+      "questions": [
+        "How do I open the register in the café demo?"
+      ],
+      "demo": {
+        "label": "Begin the day",
+        "href": "/day-with-atlasade/#walkthrough-open"
+      },
+      "sources": [
+        {
+          "label": "Product map and availability",
+          "href": "/availability/#status"
+        }
+      ],
+      "review": {
+        "revision": 1,
+        "basis": "Existing public documentation",
+        "checkedOn": "2026-11-22"
+      }
+    },
+    {
+      "slug": "sales-ticket",
+      "title": "Building a sales ticket",
+      "category": "Register",
+      "answer": "Add a house coffee and an oat bar to the café ticket. The demonstration calculates an $8.00 subtotal and $0.40 illustrative tax.",
+      "scope": "One café ticket at River.",
+      "limitation": "The two products and the illustrative tax apply to the fictional sale. Confirm your supported items and tax setup.",
+      "lifecycle": "unverified",
+      "availability": "Confirm the current package and supported workflow with Atlasade.",
+      "aliases": [
+        "ring up items",
+        "start a ticket",
+        "basket",
+        "add items",
+        "subtotal"
+      ],
+      "questions": [
+        "How do I build a sales ticket?",
+        "How do I ring up the coffee and oat bar?"
+      ],
+      "demo": {
+        "label": "The first customer",
+        "href": "/day-with-atlasade/#walkthrough-ticket"
+      },
+      "sources": [
+        {
+          "label": "Connected merchant workflows",
+          "href": "/product/#connected-work"
+        }
+      ],
+      "review": {
+        "revision": 1,
+        "basis": "Existing public documentation",
+        "checkedOn": "2026-11-22"
+      }
+    },
+    {
+      "slug": "customer-lookup",
+      "title": "Customer lookup and attachment",
+      "category": "Customers",
+      "answer": "In the café, find Sam Reed and attach their profile to the ticket. The completed receipt carries the association.",
+      "scope": "A fictional regular and one River ticket.",
+      "limitation": "Confirm the lookup method, staff access and recorded information for your package.",
+      "lifecycle": "unverified",
+      "availability": "Confirm the current package and supported workflow with Atlasade.",
+      "aliases": [
+        "find a regular",
+        "attach a customer",
+        "customer search",
+        "customer profile",
+        "link a customer"
+      ],
+      "questions": [
+        "Can I attach a customer to the café sale?"
+      ],
+      "demo": {
+        "label": "Customer recognition",
+        "href": "/day-with-atlasade/#walkthrough-customer"
+      },
+      "sources": [
+        {
+          "label": "Customer records and history",
+          "href": "/faq/#customers"
+        }
+      ],
+      "review": {
+        "revision": 1,
+        "basis": "Existing public documentation",
+        "checkedOn": "2026-11-22"
+      }
+    },
+    {
+      "slug": "cash-checkout",
+      "title": "Cash checkout and change",
+      "category": "Payments",
+      "answer": "The café accepts $10.00 in simulated cash for an $8.40 ticket and returns $1.60 in change.",
+      "scope": "One simulated cash payment at River.",
+      "limitation": "Confirm cash checkout and receipt support for your current setup.",
+      "lifecycle": "unverified",
+      "availability": "Confirm the current package and supported workflow with Atlasade.",
+      "aliases": [
+        "cash payment",
+        "make change",
+        "give change for a ten",
+        "cash tender",
+        "pay cash"
+      ],
+      "questions": [
+        "How much change does Sam get?",
+        "How does cash checkout work?"
+      ],
+      "demo": {
+        "label": "Checkout",
+        "href": "/day-with-atlasade/#walkthrough-checkout"
+      },
+      "sources": [
+        {
+          "label": "Cash checkout demonstration scope",
+          "href": "/product/#connected-work"
+        }
+      ],
+      "review": {
+        "revision": 1,
+        "basis": "Existing public documentation",
+        "checkedOn": "2026-11-22"
+      }
+    },
+    {
+      "slug": "location-stock",
+      "title": "Location-scoped inventory",
+      "category": "Inventory",
+      "answer": "In the River & Oak demo, selling an oat bar at River reduces River’s stock from 12 to 11. Hill stays at 9.",
+      "scope": "Tracked oat bars at the fictional River and Hill locations.",
+      "limitation": "This two-store comparison illustrates the sale. Confirm location-specific stock behavior for your proposed setup.",
+      "lifecycle": "unverified",
+      "availability": "Confirm the current package and supported workflow with Atlasade.",
+      "aliases": [
+        "store inventory",
+        "other location",
+        "other store",
+        "stock by store",
+        "oat bar stock",
+        "different location"
+      ],
+      "questions": [
+        "Does selling an oat bar change stock at another store?",
+        "Does selling an oat bar change stock at my other store?",
+        "Does Hill lose an oat bar when River sells one?",
+        "Does selling an oat bar change stock at another location?",
+        "If I sell an oat bar at River does stock change at Hill?",
+        "Will selling an oat bar change inventory at another store?"
+      ],
+      "demo": {
+        "label": "Follow the sale",
+        "href": "/day-with-atlasade/#walkthrough-follow-the-sale"
+      },
+      "sources": [
+        {
+          "label": "Tracked stock and availability",
+          "href": "/faq/#stock"
+        }
+      ],
+      "review": {
+        "revision": 1,
+        "basis": "Existing public documentation",
+        "checkedOn": "2026-11-22"
+      }
+    },
+    {
+      "slug": "daily-cash",
+      "title": "Daily cash reconciliation",
+      "category": "Reporting",
+      "answer": "Count River’s closing drawer against its opening cash plus the recorded sale. A short or over count shows a variance in the exercise.",
+      "scope": "The River register after one fictional cash sale.",
+      "limitation": "The editable count is a teaching exercise. Confirm the daily report and closeout workflow for your setup.",
+      "lifecycle": "unverified",
+      "availability": "Confirm the current package and supported workflow with Atlasade.",
+      "aliases": [
+        "balance the till",
+        "count the drawer",
+        "close the register",
+        "cash variance",
+        "cash up",
+        "end of day"
+      ],
+      "questions": [
+        "How do I reconcile the café drawer?",
+        "Why is my demo drawer short?"
+      ],
+      "demo": {
+        "label": "Close the day",
+        "href": "/day-with-atlasade/#walkthrough-close"
+      },
+      "sources": [
+        {
+          "label": "Daily review and closeout",
+          "href": "/faq/#close"
+        }
+      ],
+      "review": {
+        "revision": 1,
+        "basis": "Existing public documentation",
+        "checkedOn": "2026-11-22"
+      }
+    },
+    {
+      "slug": "offline-card",
+      "title": "Offline card acceptance",
+      "category": "Payments",
+      "answer": "Offline card acceptance is unverified for your setup. Confirm provider, device, region and connectivity requirements.",
+      "scope": "A specific payment provider and merchant installation.",
+      "limitation": "Local POS operation alone does not establish offline card acceptance.",
+      "lifecycle": "unverified",
+      "availability": "Confirm the current package and supported workflow with Atlasade.",
+      "aliases": [
+        "offline cards",
+        "cards without internet",
+        "offline payments",
+        "card payment during an outage"
+      ],
+      "questions": [
+        "Can I take a card payment if the internet goes down?",
+        "Can I take cards offline?"
+      ],
+      "demo": null,
+      "sources": [
+        {
+          "label": "Local operation and offline card acceptance",
+          "href": "/deployment/#offline-card"
+        },
+        {
+          "label": "Provider and device compatibility",
+          "href": "/availability/#payments-and-integrations"
+        }
+      ],
+      "review": {
+        "revision": 1,
+        "basis": "Existing public documentation",
+        "checkedOn": "2026-11-22"
+      }
+    }
+  ]
+}

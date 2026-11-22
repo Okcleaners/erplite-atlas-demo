@@ -150,6 +150,16 @@ function Closing({ day, dispatch, replay, input, setInput }) {
     <Primary disabled={variance !== 0} onClick={() => dispatch({ type: "close", counted: count })}>Close the register</Primary>
   </>;
 }
+function revealWalkthrough() {
+  const target = document.getElementById(window.location.hash.slice(1));
+  const details = target?.closest("details.walkthrough");
+  if (!details) return false;
+  details.open = true;
+  target.focus({ preventScroll: true });
+  target.scrollIntoView({ block: "nearest" });
+  return true;
+}
+
 function Player() {
   const [day, dispatch] = useReducer(transition, cafe, startDay);
   const [chapter, setChapter] = useState(0);
@@ -164,6 +174,7 @@ function Player() {
   // History only moves the reader. It never replays a tender, stock movement or close.
   useEffect(() => {
     const review = () => {
+      if (revealWalkthrough()) return;
       const match = /^#chapter-([1-6])$/.exec(window.location.hash);
       const index = match ? Number(match[1]) - 1 : 0;
       const safe = Math.min(index, unlocked);
@@ -179,6 +190,7 @@ function Player() {
     return () => window.removeEventListener("hashchange", review);
   }, [unlocked]);
   useEffect(() => {
+    revealWalkthrough();
     // A fresh visit always starts with an unopened local register.
     if (window.location.hash.startsWith("#chapter-")) window.history.replaceState(null, "", window.location.pathname);
   }, []);

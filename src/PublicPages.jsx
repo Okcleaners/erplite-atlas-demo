@@ -3,7 +3,7 @@ import { pages, contact } from "./public-content.js";
 
 export function KnowledgeLinks() {
   return <nav className="knowledge-nav" aria-label="Product information">
-    <a href="/">Home</a>
+    <a href="/">Home</a><a href="/features/">Find a feature</a>
     {pages.map((page) => <a key={page.path} href={page.path}>{page.path === "/faq/" ? "FAQ" : page.path.split("/")[1].replace(/^./, (c) => c.toUpperCase())}</a>)}
   </nav>;
 }

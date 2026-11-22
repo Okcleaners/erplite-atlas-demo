@@ -184,6 +184,7 @@ function Hero() {
         <p className="hero-subtitle">Step behind the counter at River &amp; Oak. Discover how Atlasade brings everyday business operations together, one café sale at a time.</p>
         <div className="hero-actions">
           <a className="button primary" href="/day-with-atlasade/"><Coffee size={18} aria-hidden="true" />Try the café day</a>
+          <a className="button secondary" href="/features/">Find a feature</a>
           <a className="button secondary" href="#atlas">Explore the product map</a>
         </div>
       </div>
