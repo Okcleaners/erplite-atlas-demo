@@ -4,6 +4,10 @@ This repository publishes the AtlasADE public website for `atlasade.com`.
 
 The site is a React + Vite single-page homepage with the original ERP-Lite Operational Atlas demo integrated as the second major scroll section. The Atlas section is powered by the preserved `atlas-data.json` module and lifecycle content.
 
+## A Day With Atlasade
+
+Open `/day-with-atlasade/` to work the River & Oak counter through one fictional cash sale. The café has its own readable HTML walkthrough and uses the same receipt for cashier, operator, finance and closing views. See [the café day and Cloudflare Pages preview setup](docs/cafe-day.md) for the scenario, local checks and access controls.
+
 ## Local Development
 
 ```bash
@@ -37,6 +41,6 @@ The build preserves Vite and `scripts/sync-pages-root.mjs`, then renders the exi
 
 Run `npm run check` to build production and isolated preview output and test crawler-readable HTML, metadata, links, and real local Workers asset HTTP behavior. Node 22.12+ and the pinned lockfile are required.
 
-Production output is `dist/`. Preview output is `dist-preview/`, with noindex meta tags and headers. `wrangler.jsonc` points only to the preview output, disables production workers.dev, and contains no domains or bindings. Do not deploy or connect it until existing Cloudflare resources have been inspected. The intended future GitHub Preview command is `npx wrangler preview`.
+Production output is `dist/`. Preview output is `dist-preview/`, with noindex meta tags and headers. `wrangler.jsonc` points only to the preview output, disables production workers.dev, and contains no domains or bindings. Do not deploy or connect it until existing Cloudflare resources have been inspected. That configuration was prepared for a Workers preview. Cloudflare Pages is the preferred future website host. Its static preview settings use `npm run build:preview` and `dist-preview/` as described in the café guide.
 
 The existing GitHub Pages production workflow is unchanged. Nothing in the readiness workflow deploys the website. See [website readiness](docs/website-readiness.md) for page inventory, claim approvals, crawler policy decisions, branch protection recommendations, and remaining browser/hosted validation.

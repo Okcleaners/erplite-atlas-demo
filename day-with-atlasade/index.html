@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#101e2a">
+    <title>A Day With Atlasade | River &amp; Oak café demo</title>
+    <meta name="description" content="Open a fictional café, ring up a cash sale, and follow its receipt into customer history, store inventory, and the closing drawer in this hands-on Atlasade demo.">
+    <meta property="og:title" content="A Day With Atlasade | River &amp; Oak café demo">
+    <meta property="og:description" content="Work the counter at River &amp; Oak. Follow one fictional sale from the register to the closing count.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.atlasade.com/day-with-atlasade/">
+    <meta property="og:image" content="https://www.atlasade.com/images/cafe-morning.webp">
+    <link rel="canonical" href="https://www.atlasade.com/day-with-atlasade/">
+    <link rel="stylesheet" href="/src/day/day.css">
+    <script type="module" src="/src/day/main.jsx"></script>
+  </head>
+  <body>
+    <a class="skip" href="#counter">Skip to the register</a>
+    <header class="mast"><div class="wrap top-line">
+      <a class="wordmark" href="/" aria-label="AtlasADE home"><span class="mark" aria-hidden="true"><i></i></span>ATLAS<b>ADE</b></a>
+      <a href="/" class="home-link">Back to Atlasade</a>
+    </div></header>
+    <main class="wrap">
+      <section class="day-intro" aria-labelledby="cafe-name">
+        <div class="intro-copy"><p class="kicker"><span class="sun-mark" aria-hidden="true"></span> A Day With Atlasade</p>
+          <h1 id="cafe-name">River <em>&amp;</em> Oak</h1>
+          <p>Take the counter at a fictional neighborhood café. Follow one sale from the first cup to the closing count.</p>
+        </div>
+        <div class="cafe-print"><img src="/images/cafe-morning.webp" alt="House coffee and an oat bar in morning light on the café counter" width="900" height="600"></div>
+      </section>
+      <div id="counter" tabindex="-1">
+        <div class="loading-note">The interactive register uses JavaScript. The café walkthrough below is available to read.</div>
+      </div>
+      <details class="walkthrough">
+        <summary>Read the café walkthrough</summary>
+        <ol>
+          <li><strong>Begin the day.</strong> Open the River location’s register with its starting cash float.</li>
+          <li><strong>The first customer.</strong> Add a house coffee and an oat bar. The ticket calculates an illustrative sales tax.</li>
+          <li><strong>Customer recognition.</strong> Find a fictional regular and attach their profile to the ticket while you are still at the counter.</li>
+          <li><strong>Checkout.</strong> Accept simulated cash, return the change, and inspect the completed receipt.</li>
+          <li><strong>Follow the sale.</strong> The cashier sees the customer’s receipt. The operator sees one fewer oat bar at River and the original count at Hill. Finance can distinguish sales revenue from tax and trace the cash retained.</li>
+          <li><strong>Close the day.</strong> Compare the counted drawer with opening cash plus cash received less change. Resolve any difference, close the register, and replay the day.</li>
+        </ol>
+      </details>
+    </main>
+    <footer class="wrap day-foot"><span>Fictional café · Simulated cash</span><a href="/availability/">Atlasade product availability</a></footer>
+  </body>
+</html>

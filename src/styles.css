@@ -254,7 +254,6 @@ a {
     radial-gradient(circle at 50% 50%, rgba(43, 179, 255, 0.16), transparent 15%),
     conic-gradient(from 90deg, transparent, rgba(43, 179, 255, 0.12), transparent, rgba(151, 255, 79, 0.07), transparent);
   filter: blur(0.2px);
-  animation: rotate-slow 42s linear infinite;
 }
 
 .hero-inner {
@@ -433,7 +432,6 @@ h4 {
   content: "";
   border: 1px solid rgba(43, 179, 255, 0.09);
   border-radius: 50%;
-  animation: breathe 6s ease-in-out infinite;
 }
 
 .map-shell.compact {
@@ -656,7 +654,6 @@ h4 {
   content: "";
   border: 1px solid rgba(43, 179, 255, 0.08);
   border-radius: 50%;
-  animation: breathe 6.8s ease-in-out infinite;
 }
 
 .atlas-map-orbit {
@@ -671,7 +668,6 @@ h4 {
     radial-gradient(circle, rgba(45, 226, 210, 0.12), transparent 18%),
     conic-gradient(from 160deg, transparent, rgba(43, 179, 255, 0.16), transparent, rgba(151, 255, 79, 0.1), transparent);
   transform: translate(-50%, -50%);
-  animation: rotate-slow 36s linear infinite;
 }
 
 .atlas-node {
@@ -1139,7 +1135,6 @@ h4 {
   border-radius: 50%;
   content: "";
   transform: translate(-50%, -50%);
-  animation: breathe 6.5s ease-in-out infinite;
 }
 
 .studio-graph-lines {
@@ -1163,7 +1158,6 @@ h4 {
   content: "";
   background: linear-gradient(90deg, transparent, var(--teal), var(--green), var(--purple), transparent);
   box-shadow: 0 0 24px rgba(45, 226, 210, 0.28);
-  animation: studio-pulse 3.8s ease-in-out infinite;
 }
 
 .signal-card {
@@ -1518,7 +1512,6 @@ h4 {
   content: "";
   border: 1px solid rgba(177, 109, 255, 0.18);
   border-radius: 50%;
-  animation: rotate-slow 28s linear infinite;
 }
 
 .alpha-signal svg {
@@ -1925,3 +1918,36 @@ h4 {
 .knowledge-page .brand { text-decoration: none; margin-bottom: 20px; }
 .knowledge-page section { scroll-margin-top: 24px; }
 @media (max-width: 640px) { .knowledge-page { padding-top: 28px; } .knowledge-nav { gap: 16px; } }
+
+.phone-menu { display: none; }
+.cafe-hero { min-height: auto; padding-block: clamp(116px,10vw,160px) clamp(45px,6vw,88px); background: radial-gradient(ellipse at 80% 38%,#334445 0,transparent 48%),#10202e; }
+.cafe-hero::before { background: radial-gradient(ellipse at 20% 98%,#24404c80,transparent 57%); }
+.cafe-hero .hero-inner { grid-template-columns: 1.05fr .95fr; gap: clamp(28px,5vw,80px); }
+.cafe-hero .eyebrow { color: #e6bc89; font-size: .8rem; }
+.cafe-hero h1 { max-width: 12em; margin-bottom: 17px; font-size: clamp(3rem,5.25vw,5.35rem); line-height: 1.01; letter-spacing: -.05em; font-family: Georgia,serif; }
+.cafe-hero h1 em { display: block; color: #edcc9e; font-weight: 400; }
+.cafe-hero .hero-subtitle { color: #d0dbde; font-size: 1.06rem; max-width: 46ch; line-height: 1.6; margin-bottom: 22px; }
+.cafe-hero .button.primary { background: #b9e6dc; color: #103832; box-shadow: none; }
+.cafe-cover { position: relative; margin: 0; border: 1px solid #83928d; border-radius: 5px 36px 5px 5px; overflow: hidden; }
+.cafe-cover img { display: block; width: 100%; height: clamp(220px,23vw,326px); object-fit: cover; }
+.cafe-cover figcaption { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; color: #f6ede1; border-top: 1px solid #ffffff36; background: #1d3034; padding: 10px 16px; }
+.cafe-cover figcaption span { font: 1.55rem Georgia,serif; }
+.cafe-cover small { color: #d2dcda; font-size: .84rem; }
+@media (max-width: 980px) {
+  .site-header { display: flex; justify-content: space-between; gap: 10px; border-radius: 16px; }
+  .site-header > nav { display: none; }
+  .nav-cta { margin-left: auto; }
+  .phone-menu { display: block; }
+  .phone-menu summary { display: flex; align-items: center; gap: 6px; cursor: pointer; list-style: none; padding: 8px; min-height: 42px; }
+  .phone-menu summary::-webkit-details-marker { display: none; }
+  .site-header .phone-menu nav { position: absolute; inset: calc(100% + 3px) 0 auto; display: grid; grid-template-columns: 1fr 1fr; padding: 8px; margin: 0; border-radius: 12px; border: 1px solid #62747d; background: #142532; max-height: 70vh; overflow: auto; }
+  .site-header .phone-menu nav a { display: flex; align-items: center; font-size: .94rem; min-height: 44px; }
+}
+@media (max-width: 720px) {
+  .cafe-hero { padding: 106px 18px 32px; }
+  .cafe-hero .hero-inner { grid-template-columns: 1fr; gap: 22px; }
+  .cafe-hero .hero-actions { flex-direction: row; align-items: center; gap: 9px; }
+  .cafe-hero .button { font-size: .91rem; padding-inline: 14px; }
+  .cafe-cover img { height: clamp(132px,32vw,198px); }
+  .cafe-cover figcaption { padding: 8px 12px; }
+}

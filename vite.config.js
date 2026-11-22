@@ -6,7 +6,7 @@ export default defineConfig({
   base: "./",
   build: {
     rollupOptions: {
-      input: "app/index.html",
+      input: ["app/index.html", "day-with-atlasade/index.html"],
     },
   },
   plugins: [react()],

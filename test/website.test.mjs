@@ -29,9 +29,9 @@ test("the original Vite and sync build stages run before static rendering", asyn
 test("raw homepage has useful content, limitations, and JavaScript-free navigation", async () => {
   const html = await read("index.html");
   const text = visibleText(html);
-  for (const phrase of ["A connected vision", "Sales Register", "Inventory", "Privacy Policy", "Alpha product overview", "commercially released"]) assert.ok(text.includes(phrase), phrase);
+  for (const phrase of ["One day. One business.", "Sales Register", "Inventory", "Privacy Policy", "Alpha product overview", "commercially released"]) assert.ok(text.includes(phrase), phrase);
   assert.match(html, /<nav aria-label="Primary navigation">[\s\S]*?<a href="#home"/);
-  assert.match(html, /<a class="button primary" href="#alpha">/);
+  assert.match(html, /<a class="button primary" href="\/day-with-atlasade\/">/);
   assert.match(html, /<details>/);
   assert.match(html, /<summary>Inventory<\/summary>/);
   assert.ok(!html.includes('id="root"></div>'));
@@ -99,14 +99,14 @@ test("every canonical page has substantial readable HTML, unique metadata, and m
     for (const type of ["Organization", "WebSite"]) assert.ok(schema["@graph"].some((node) => node["@type"] === type));
     assert.ok(!/"(offers|price|aggregateRating|review|downloadUrl|softwareVersion)"/.test(JSON.stringify(schema)));
     if (path.startsWith("product/")) assert.ok(schema["@graph"].some((node) => node["@type"] === "SoftwareApplication"));
-    if (path !== "index.html") assert.ok(!html.includes('type="module"'), path);
+    if (path !== "index.html") assert.doesNotMatch(html, /type="module"|rel="modulepreload"/, path);
   }
   assert.equal(titles.size, pageFiles.length);
   assert.equal(descriptions.size, pageFiles.length);
 });
 
 test("all generated internal links, fragments, stylesheets, scripts, and images resolve", async () => {
-  const files = [...pageFiles, "app/index.html", "404.html"];
+  const files = [...pageFiles, "day-with-atlasade/index.html", "app/index.html", "404.html"];
   for (const path of files) {
     const html = await read(path);
     const current = path === "index.html" ? "/" : `/${path.replace(/index.html$/, "")}`;
@@ -128,7 +128,7 @@ test("all generated internal links, fragments, stylesheets, scripts, and images 
 });
 
 test("preview exclusion never changes the production artifact", async () => {
-  for (const path of [...pageFiles, "app/index.html"]) {
+  for (const path of [...pageFiles, "day-with-atlasade/index.html", "app/index.html"]) {
     assert.doesNotMatch(await read(path), /name="robots" content="noindex"/);
     assert.match(await read(path, "dist-preview"), /name="robots" content="noindex"/);
   }
@@ -159,7 +159,7 @@ test("robots permits search and user retrieval while opting GPTBot out; sitemap 
   assert.ok(robots.includes(`Sitemap: ${site}/sitemap.xml`));
   const sitemap = await read("sitemap.xml");
   const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-  assert.deepEqual(urls, [`${site}/`, ...pages.map((page) => `${site}${page.path}`)]);
+  assert.deepEqual(urls, [`${site}/`, `${site}/day-with-atlasade/`, ...pages.map((page) => `${site}${page.path}`)]);
   assert.ok(!sitemap.includes("workers.dev") && !sitemap.includes("/app/") && !sitemap.includes("404"));
 });
 
@@ -221,19 +221,20 @@ async function localAssets(variant, check) {
 
 test("actual Workers asset HTTP behavior: production pages, redirects, assets, and genuine 404s", { timeout: 45000 }, async () => {
   await localAssets("dist", async (base) => {
-    for (const path of ["/", ...pages.map((page) => page.path), "/app/", "/robots.txt", "/sitemap.xml", "/atlasade-brand-reference.png"]) {
+    for (const path of ["/", "/day-with-atlasade/", ...pages.map((page) => page.path), "/app/", "/robots.txt", "/sitemap.xml", "/atlasade-brand-reference.png"]) {
       const response = await fetch(base + path);
       assert.equal(response.status, 200, path);
       assert.notEqual(response.headers.get("x-robots-tag"), "noindex", path);
-      if (path.endsWith("/")) assert.match(await response.text(), /Alpha product overview/);
+      if (path === "/day-with-atlasade/") assert.match(await response.text(), /Read the café walkthrough/);
+      else if (path.endsWith("/")) assert.match(await response.text(), /Alpha product overview/);
     }
     const redirect = await fetch(base + "/product", { redirect: "manual" });
     assert.ok([301, 307, 308].includes(redirect.status));
     assert.equal(new URL(redirect.headers.get("location"), base).pathname, "/product/");
-    for (const path of ["/not-a-real-page", "/product/not-a-real-page", "/assets/missing.js", "/src/App.jsx", "/docs/website-readiness.md"]) {
+    for (const path of ["/not-a-real-page", "/day-with-atlasade/missing", "/product/not-a-real-page", "/assets/missing.js", "/src/App.jsx", "/docs/website-readiness.md"]) {
       const response = await fetch(base + path);
       assert.equal(response.status, 404, path);
-      assert.ok(!(await response.text()).includes("A connected vision"));
+      assert.ok(!(await response.text()).includes("Try the café day"));
     }
     const head = await fetch(base + "/product/", { method: "HEAD" });
     assert.equal(head.status, 200);
@@ -248,7 +249,7 @@ test("actual Workers asset HTTP behavior: production pages, redirects, assets, a
 
 test("actual preview HTTP behavior: noindex and crawler-readable content", { timeout: 45000 }, async () => {
   await localAssets("dist-preview", async (base) => {
-    for (const path of ["/", ...pages.map((page) => page.path), "/app/"]) {
+    for (const path of ["/", "/day-with-atlasade/", ...pages.map((page) => page.path), "/app/"]) {
       const response = await fetch(base + path, { headers: { "User-Agent": "OAI-SearchBot/1.4" } });
       assert.equal(response.status, 200, path);
       assert.equal(response.headers.get("x-robots-tag"), "noindex", path);
@@ -265,8 +266,8 @@ test("Vite local preview also keeps unknown pages as 404", { timeout: 15000 }, a
   const port = await unusedPort();
   const server = await preview({ root, preview: { host: "127.0.0.1", port, strictPort: true, open: false } });
   try {
-    for (const path of ["/", "/product/", "/faq/"]) assert.equal((await fetch(`http://127.0.0.1:${port}${path}`)).status, 200, path);
-    for (const path of ["/not-a-real-page", "/product/not-a-real-page", "/assets/missing.js"]) assert.equal((await fetch(`http://127.0.0.1:${port}${path}`)).status, 404, path);
+    for (const path of ["/", "/day-with-atlasade/", "/product/", "/faq/"]) assert.equal((await fetch(`http://127.0.0.1:${port}${path}`)).status, 200, path);
+    for (const path of ["/not-a-real-page", "/day-with-atlasade/missing", "/product/not-a-real-page", "/assets/missing.js"]) assert.equal((await fetch(`http://127.0.0.1:${port}${path}`)).status, 404, path);
   } finally {
     server.httpServer.closeAllConnections();
     await new Promise((resolve) => server.httpServer.close(resolve));
@@ -287,4 +288,17 @@ test("security-patched tooling stays outside the production dependency set", asy
     assert.ok(firstDifference === -1 || version[firstDifference] > minimum[firstDifference], `${name} below patched floor ${floor}`);
   }
   console.info(`Host runtime boundary: Node ${process.version}; bundled Undici ${process.versions.undici}; tests use controlled loopback HTTP.`);
+});
+
+test("the dedicated café HTML serves the six-chapter walkthrough before scripts run", async () => {
+  const html = await read("day-with-atlasade/index.html");
+  assert.match(html, /<title>A Day With Atlasade/);
+  assert.equal(canonical(html), site + "/day-with-atlasade/");
+  assert.match(html, /name="description"/);
+  for (const chapter of ["Begin the day", "The first customer", "Customer recognition", "Checkout", "Follow the sale", "Close the day"]) {
+    assert.ok(visibleText(html).includes(chapter), chapter);
+  }
+  assert.ok(visibleText(html).includes("Simulated cash"));
+  assert.match(html, /type="module"/);
+  assert.ok((await read("index.html")).includes('href="/day-with-atlasade/"'));
 });

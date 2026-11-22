@@ -1,7 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { MotionConfig, motion, useScroll, useTransform } from "framer-motion";
+import { MotionConfig, motion } from "framer-motion";
 import {
   ArrowRight,
+  Coffee,
+  Menu,
   BarChart3,
   Boxes,
   BrainCircuit,
@@ -127,184 +129,70 @@ function BrandMark() {
 }
 
 function Navigation() {
+  const links = navItems.map(([label, id]) => <a key={id} href={"#" + id}>{label}</a>);
   return (
     <header className="site-header">
       <BrandMark />
-      <nav aria-label="Primary navigation">
-        {navItems.map(([label, id]) => (
-          <a key={id} href={`#${id}`}>
-            {label}
-          </a>
-        ))}
-      </nav>
-      <a className="nav-cta" href="#alpha">
-        Ask about access
-      </a>
+      <nav aria-label="Primary navigation">{links}</nav>
+      <a className="nav-cta" href="#alpha">Ask about access</a>
+      <details className="phone-menu" onKeyDown={event => {
+        if (event.key === "Escape") {
+          event.currentTarget.open = false;
+          event.currentTarget.querySelector("summary").focus();
+        }
+      }}>
+        <summary><Menu size={19} aria-hidden="true" />Menu</summary>
+        <nav aria-label="Site sections" onClick={event => {
+          if (event.target.closest("a")) {
+            event.currentTarget.closest("details").open = false;
+            const section = document.getElementById(event.target.closest("a").hash.slice(1));
+            if (section) { section.tabIndex = -1; section.focus({ preventScroll: true }); }
+          }
+        }}>{links}</nav>
+      </details>
     </header>
   );
 }
 
-function OperationalMap({ compact = false }) {
-  const nodes = compact
-    ? [
-        { x: 18, y: 50, label: "Sales", color: "#2bb3ff" },
-        { x: 42, y: 24, label: "CRM", color: "#2de2d2" },
-        { x: 48, y: 72, label: "Stock", color: "#97ff4f" },
-        { x: 74, y: 38, label: "Pay", color: "#ff9b4a" },
-        { x: 82, y: 70, label: "Insight", color: "#b16dff" },
-      ]
-    : [
-        { x: 12, y: 48, label: "Customer", color: "#2de2d2" },
-        { x: 31, y: 23, label: "Register", color: "#2bb3ff" },
-        { x: 38, y: 69, label: "Inventory", color: "#97ff4f" },
-        { x: 58, y: 42, label: "Payment", color: "#ff9b4a" },
-        { x: 74, y: 20, label: "Reporting", color: "#b16dff" },
-        { x: 82, y: 63, label: "Recovery", color: "#2bb3ff" },
-      ];
-
-  const connections =
-    nodes.length === 5
-      ? [
-          [0, 1],
-          [0, 2],
-          [1, 3],
-          [2, 4],
-          [3, 4],
-        ]
-      : [
-          [0, 1],
-          [0, 2],
-          [1, 3],
-          [2, 3],
-          [3, 4],
-          [3, 5],
-          [4, 5],
-        ];
-
-  return (
-    <motion.div
-      className={`map-shell ${compact ? "compact" : ""}`}
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.35 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-    >
-      <div className="map-glow" aria-hidden="true" />
-      <svg viewBox="0 0 100 100" className="map-svg" role="img" aria-label="Animated business map">
-        <defs>
-          <filter id={compact ? "softGlowCompact" : "softGlow"}>
-            <feGaussianBlur stdDeviation="1.2" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
-        {connections.map(([from, to], index) => {
-          const a = nodes[from];
-          const b = nodes[to];
-          return (
-            <g key={`${from}-${to}`}>
-              <line className="map-line" x1={a.x} y1={a.y} x2={b.x} y2={b.y} />
-              <motion.line
-                className="map-pulse"
-                x1={a.x}
-                y1={a.y}
-                x2={b.x}
-                y2={b.y}
-                style={{ stroke: b.color }}
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={{ pathLength: [0, 1, 1], opacity: [0, 0.95, 0] }}
-                transition={{
-                  duration: 3.4,
-                  delay: index * 0.32,
-                  repeat: Infinity,
-                  repeatDelay: 1.1,
-                  ease: "easeInOut",
-                }}
-              />
-            </g>
-          );
-        })}
-        {nodes.map((node, index) => (
-          <g key={node.label} filter={`url(#${compact ? "softGlowCompact" : "softGlow"})`}>
-            <motion.circle
-              cx={node.x}
-              cy={node.y}
-              r="4.4"
-              fill="#07111f"
-              stroke={node.color}
-              strokeWidth="0.45"
-              animate={{ r: [4.2, 5.1, 4.2], opacity: [0.9, 1, 0.9] }}
-              transition={{
-                duration: 4,
-                delay: index * 0.25,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-            <circle cx={node.x} cy={node.y} r="1.1" fill={node.color} />
-          </g>
-        ))}
-      </svg>
-      <div className="map-labels" aria-hidden="true">
-        {nodes.map((node) => (
-          <span
-            key={node.label}
-            style={{ left: `${node.x}%`, top: `${node.y}%`, "--node-color": node.color }}
-          >
-            {node.label}
-          </span>
-        ))}
-      </div>
-    </motion.div>
-  );
+function OperationalMap() {
+  const nodes = [
+    { x: 18, y: 50, label: "Sales", color: "#2bb3ff" },
+    { x: 42, y: 24, label: "CRM", color: "#2de2d2" },
+    { x: 48, y: 72, label: "Stock", color: "#97ff4f" },
+    { x: 74, y: 38, label: "Pay", color: "#ff9b4a" },
+    { x: 82, y: 70, label: "Insight", color: "#b16dff" },
+  ];
+  return <div className="map-shell compact">
+    <div className="map-glow" aria-hidden="true" />
+    <svg viewBox="0 0 100 100" className="map-svg" role="img" aria-label="Sales connect to CRM and stock, then payment and insight">
+      {[[0,1],[0,2],[1,3],[2,4],[3,4]].map(([from,to]) =>
+        <line key={from + "-" + to} className="map-line" x1={nodes[from].x} y1={nodes[from].y} x2={nodes[to].x} y2={nodes[to].y}/>)}
+      {nodes.map(node => <g key={node.label}><circle cx={node.x} cy={node.y} r="4.4" fill="#07111f" stroke={node.color} strokeWidth=".45"/>
+        <circle cx={node.x} cy={node.y} r="1.1" fill={node.color}/></g>)}
+    </svg>
+    <div className="map-labels" aria-hidden="true">{nodes.map(node =>
+      <span key={node.label} style={{left: node.x + "%", top: node.y + "%", "--node-color": node.color}}>{node.label}</span>)}</div>
+  </div>;
 }
 
 function Hero() {
-  const { scrollYProgress } = useScroll();
-  const y = useTransform(scrollYProgress, [0, 0.25], [0, 90]);
-  const opacity = useTransform(scrollYProgress, [0, 0.22], [1, 0.2]);
-
-  return (
-    <section className="hero section" id="home">
-      <motion.div className="hero-bg-orbit" style={{ y, opacity }} aria-hidden="true" />
-      <div className="hero-inner">
-        <motion.div
-          className="hero-copy"
-          initial={{ opacity: 0, y: 26 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.85, ease: "easeOut" }}
-        >
-          <div className="brand-panel">
-            <BrandMark />
-            <span>Business System For Merchants</span>
-          </div>
-          <p className="eyebrow">In development for small merchants</p>
-          <h1>A connected vision for everyday merchant work.</h1>
-          <p className="hero-brand-line">The goal: understand what sold, what needs attention, and where the day is going.</p>
-          <p className="hero-subtitle">
-            AtlasADE is an early ERP Lite project for small merchants, solo owners, and lean
-            teams. The vision connects sales, customers, inventory, payments, reporting, content
-            ideas, and daily work. Controlled-beta demonstrations cover selected workflows;
-            this overview does not establish a commercially available product or feature set.
-          </p>
-          <div className="hero-actions">
-            <a className="button primary" href="#alpha">
-              Ask About Alpha Access <ArrowRight size={18} aria-hidden="true" />
-            </a>
-            <a className="button secondary" href="#merchant-types">
-              Explore Intended Business Models
-            </a>
-          </div>
-        </motion.div>
-        <OperationalMap />
+  return <section className="hero section cafe-hero" id="home">
+    <div className="hero-inner">
+      <div className="hero-copy">
+        <p className="eyebrow">A Day With Atlasade</p>
+        <h1>One day. One business. <em>Everything connected.</em></h1>
+        <p className="hero-subtitle">Step behind the counter at River &amp; Oak. Discover how Atlasade brings everyday business operations together, one café sale at a time.</p>
+        <div className="hero-actions">
+          <a className="button primary" href="/day-with-atlasade/"><Coffee size={18} aria-hidden="true" />Try the café day</a>
+          <a className="button secondary" href="#atlas">Explore the product map</a>
+        </div>
       </div>
-      <div className="hero-floor" aria-hidden="true">
-        <span />
-      </div>
-    </section>
-  );
+      <figure className="cafe-cover">
+        <img src="/images/cafe-morning.webp" width="900" height="600" alt="Coffee and a hand-cut oat bar on the sunlit café counter" />
+        <figcaption><span>River &amp; Oak</span><small>Interactive café story</small></figcaption>
+      </figure>
+    </div>
+  </section>;
 }
 
 function MerchantTypesSection() {
@@ -394,7 +282,6 @@ function InteractiveAtlasSection() {
                   key={module.id}
                   style={{ "--accent": accent }}
                   aria-pressed={isSelected}
-                  aria-selected={isSelected}
                   aria-label={`${module.name}. ${module.tagline}. Select to see what this area touches and what it helps the owner understand.`}
                   onClick={() => setSelectedId(module.id)}
                   initial={{ opacity: 0, y: 18 }}
@@ -525,7 +412,7 @@ function ErpLiteSection() {
   return (
     <section className="section split-section" id="erp-lite">
       <div className="section-inner split-grid">
-        <OperationalMap compact />
+        <OperationalMap />
         <motion.div
           className="section-copy"
           initial={{ opacity: 0, y: 28 }}

@@ -8,7 +8,7 @@
     "build": "vite build && node scripts/sync-pages-root.mjs && node scripts/build-public.mjs",
     "preview": "vite preview --host 127.0.0.1",
     "build:preview": "npm run build && node scripts/prepare-preview.mjs",
-    "test": "node --test test/*.test.mjs",
+    "test": "node --experimental-strip-types --test test/*.test.mjs",
     "check": "npm run build:preview && npm test"
   },
   "dependencies": {

@@ -45,6 +45,11 @@ function metadata(html, page) {
   </head>`);
 }
 
+function withoutClientScripts(html) {
+  return html.replace(/\s*<script type="module"[^>]*><\/script>/g, "")
+    .replace(/\s*<link rel="modulepreload"[^>]*>/g, "");
+}
+
 const home = metadata(template).replace('<div id="root"></div>', () => `<div id="root">${renderHome()}</div>`);
 if (!home.includes('<main id="main">')) throw new Error("Static homepage rendering failed");
 await writeFile(join(dist, "index.html"), home);
@@ -53,16 +58,16 @@ await writeFile(join(dist, "app/index.html"), home);
 for (const page of pages) {
   let html = metadata(template, page).replace('<div id="root"></div>', () => `<div id="root">${renderPage(page)}</div>`);
   // Product reference pages are plain HTML, styled by the existing stylesheet.
-  html = html.replace(/\s*<script type="module"[^>]*><\/script>/g, "");
+  html = withoutClientScripts(html);
   const directory = join(dist, page.path.slice(1));
   await mkdir(directory, { recursive: true });
   await writeFile(join(directory, "index.html"), html);
 }
 const notFound = { path: "/404.html", title: "Page not found | AtlasADE", heading: "Page not found", description: "The requested AtlasADE page could not be found. Return to the product overview or contact the team.", sections: [] };
 let errorHtml = metadata(template, notFound).replace('<div id="root"></div>', () => `<div id="root">${renderPage(notFound)}</div>`);
-errorHtml = errorHtml.replace(/\s*<script type="module"[^>]*><\/script>/g, "").replace("</head>", '<meta name="robots" content="noindex" /></head>');
+errorHtml = withoutClientScripts(errorHtml).replace("</head>", '<meta name="robots" content="noindex" /></head>');
 await writeFile(join(dist, "404.html"), errorHtml);
-const paths = ["/", ...pages.map((page) => page.path)];
+const paths = ["/", "/day-with-atlasade/", ...pages.map((page) => page.path)];
 await writeFile(join(dist, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${paths.map((path) => `<url><loc>${site}${path}</loc></url>`).join("")}</urlset>\n`);
 // Keep the generated root entry aligned with the existing Pages compatibility copy.
 await writeFile(join(root, "index.html"), home);
