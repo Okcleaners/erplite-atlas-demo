@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect, useReducer, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { Banknote, BookOpen, Check, CircleCheck, Coffee, Cookie, GitBranch, MapPin, Plus, ReceiptText, RotateCcw, Search, Store, Sunrise, Sunset, UsersRound, Wallet } from "lucide-react";
+import { Banknote, Check, CircleCheck, Coffee, Cookie, GitBranch, MapPin, Plus, ReceiptText, RotateCcw, Search, Store, Sunrise, Sunset, UsersRound, Wallet } from "lucide-react";
 import { basketReady, cafe, drawer, money, parseCount, startDay, stock, totals, transition } from "./scenario.ts";
 
 const chapters = [
@@ -8,7 +8,7 @@ const chapters = [
   { title: "The first customer", short: "Build a ticket", time: "7:12 AM", icon: Coffee, line: "One house coffee and one oat bar, please. Add each item to the ticket." },
   { title: "Customer recognition", short: "Find a regular", time: "7:13 AM", icon: UsersRound, line: "It’s Sam, a River regular. Find their profile and put today’s visit on the same ticket." },
   { title: "Checkout", short: "Take payment", time: "7:14 AM", icon: Wallet, line: "Sam hands you a ten. Take the cash and give back the change." },
-  { title: "Follow the sale", short: "Follow the sale", time: "7:15 AM", icon: GitBranch, line: "Look at the receipt from three seats in the business. Each view follows the same sale." },
+  { title: "Follow the sale", short: "Follow the sale", time: "7:15 AM", icon: GitBranch },
   { title: "Close the day", short: "Count the drawer", time: "5:00 PM", icon: Sunset, line: "The chairs are up. Compare the cash in River’s drawer with the day’s recorded movements." },
 ];
 
@@ -32,7 +32,7 @@ function Opening({ day, dispatch, next }) {
   </>;
 }
 function TicketLines({ day, record }) {
-  return <div className="ticket-lines">{record.lines.map(line => <div className="amount" key={line.productId}>
+  return <div className="ticket-lines">{record.lines.map(line => <div className="amount" key={line.productId} data-moved={record.stockMovements?.some(move => move.productId === line.productId) || undefined}>
     <span>{line.quantity} × {day.scenario.products.find(p => p.id === line.productId).name}</span>
     <b>{money(line.unitPrice * line.quantity)}</b></div>)}</div>;
 }
@@ -79,8 +79,8 @@ function Receipt({ day }) {
     <header><span className="slip-title"><ReceiptText size={16} />Receipt {r.id}</span><strong>{day.scenario.business}</strong>
       <span>{location.name} · {day.scenario.register}</span></header>
     <p className="receipt-person">Customer <b>{customer.name}</b></p>
-    <TicketLines day={day} record={r} /><Amount label="Subtotal" value={r.subtotal} /><Amount label="Illustrative tax" value={r.tax} />
-    <Amount label="Paid in cash" value={r.total} strong /><Amount label="Tendered" value={r.tendered} /><Amount label="Change returned" value={r.change} />
+    <TicketLines day={day} record={r} /><div className="receipt-totals"><Amount label="Subtotal" value={r.subtotal} /><Amount label="Illustrative tax" value={r.tax} />
+    <Amount label="Paid in cash" value={r.total} strong /></div><Amount label="Tendered" value={r.tendered} /><Amount label="Change returned" value={r.change} />
   </section>;
 }
 function Checkout({ day, dispatch, next }) {
@@ -95,36 +95,57 @@ function Checkout({ day, dispatch, next }) {
     <Primary onClick={() => dispatch({ type: "pay", tendered: day.scenario.tendered })}><Banknote size={18} />Complete simulated sale</Primary>
   </>;
 }
-const perspectives = { Cashier: ReceiptText, Operator: Store, Finance: BookOpen };
-function Perspectives({ day, lens, setLens, next }) {
-  const receipt = day.receipt;
-  const location = day.scenario.locations.find(place => place.id === receipt.locationId);
-  const retained = drawer(day).net;
-  const customer = day.scenario.customers.find(person => person.id === receipt.customerId);
-  const oatBars = stock(day, receipt.locationId, "oat-bar");
+function Trace({ label, id, active, onToggle, children }) {
   return <>
-    <div className="sale-id"><span><GitBranch size={17} />Receipt {receipt.id} · {location.name}</span><strong>{money(receipt.total)} paid</strong></div>
-    <div className="lenses" role="group" aria-label="Sale perspective">{Object.entries(perspectives).map(([name, Icon]) =>
-      <button type="button" key={name} aria-pressed={name === lens} onClick={() => setLens(name)}><Icon size={16} />{name}</button>)}</div>
-    <div className="lens-panel" key={lens} role="region" aria-label={lens + " perspective"}>
-      {lens === "Cashier" && <Receipt day={day} />}
-      {lens === "Operator" && <><h3>Oat bars by location</h3>
-        <table><thead><tr><th scope="col">Store</th><th scope="col">Before</th><th scope="col">After</th><th scope="col">Change</th></tr></thead><tbody>
-          {day.scenario.locations.map(place => { const count = stock(day, place.id, "oat-bar"); return <tr key={place.id}><th scope="row">{place.name}</th><td>{count.before}</td><td><strong>{count.after}</strong></td><td><span className={count.before !== count.after ? "stock-delta" : "same-stock"}>{count.before !== count.after ? (count.before - count.after) + " sold" : "No sale"}</span></td></tr>; })}
-        </tbody></table><p className="hint">One oat bar left River with this ticket. Hill kept its original stock.</p></>}
-      {lens === "Finance" && <><h3>Where the cash went</h3><div className="money-split" aria-hidden="true">
-          <span style={{ width: (receipt.subtotal / receipt.total * 100) + "%" }} /></div><Amount label="Sales excluding tax" value={receipt.subtotal} />
-        <Amount label="Tax collected" value={receipt.tax} /><Amount label="Cash retained" value={retained} strong />
-        <p className="hint">{money(receipt.tendered)} received less {money(receipt.change)} in change leaves {money(retained)} in the drawer.</p></>}
+    <button className="trace-button" type="button" aria-expanded={active} aria-controls={id} onClick={onToggle}>
+      {label}<GitBranch size={15} aria-hidden="true" />
+    </button>
+    <p className="trace-detail" id={id} hidden={!active}>{children}</p>
+  </>;
+}
+
+function ConnectedSale({ day, lens, setLens, next }) {
+  const { receipt, scenario } = day;
+  const location = scenario.locations.find(place => place.id === receipt.locationId);
+  const movement = receipt.stockMovements[0];
+  const product = scenario.products.find(item => item.id === movement.productId);
+  const itemLine = receipt.lines.find(line => line.productId === product.id);
+  const inventory = stock(day, location.id, product.id);
+  const retained = drawer(day).net;
+  const ref = "Receipt #" + receipt.id;
+  const toggle = name => setLens(lens === name ? "Cashier" : name);
+  return <>
+    <p className="intro-line">{ref} took {location.name}’s {product.name.toLowerCase()} stock from {inventory.before} to {inventory.after} and added {money(retained)} to its drawer.</p>
+    <div className="sale-map" data-lens={lens}>
+      <div className="sale-desk">
+        <div className="sale-caption"><span>Cashier</span><span>✓ Paid</span></div>
+        <Receipt day={day} />
+      </div>
+      <div className="sale-effects">
+        <section className="effect inventory" aria-labelledby="stock-heading">
+          <div className="sale-caption"><span>Operator</span><span>{ref}</span></div>
+          <h3 id="stock-heading">{product.name} stock at {location.name}</h3>
+          <p className="sale-reading">{inventory.before} <span aria-hidden="true">→</span><span className="sr">to</span> <strong>{inventory.after}</strong></p>
+          {scenario.locations.filter(place => place.id !== location.id).map(place => {
+            const balance = stock(day, place.id, product.id);
+            return balance && <p key={place.id}>{place.name} stays at {balance.after}.</p>;
+          })}
+          <Trace label="See inventory change" id="stock-source" active={lens === "Operator"} onToggle={() => toggle("Operator")}>
+            {ref} · {itemLine.quantity} × {product.name} at {location.name} · {money(itemLine.unitPrice * itemLine.quantity)}
+          </Trace>
+        </section>
+        <section className="effect finance" aria-labelledby="finance-heading">
+          <div className="sale-caption"><span>Finance</span><span>{ref}</span></div>
+          <h3 id="finance-heading">Cash retained</h3>
+          <p className="sale-reading"><strong>{money(retained)}</strong></p>
+          <p>{money(receipt.subtotal)} sales excluding tax + {money(receipt.tax)} tax.</p>
+          <Trace label="See where the money went" id="cash-source" active={lens === "Finance"} onToggle={() => toggle("Finance")}>
+            {ref} · {money(receipt.tendered)} tendered less {money(receipt.change)} change leaves {money(retained)} in the drawer.
+          </Trace>
+        </section>
+      </div>
     </div>
-    <details className="connections"><summary>See the bigger picture</summary>
-      <p>Receipt {receipt.id} connects three business records.</p>
-      <ul>
-        <li><UsersRound size={16} /><span><b>Customer</b> {customer.name}’s visit is linked to this receipt.</span></li>
-        <li><Store size={16} /><span><b>Stock</b> {location.name} now has {oatBars.after} of its original {oatBars.before} oat bars.</span></li>
-        <li><Wallet size={16} /><span><b>Drawer</b> {money(retained)} from this ticket goes into the closing count.</span></li>
-      </ul>
-    </details><Primary onClick={next}>Go to the closing count</Primary>
+    <Primary onClick={next}>Go to the closing count</Primary>
   </>;
 }
 function Closing({ day, dispatch, replay, input, setInput }) {
@@ -225,13 +246,13 @@ function Player() {
       <div className="compact-progress" aria-hidden="true">{chapters.map((item, i) => <span key={item.short} className={i <= chapter ? "filled" : ""} />)}</div>
       <div className="panel-body">
         <div className="chapter-meta"><span>Chapter {chapter + 1} of 6</span><span>{current.time}</span></div>
-        <h2 ref={heading} tabIndex="-1" id="chapter-title">{current.title}</h2><p className="intro-line">{day.close && chapter === 5 ? "Here’s how the day balanced at the River counter." : current.line}</p>
+        <h2 ref={heading} tabIndex="-1" id="chapter-title">{current.title}</h2>{current.line && <p className="intro-line">{day.close && chapter === 5 ? "Here’s how the day balanced at the River counter." : current.line}</p>}
         <div key={chapter} className="task">
           {chapter === 0 && <Opening {...{ day, dispatch, next }} />}
           {chapter === 1 && <Basket {...{ day, dispatch, next }} />}
           {chapter === 2 && <Customer {...{ day, dispatch, next }} />}
           {chapter === 3 && <Checkout {...{ day, dispatch, next }} />}
-          {chapter === 4 && <Perspectives {...{ day, lens, setLens, next }} />}
+          {chapter === 4 && <ConnectedSale {...{ day, lens, setLens, next }} />}
           {chapter === 5 && <Closing {...{ day, dispatch, replay }} input={countDraft ?? (drawer(day).expected / 100).toFixed(2)} setInput={setCountDraft} />}
         </div>
       </div>

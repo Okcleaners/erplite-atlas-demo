@@ -52,9 +52,6 @@ def exercise(browser, base, output, width, height, keyboard=False, reduced=False
         expect(title).to_be_visible()
         return title
 
-    def region():
-        return page.locator(".lens-panel")
-
     page.goto(base + "/", wait_until="load")
     expect(page.locator("#atlas")).to_have_attribute("data-enhanced", "true", timeout=20000)
     invitation = page.get_by_role("link", name="Try the café day", exact=True)
@@ -127,24 +124,48 @@ def exercise(browser, base, output, width, height, keyboard=False, reduced=False
     shot("04-receipt")
     action("Follow this sale")
     chapter("Follow the sale")
-    expected_receipt = region().inner_text()
-    shot("05-cashier")
-    for name in ["Operator", "Finance", "Cashier", "Operator"]:
-        action(name)
-        expect(button(name)).to_be_focused()
-        expect(page.locator(".sale-id")).to_contain_text("Receipt 104 · River")
-        expect(page.locator(".sale-id")).to_contain_text("$8.40")
-        if name == "Operator":
-            rows = page.locator(".lens-panel tbody tr").all_inner_texts()
-            assert [r.split() for r in rows] == [["River","12","11","1","sold"],["Hill","9","9","No","sale"]], rows
-        elif name == "Finance":
-            assert region().locator(".amount b").all_inner_texts() == ["$8.00","$0.40","$8.40"]
-        else:
-            assert region().inner_text() == expected_receipt
-        shot("05-" + name.lower())
-    activate(page.get_by_text("See the bigger picture", exact=True))
-    expect(page.locator(".connections")).to_contain_text("River now has 11 of its original 12 oat bars.")
-    shot("05-connections")
+    board = page.locator(".sale-map")
+    receipt = board.get_by_role("region", name="Completed receipt")
+    expected_receipt = receipt.inner_text()
+    assert receipt.locator(".amount b").all_text_contents() == [
+        "$5.00", "$3.00", "$8.00", "$0.40", "$8.40", "$10.00", "$1.60"]
+    expect(receipt).to_contain_text("Sam Reed")
+    expect(board.locator(".inventory .sale-reading")).to_have_text("12 →to 11")
+    expect(board.locator(".inventory")).to_contain_text("Hill stays at 9.")
+    expect(board.locator(".finance")).to_contain_text("$8.00 sales excluding tax + $0.40 tax")
+    expect(board.locator(".finance .sale-reading")).to_have_text("$8.40")
+    shot("05-connected")
+    stock_label, cash_label = "See inventory change", "See where the money went"
+    for label, source in [(stock_label, "stock"), (cash_label, "cash"), (stock_label, "stock")]:
+        action(label)
+        expect(button(label)).to_be_focused()
+        expect(button(label)).to_have_attribute("aria-expanded", "true")
+        detail = board.locator("#" + source + "-source")
+        expect(detail).to_contain_text("Receipt #104")
+        expect(detail).to_be_visible()
+        expect(detail).to_contain_text("1 × Oat bar at River · $3.00" if source == "stock" else "$10.00 tendered less $1.60 change leaves $8.40")
+        expect(board.locator("button[aria-expanded=true]")).to_have_count(1)
+        assert receipt.inner_text() == expected_receipt
+        if reduced:
+            assert detail.evaluate("e => getComputedStyle(e.closest('section'),'::before').animationName") == "none"
+        shot("05-" + source)
+    if width == 390:
+        page.evaluate("""() => {
+          window.tracePaints = [];
+          document.addEventListener("click", event => {
+            if (!event.target.closest(".trace-button")) return;
+            const start = event.timeStamp;
+            requestAnimationFrame(() => requestAnimationFrame(() => window.tracePaints.push(performance.now() - start)));
+          }, true);
+        }""")
+        for i in range(44):
+            button(cash_label if i % 2 == 0 else stock_label).click()
+            page.wait_for_function("n => window.tracePaints.length === n", arg=i+1)
+        samples = sorted(page.evaluate("window.tracePaints.slice(4)"))
+        print(f"40 trace clicks, unthrottled 390px, click to second frame p95 {samples[37]:.1f} ms", flush=True)
+    action(stock_label)
+    expect(board.locator("#stock-source")).to_be_hidden()
+    action(stock_label)
     if not keyboard:
         page.go_back()
         chapter("Checkout")
@@ -157,7 +178,8 @@ def exercise(browser, base, output, width, height, keyboard=False, reduced=False
         choose.select_option("3")
         expect(button("Complete simulated sale")).to_have_count(0)
         choose.select_option("4")
-        expect(button("Operator")).to_have_attribute("aria-pressed", "true")
+        expect(button(stock_label)).to_have_attribute("aria-expanded", "true")
+        assert receipt.inner_text() == expected_receipt
     action("Go to the closing count")
     chapter("Close the day")
     counted = page.get_by_role("textbox", name="Counted cash (USD)")
