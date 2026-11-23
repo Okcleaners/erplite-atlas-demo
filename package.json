@@ -9,7 +9,8 @@
     "preview": "vite preview --host 127.0.0.1",
     "build:preview": "npm run build && node scripts/prepare-preview.mjs",
     "test": "node --experimental-strip-types --test test/*.test.mjs",
-    "check": "npm run build:preview && npm test"
+    "check": "npm run build:preview && npm test",
+    "test:worker": "node --test mcp/qualification/worker.test.mjs"
   },
   "dependencies": {
     "react": "latest",
@@ -19,6 +20,8 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "latest",
+    "esbuild": "0.28.2",
+    "miniflare": "5.20261023.0-beta",
     "vite": "8.1.6",
     "wrangler": "4.153.0"
   }

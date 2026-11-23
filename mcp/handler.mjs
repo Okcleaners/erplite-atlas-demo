@@ -1,5 +1,5 @@
 import { readBoundedBody } from "../scripts/bounded-body.mjs";
-import { createMcpHandler, readRequestBody, isJsonContentType } from "@modelcontextprotocol/server";
+import { createMcpHandler, readRequestBody, isJsonContentType, isLegacyRequest, WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/server";
 import { knowledgeServer } from "./tools.mjs";
 
 const maxBody = 8 * 1024;
@@ -9,7 +9,7 @@ function failure(status, code, message, id = null) {
 }
 
 // expectedOrigin is supplied by the operator. Request headers never select an upstream.
-export function knowledgeHandler(reader, expectedOrigin) {
+export function knowledgeHandler(reader, expectedOrigin, { legacyJson = false } = {}) {
   const expectedHost = new URL(expectedOrigin).host;
   const sdk = createMcpHandler(() => knowledgeServer(reader), {
     responseMode: "auto", legacy: "stateless", maxRequestBodySize: maxBody, maxSubscriptions: 0
@@ -29,6 +29,17 @@ export function knowledgeHandler(reader, expectedOrigin) {
     try { message = JSON.parse(body.text); } catch { return failure(400, -32700, "Invalid JSON."); }
     if (!message || typeof message !== "object" || Array.isArray(message))
       return failure(400, -32600, "Expected one JSON-RPC message.");
+    if (legacyJson && await isLegacyRequest(request, message)) {
+      // Use a finite JSON response for stateless legacy exchanges on workerd.
+      const transport = new WebStandardStreamableHTTPServerTransport({ enableJsonResponse: true, sessionIdGenerator: undefined });
+      const server = knowledgeServer(reader);
+      try {
+        await server.connect(transport);
+        return await transport.handleRequest(request, { parsedBody: message });
+      } finally {
+        await server.close();
+      }
+    }
     return sdk.fetch(request, { parsedBody: message });
   }
   return {

@@ -8,7 +8,7 @@ const required = ["/agents/capabilities.json", "/agents/graph.json", "/agents/sc
 
 // This reader consumes only public HTTP resources. A returned view is one observation.
 // Call read() again for the next answer. Failures never return the last successful view.
-export function currentKnowledge(origin, { now = () => new Date() } = {}) {
+export function currentKnowledge(origin, { now = () => new Date(), fetchPublic = fetch, signal: deadline, expectedReleaseId, confirmCurrent } = {}) {
   let previous;
   let revisions = new Map();
   let bytesByDigest = new Map();
@@ -17,7 +17,7 @@ export function currentKnowledge(origin, { now = () => new Date() } = {}) {
 
   async function manifest(prior, signal) {
     const headers = prior?.etag ? { "If-None-Match": prior.etag } : {};
-    const response = await fetch(new URL(pointer, origin), { headers, cache: "no-cache", redirect: "error", signal });
+    const response = await fetchPublic(new URL(pointer, origin), { headers, cache: "no-cache", redirect: "error", signal });
     if (response.status === 304 && prior?.etag) {
       const validated = response.headers.get("etag");
       if (validated && validated !== prior.etag) throw new Error("Inconsistent 304 validator");
@@ -32,9 +32,10 @@ export function currentKnowledge(origin, { now = () => new Date() } = {}) {
   }
 
   async function refresh() {
-    const signal = AbortSignal.timeout(10000);
+    const signal = deadline ?? AbortSignal.timeout(10000);
     const first = await manifest(previous, signal);
     const { data } = first;
+    if (expectedReleaseId && data.releaseId !== expectedReleaseId) throw new Error("Release differs from checkpoint");
     if (retired.has(data.releaseId)) throw new Error("Previously superseded release");
     const nextCache = new Map();
     const documents = new Map();
@@ -42,7 +43,7 @@ export function currentKnowledge(origin, { now = () => new Date() } = {}) {
       if (artifact.bytes > 256 * 1024) throw new Error("Public artifact exceeds size limit");
       let bytes = bytesByDigest.get(artifact.sha256);
       if (!bytes) {
-        const response = await fetch(new URL(artifact.path, origin), { cache: "no-cache", redirect: "error", signal });
+        const response = await fetchPublic(new URL(artifact.path, origin), { cache: "no-cache", redirect: "error", signal });
         if (response.status !== 200) throw new Error("Missing current artifact: " + artifact.path);
         bytes = await readBoundedBody(response, 256 * 1024);
       }
@@ -73,6 +74,7 @@ export function currentKnowledge(origin, { now = () => new Date() } = {}) {
           (next.review.revision === prior.revision && prior.inactive && !next.notice))
         throw new Error("Regressed capability revision: " + slug);
     }
+    if (confirmCurrent) await confirmCurrent(data.releaseId, signal);
     if (previous && previous.data.releaseId !== data.releaseId) retired.add(previous.data.releaseId);
     revisions = new Map(capabilities.records.map(r => [r.slug, { revision: r.review.revision, inactive: Boolean(r.notice) }]));
     previous = last;

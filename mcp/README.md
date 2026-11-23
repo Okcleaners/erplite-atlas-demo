@@ -44,7 +44,11 @@ Each answer calls the 004B reader. It checks the manifest twice against a fixed 
 
 The adapter enforces an 8 KiB request limit, strict argument schemas, 16 concurrent requests, a 24 KiB logical result ceiling and a 64 KiB serialized response ceiling. The fixed upstream reader allows 16 KiB per manifest, 256 KiB per artifact, a 10-second overall acquisition deadline and no redirects. Responses use `Cache-Control: no-store`, including failures. A disconnected client can retain anything it previously downloaded. In-process rollback history starts when the reader starts. A consistent old origin on a cold start needs an independent trusted release floor to be rejected.
 
-## Future Cloudflare pilot
+## Cloudflare Worker qualification
+
+The 004D Worker uses an independent, append-only release checkpoint. Its local endpoint, verified runtime configuration, promotion procedure and hosted-preview controls are in the [Worker qualification guide](worker/README.md).
+
+## 004C pilot design
 
 Mount only the exact MCP path on a separate access-controlled preview. The adapter exposes a Web-standard fetch handler. Replace the local Node listener with a Worker entry and give it a trusted origin or read-only service binding to the existing public release. Pin a tested compatibility date supporting Buffer and Node crypto. Keep website build inputs, private Graphify, POS and account credentials outside that binding. [Workers runtime compatibility](https://developers.cloudflare.com/workers/runtime-apis/nodejs/)
 

@@ -1,4 +1,5 @@
 """Loopback qualification with the official Python MCP SDK and measured modern HTTP calls."""
+import argparse
 import asyncio
 import json
 import math
@@ -54,7 +55,7 @@ def benchmark():
             "io.modelcontextprotocol/clientInfo": {"name": "local-qualification", "version": "1"}}
     with httpx.Client(trust_env=False, timeout=15) as client:
         for name, args in CALLS.items():
-            times, sizes = [], []
+            times, sizes, worker_times = [], [], []
             for i in range(32):
                 body = {"jsonrpc": "2.0", "id": 1, "method": "tools/call",
                         "params": {"name": name, "arguments": args, "_meta": meta}}
@@ -67,10 +68,17 @@ def benchmark():
                 if i >= 2:
                     times.append(elapsed)
                     sizes.append(len(reply.content))
+                    if "server-timing" in reply.headers:
+                        worker_times.append(float(reply.headers["server-timing"].split("dur=")[1]))
             p95 = sorted(times)[math.ceil(.95 * len(times)) - 1]
+            if worker_times:
+                print(f"{name} Worker p50={median(worker_times):.2f}ms p95={sorted(worker_times)[math.ceil(.95 * len(worker_times)) - 1]:.2f}ms")
             print(f"{name:22} n={len(times)} p50={median(times):.2f}ms p95={p95:.2f}ms body={max(sizes)} bytes")
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--port", type=int, default=18748)
+    URL = f"http://127.0.0.1:{parser.parse_args().port}/mcp"
     asyncio.run(reference())
     benchmark()
