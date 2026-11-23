@@ -41,6 +41,13 @@ function update(ask = false) {
     p.textContent = value;
     help.append(p);
   }
+  const revision = document.createElement("p");
+  const releaseId = document.querySelector("[data-release]").dataset.release;
+  revision.dataset.release = releaseId;
+  revision.dataset.revision = record.review.revision;
+  revision.textContent = "Revision " + record.review.revision + " · Release " + releaseId.slice(9,21) +
+    " · Merchant availability " + record.availabilityStatus;
+  help.append(revision);
   for (const source of [...record.sources, ...(record.demo ? [record.demo] : [])]) help.append(link(source.label, source.href));
 }
 form.addEventListener("input", () => update());

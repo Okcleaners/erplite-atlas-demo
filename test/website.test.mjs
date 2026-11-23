@@ -160,7 +160,7 @@ test("robots permits search and user retrieval while opting GPTBot out; sitemap 
   assert.ok(robots.includes(`Sitemap: ${site}/sitemap.xml`));
   const sitemap = await read("sitemap.xml");
   const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-  assert.deepEqual(urls, [...[...(await featureDocuments()).keys()].map(path => site + path), `${site}/`, `${site}/day-with-atlasade/`, ...pages.map((page) => `${site}${page.path}`)]);
+  assert.deepEqual(urls, [...[...(await featureDocuments()).keys()].map(path => site + path), `${site}/agents/`, `${site}/`, `${site}/day-with-atlasade/`, ...pages.map((page) => `${site}${page.path}`)]);
   assert.ok(!sitemap.includes("workers.dev") && !sitemap.includes("/app/") && !sitemap.includes("404"));
 });
 

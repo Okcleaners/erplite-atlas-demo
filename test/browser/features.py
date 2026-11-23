@@ -1,4 +1,5 @@
 """Run against the compiled loopback preview with installed Python Playwright."""
+import hashlib
 import argparse
 import json
 import math
@@ -52,6 +53,8 @@ with sync_playwright() as p:
         expect(answer).to_contain_text("Hill stays at 9")
         expect(answer).to_contain_text("unverified")
         expect(answer).to_contain_text("Confirm")
+        release_id = page.locator("#help-result [data-release]").get_attribute("data-release")
+        expect(page.locator("#help-result [data-revision]")).to_have_attribute("data-revision", "1")
         assert len(requests) == before
         answer.scroll_into_view_if_needed()
         shot("answer")
@@ -63,12 +66,27 @@ with sync_playwright() as p:
         expect(page.locator("#walkthrough-follow-the-sale")).to_be_in_viewport()
         expect(page.locator(".register-status")).to_have_text("Register closed")
         shot("walkthrough")
+        page.goto(args.base + "/agents/")
+        expect(page.get_by_role("heading", name="Agent guide")).to_be_visible()
+        expect(page.locator("link[rel=canonical]")).to_have_attribute("href", "https://www.atlasade.com/agents/")
+        page.locator("summary").focus()
+        page.keyboard.press("Enter")
+        expect(page.locator("code[data-release]")).to_have_text(release_id)
+        shot("agent-guide")
+        manifest = page.request.get(args.base + "/agents/manifest.json").json()
+        assert manifest["releaseId"] == release_id
+        for artifact in manifest["artifacts"]:
+            response = page.request.get(args.base + artifact["path"])
+            assert response.ok and "application/json" in response.headers["content-type"]
+            assert hashlib.sha256(response.body()).hexdigest() == artifact["sha256"]
         assert not errors, errors
         assert all(urlsplit(url).netloc==urlsplit(args.base).netloc for url in requests)
         print("PASS",width,height,"console and external requests clear",flush=True)
         ctx.close()
     ctx = browser.new_context(java_script_enabled=False, viewport={"width":390,"height":844})
     page = ctx.new_page()
+    page.goto(args.base+"/agents/")
+    expect(page.get_by_role("link", name="capability records")).to_be_visible()
     page.goto(args.base+"/")
     page.get_by_role("link", name="Find a feature", exact=True).first.click()
     for href in page.locator("#results h2 a").evaluate_all("links => links.map(link => link.href)"):

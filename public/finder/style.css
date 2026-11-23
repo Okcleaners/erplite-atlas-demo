@@ -333,3 +333,20 @@ footer {
   }
 
 }
+
+.agent-guide {
+  max-width: 78ch;
+  overflow-wrap: anywhere;
+}
+.agent-guide h2:not(:first-child) {
+  margin-top: 1.5em;
+}
+.agent-guide li + li, .agent-guide details {
+  margin-top: .5em;
+}
+.agent-guide summary {
+  cursor: pointer;
+}
+.agent-guide code {
+  font-size: .9em;
+}

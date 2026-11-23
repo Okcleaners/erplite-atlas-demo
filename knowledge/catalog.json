@@ -1,5 +1,6 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
+  "issuedOn": "2026-11-22",
   "records": [
     {
       "slug": "open-register",
@@ -33,6 +34,18 @@
         "revision": 1,
         "basis": "Existing public documentation",
         "checkedOn": "2026-11-22"
+      },
+      "claimScope": "synthetic_demo",
+      "availabilityStatus": "unverified",
+      "dependencies": [
+        "Opening cash float"
+      ],
+      "publication": {
+        "state": "active",
+        "issuedOn": "2026-11-22",
+        "expiresOn": null,
+        "supersedes": null,
+        "evidence": "documented"
       }
     },
     {
@@ -69,6 +82,19 @@
         "revision": 1,
         "basis": "Existing public documentation",
         "checkedOn": "2026-11-22"
+      },
+      "claimScope": "synthetic_demo",
+      "availabilityStatus": "unverified",
+      "dependencies": [
+        "House coffee and oat bar",
+        "Illustrative café tax"
+      ],
+      "publication": {
+        "state": "active",
+        "issuedOn": "2026-11-22",
+        "expiresOn": null,
+        "supersedes": null,
+        "evidence": "documented"
       }
     },
     {
@@ -104,6 +130,19 @@
         "revision": 1,
         "basis": "Existing public documentation",
         "checkedOn": "2026-11-22"
+      },
+      "claimScope": "synthetic_demo",
+      "availabilityStatus": "unverified",
+      "dependencies": [
+        "Active café ticket",
+        "Fictional customer profile"
+      ],
+      "publication": {
+        "state": "active",
+        "issuedOn": "2026-11-22",
+        "expiresOn": null,
+        "supersedes": null,
+        "evidence": "documented"
       }
     },
     {
@@ -140,6 +179,19 @@
         "revision": 1,
         "basis": "Existing public documentation",
         "checkedOn": "2026-11-22"
+      },
+      "claimScope": "synthetic_demo",
+      "availabilityStatus": "unverified",
+      "dependencies": [
+        "Café ticket",
+        "Simulated cash tender"
+      ],
+      "publication": {
+        "state": "active",
+        "issuedOn": "2026-11-22",
+        "expiresOn": null,
+        "supersedes": null,
+        "evidence": "documented"
       }
     },
     {
@@ -181,6 +233,19 @@
         "revision": 1,
         "basis": "Existing public documentation",
         "checkedOn": "2026-11-22"
+      },
+      "claimScope": "synthetic_demo",
+      "availabilityStatus": "unverified",
+      "dependencies": [
+        "Completed café sale",
+        "Tracked oat bars at River and Hill"
+      ],
+      "publication": {
+        "state": "active",
+        "issuedOn": "2026-11-22",
+        "expiresOn": null,
+        "supersedes": null,
+        "evidence": "documented"
       }
     },
     {
@@ -218,6 +283,20 @@
         "revision": 1,
         "basis": "Existing public documentation",
         "checkedOn": "2026-11-22"
+      },
+      "claimScope": "synthetic_demo",
+      "availabilityStatus": "unverified",
+      "dependencies": [
+        "Opening float",
+        "Recorded cash sale",
+        "Counted drawer"
+      ],
+      "publication": {
+        "state": "active",
+        "issuedOn": "2026-11-22",
+        "expiresOn": null,
+        "supersedes": null,
+        "evidence": "documented"
       }
     },
     {
@@ -254,6 +333,21 @@
         "revision": 1,
         "basis": "Existing public documentation",
         "checkedOn": "2026-11-22"
+      },
+      "claimScope": "merchant_product",
+      "availabilityStatus": "unverified",
+      "dependencies": [
+        "Payment provider",
+        "Device",
+        "Region",
+        "Connectivity requirements"
+      ],
+      "publication": {
+        "state": "active",
+        "issuedOn": "2026-11-22",
+        "expiresOn": null,
+        "supersedes": null,
+        "evidence": "documented"
       }
     }
   ]

@@ -3,7 +3,9 @@ import { dirname, resolve, join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { build } from "vite";
 import react from "@vitejs/plugin-react";
-import { featureDocuments } from "./feature-pages.mjs";
+import { loadRelease } from "./knowledge-release.mjs";
+import { writeKnowledge } from "./write-knowledge.mjs";
+import { auditRelease } from "./audit-release.mjs";
 import { pages, site, contact, productDescription } from "../src/public-content.js";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -68,15 +70,12 @@ const notFound = { path: "/404.html", title: "Page not found | AtlasADE", headin
 let errorHtml = metadata(template, notFound).replace('<div id="root"></div>', () => `<div id="root">${renderPage(notFound)}</div>`);
 errorHtml = withoutClientScripts(errorHtml).replace("</head>", '<meta name="robots" content="noindex" /></head>');
 await writeFile(join(dist, "404.html"), errorHtml);
-const finder = await featureDocuments();
-for (const [path, html] of finder) {
-  const directory = join(dist, path.slice(1));
-  await mkdir(directory, { recursive: true });
-  await writeFile(join(directory, "index.html"), html);
-}
-const paths = [...finder.keys(), "/", "/day-with-atlasade/", ...pages.map((page) => page.path)];
+const release = await loadRelease();
+const knowledgePaths = await writeKnowledge(dist, release);
+const paths = [...knowledgePaths, "/", "/day-with-atlasade/", ...pages.map((page) => page.path)];
 await writeFile(join(dist, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${paths.map((path) => `<url><loc>${site}${path}</loc></url>`).join("")}</urlset>\n`);
 // Keep the generated root entry aligned with the existing Pages compatibility copy.
 await writeFile(join(root, "index.html"), home);
+await auditRelease(dist, release);
 const total = (await stat(join(dist, "index.html"))).size;
 console.log(`Rendered ${paths.length} canonical pages, /app/ compatibility entry, and 404.html; homepage ${total} bytes.`);

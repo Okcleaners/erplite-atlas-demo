@@ -23,6 +23,9 @@ export function search(index, value, category = "", lifecycle = "") {
   const matches = [];
   for (const item of index) {
     const { record } = item;
+    const publication = record.publication;
+    if (publication && (publication.state === "withdrawn" || publication.evidence !== "documented" ||
+        (publication.expiresOn && publication.expiresOn <= new Date().toISOString().slice(0,10)))) continue;
     if ((category && category !== record.category) || (lifecycle && lifecycle !== record.lifecycle)) continue;
     if (guards.some(([pattern, allowed]) => pattern.test(query) && !allowed.includes(record.slug))) continue;
     // A complete grammar covers ordinary rephrasings of the two-store example.

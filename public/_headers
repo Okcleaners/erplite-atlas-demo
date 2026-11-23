@@ -6,3 +6,12 @@ https://:worker.:account.workers.dev/*
 
 https://:version.:worker.:account.workers.dev/*
   X-Robots-Tag: noindex
+
+/agents/*
+  Cache-Control: public, no-cache
+
+/features/*
+  Cache-Control: public, no-cache
+
+/finder/catalog.v1.json
+  Cache-Control: public, no-cache

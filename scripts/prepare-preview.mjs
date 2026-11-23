@@ -19,5 +19,6 @@ async function mark(directory) {
   }
 }
 await mark(preview);
-await writeFile(join(preview, "_headers"), "/*\n  X-Robots-Tag: noindex\n  X-Content-Type-Options: nosniff\n");
+const headers = (await readFile(join(root, "dist", "_headers"), "utf8")).replaceAll("\r\n", "\n");
+await writeFile(join(preview, "_headers"), headers.replace("/*\n", "/*\n  X-Robots-Tag: noindex\n"));
 console.log("Prepared isolated dist-preview with noindex in every HTML response and asset header. Production dist unchanged.");

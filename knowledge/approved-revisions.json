@@ -1,0 +1,23 @@
+{
+  "open-register": [
+    "5985109fa2bfe970fd15409653fb891785d6d55da47ecf89bce03642d0b80a97"
+  ],
+  "sales-ticket": [
+    "1485c4d753d29e7f7cc93c6c8bd7e4d497bcab3b869695fca792b65d14afa7e2"
+  ],
+  "customer-lookup": [
+    "5140c274f24c133a88173658a43963e7908ae826f13cf9825c73e578507a67eb"
+  ],
+  "cash-checkout": [
+    "e79b7ef02374456180a226412a91fe5c60da46657ec31275e516e9441513dcf4"
+  ],
+  "location-stock": [
+    "acdcea9080814d6b6515c9be74fafe0873954c06f269a36cf35eb4aad83ab94f"
+  ],
+  "daily-cash": [
+    "fcbff16352403c09568a55ba02a9eddb46b71ce5e1f640da49dde9cda5345651"
+  ],
+  "offline-card": [
+    "9868183cdff8c1d58278521a8d38e089be50d8ad0325c3ca98bbf924b8529b1b"
+  ]
+}

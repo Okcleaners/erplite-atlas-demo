@@ -619,6 +619,7 @@ function ContactSection() {
           jwong@atlasade.com
         </a>
         <nav className="footer-nav" aria-label="Footer disclosures">
+          <a href="/agents/">Agent guide</a>
           <a href="#accessibility-statement">Accessibility Statement</a>
           <a href="#privacy-policy">Privacy Policy</a>
           <a href="#terms">Terms</a>

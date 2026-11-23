@@ -1,11 +1,14 @@
 import {readFile} from "node:fs/promises";
-const schema = JSON.parse(await readFile(new URL("../public/finder/catalog.schema.json", import.meta.url)));
-function check(value, rule, path) {
-  if (rule.anyOf) {
-    if (value === null) return;
-    return check(value, rule.anyOf[1], path);
-  }
+export const legacySchema = JSON.parse(await readFile(new URL("../public/finder/catalog.schema.json", import.meta.url)));
+export function check(value, rule, path) {
   const fail = () => { throw new Error("Invalid public capability field: " + path); };
+  if (rule.anyOf) {
+    for (const candidate of rule.anyOf) {
+      try { check(value, candidate, path); return; } catch { /* try the next schema */ }
+    }
+    fail();
+  }
+  if (rule.type === "null" && value !== null) fail();
   if ("const" in rule && value !== rule.const) fail();
   if (rule.enum && !rule.enum.includes(value)) fail();
   if (rule.type === "object") {
@@ -21,11 +24,14 @@ function check(value, rule, path) {
   if (rule.type === "string") {
     if (typeof value !== "string" || !value.trim()) fail();
     if (rule.pattern && !new RegExp(rule.pattern).test(value)) fail();
-    if (rule.format === "date" && !/^\d{4}-\d{2}-\d{2}$/.test(value)) fail();
+    if (rule.format === "date") {
+      const time = Date.parse(value + "T00:00:00Z");
+      if (!Number.isFinite(time) || new Date(time).toISOString().slice(0,10) !== value) fail();
+    }
   }
 }
 export function validateCatalog(catalog) {
-  check(catalog,schema,"catalog");
+  check(catalog,legacySchema,"catalog");
   const ids = new Set(catalog.records.map(record => record.slug));
   if (ids.size !== catalog.records.length) throw new Error("Duplicate public feature slug");
   return catalog.records;
