@@ -222,6 +222,18 @@ async function localAssets(variant, check) {
 
 test("actual Workers asset HTTP behavior: production pages, redirects, assets, and genuine 404s", { timeout: 45000 }, async () => {
   await localAssets("dist", async (base) => {
+    for (const path of ["/agents/manifest.json", "/agents/capabilities.json", "/agents/graph.json",
+      "/agents/", "/features/", "/features/location-stock/", "/finder/catalog.v1.json"]) {
+      const first = await fetch(base + path);
+      assert.equal(first.status, 200, path);
+      assert.match(first.headers.get("cache-control"), /no-cache.*must-revalidate/, path);
+      const etag = first.headers.get("etag");
+      assert.ok(etag, path);
+      const unchanged = await fetch(base + path, {headers: {"If-None-Match": etag}});
+      assert.equal(unchanged.status, 304, path);
+      assert.equal(await unchanged.text(), "", path);
+      assert.equal((await fetch(base + path, {headers: {"If-None-Match": '"older"'}})).status, 200, path);
+    }
     for (const path of ["/", "/day-with-atlasade/", ...pages.map((page) => page.path), "/app/", "/robots.txt", "/sitemap.xml", "/atlasade-brand-reference.png"]) {
       const response = await fetch(base + path);
       assert.equal(response.status, 200, path);
@@ -243,7 +255,11 @@ test("actual Workers asset HTTP behavior: production pages, redirects, assets, a
     const html = await (await fetch(base)).text();
     for (const tag of [...tags(html, "script"), ...tags(html, "link")]) {
       const path = attribute(tag, "src") || (attribute(tag, "rel") === "stylesheet" && attribute(tag, "href"));
-      if (path) assert.equal((await fetch(base + path)).status, 200, path);
+      if (path) {
+        const asset = await fetch(base + path);
+        assert.equal(asset.status, 200, path);
+        if (path.startsWith("/assets/")) assert.match(asset.headers.get("cache-control"), /max-age=31536000, immutable/);
+      }
     }
   });
 });

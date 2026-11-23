@@ -68,7 +68,7 @@ export function createRelease(source, approvals, asOf = new Date().toISOString()
   const schemaVersion = 2;
   const issuedOn = source.issuedOn;
   const current = records.filter(r => !r.notice);
-  const legacy = { schemaVersion: 1, records: current.map(record =>
+  const legacy = { schemaVersion: 1, records: current.filter(record => !record.publication.expiresOn).map(record =>
     Object.fromEntries(legacyKeys.map(key => [key, record[key]]))) };
   const nodes = records.map(r => ({ id: r.slug, kind: "capability", url: r.canonicalUrl, revision: r.review.revision, status: r.status }));
   const edges = [];

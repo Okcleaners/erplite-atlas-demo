@@ -13,14 +13,15 @@ export function shell(title, description, path, body, script = "") {
 <link rel="stylesheet" href="/finder/style.css">${script}</head><body><a class="skip" href="#main">Skip to content</a><header><div class="wrap top"><a class="brand" href="/" aria-label="Atlasade home"><img src="/favicon.ico" width="30" height="30" alt="">ATLAS<b>ADE</b></a><nav aria-label="Website"><a href="/features/">Feature Finder</a><a href="/day-with-atlasade/">Café day</a></nav></div></header>
 <main class="wrap" id="main">${body}</main><footer class="wrap"><a href="/">Atlasade home</a><a href="/availability/">Product availability</a><a href="/faq/">Merchant FAQ</a><a href="/agents/">Agent guide</a></footer></body></html>`;
 }
+const datedNotice = record => "This entry requires a current check. Its review deadline is " + record.publication.expiresOn + " at 00:00 UTC. Ask about this feature in Feature Finder.";
 function card(record) {
   return `<article class="card" data-feature="${escape(record.slug)}" data-revision="${record.review.revision}"><div class="category">${escape(record.category)}</div><h2><a href="${url(record)}">${escape(record.title)}</a></h2>
-  <p>${escape(record.answer)}</p><div class="card-foot">${status(record)}${chapters(record)}</div></article>`;
+  <p>${escape(record.publication.expiresOn ? datedNotice(record) : record.answer)}</p><div class="card-foot">${status(record)}${record.publication.expiresOn ? "" : chapters(record)}</div></article>`;
 }
 function detail(record, releaseId) {
   const stamp = '<p class="review" data-release="' + releaseId + '" data-revision="' + record.review.revision + '">Revision ' + record.review.revision + ' · <a href="/agents/manifest.json">Knowledge release ' + releaseId.slice(9,21) + '</a></p>';
-  if (record.notice) return shell(record.title, record.notice, url(record),
-    '<a class="back" href="/features/">All features</a><h1>' + escape(record.title) + '</h1><p>' + escape(record.notice) + '</p>' + stamp);
+  if (record.notice || record.publication.expiresOn) return shell(record.title, record.notice || datedNotice(record), url(record),
+    '<a class="back" href="/features/">All features</a><h1>' + escape(record.title) + '</h1><p>' + escape(record.notice || datedNotice(record)) + '</p>' + stamp);
   return shell(record.title,record.answer,url(record),`<a class="back" href="/features/">All features</a>
     <div class="detail-head"><p class="eyebrow">${escape(record.category)}</p><h1>${escape(record.title)}</h1><p class="lead">${escape(record.answer)}</p></div>
     <section class="details"><h2>Scope and availability</h2>${status(record)}<dl><dt>Evidence</dt><dd>${record.claimScope === "synthetic_demo" ? "Fictional café demonstration" : "Merchant product documentation"}</dd><dt>Where this applies</dt><dd>${escape(record.scope)}</dd><dt>Dependencies</dt><dd>${record.dependencies.map(escape).join(" · ")}</dd><dt>Merchant availability · ${escape(record.availabilityStatus)}</dt><dd>${escape(record.availability)}</dd><dt>What to confirm</dt><dd>${escape(record.limitation)}</dd></dl>

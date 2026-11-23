@@ -11,7 +11,6 @@ const count = document.querySelector("#result-count");
 const help = document.querySelector("#help-result");
 const reset = form.querySelector("[type=reset]");
 const empty = document.querySelector("#no-matches");
-form.hidden = false;
 
 function link(label, href) {
   const anchor = document.createElement("a");
@@ -19,7 +18,10 @@ function link(label, href) {
   anchor.href = href;
   return anchor;
 }
+const releaseId = document.querySelector("[data-release]").dataset.release;
+let available = true;
 function update(ask = false) {
+  if (!available) return;
   const result = search(index, query.value, category.value, lifecycle.value);
   list.replaceChildren(...result.records.map(record => cards.get(record.slug)));
   count.textContent = result.records.length + (result.records.length === 1 ? " feature" : " features");
@@ -42,7 +44,6 @@ function update(ask = false) {
     help.append(p);
   }
   const revision = document.createElement("p");
-  const releaseId = document.querySelector("[data-release]").dataset.release;
   revision.dataset.release = releaseId;
   revision.dataset.revision = record.review.revision;
   revision.textContent = "Revision " + record.review.revision + " · Release " + releaseId.slice(9,21) +
@@ -61,3 +62,40 @@ form.addEventListener("reset", event => {
   query.focus();
 });
 update();
+
+// A page restored from the back-forward cache can predate the current release.
+// Keep keystrokes local. Recheck on return and once a minute while visible.
+let checking = false;
+async function revalidate() {
+  if (checking || document.hidden || !available) return;
+  checking = true;
+  try {
+    const response = await fetch("/agents/manifest.json", { cache: "no-cache", redirect: "error", signal: AbortSignal.timeout(10000) });
+    if (!response.ok || (await response.json()).releaseId !== releaseId) throw new Error("Release unavailable");
+    form.hidden = false;
+  } catch {
+    available = false;
+    form.hidden = true;
+    list.replaceChildren();
+    empty.hidden = true;
+    count.textContent = "Current release required";
+    help.hidden = false;
+    help.replaceChildren("Refresh the directory to check the current release. ", link("Reload Feature Finder", "/features/"));
+  } finally {
+    checking = false;
+  }
+}
+function checkDeadline() {
+  const now = Date.now();
+  const deadlines = records.filter(r => r.publication.expiresOn)
+    .map(r => Date.parse(r.publication.expiresOn + "T00:00:00Z"));
+  if (!deadlines.length) return;
+  update(!help.hidden);
+  const next = Math.min(...deadlines.filter(time => time > now));
+  if (Number.isFinite(next)) setTimeout(checkDeadline, Math.min(2147483647, next - now + 1));
+}
+checkDeadline();
+revalidate();
+window.addEventListener("pageshow", event => { if (event.persisted) { update(!help.hidden); revalidate(); } });
+document.addEventListener("visibilitychange", () => { if (!document.hidden) { update(!help.hidden); revalidate(); } });
+setInterval(revalidate, 60000);
