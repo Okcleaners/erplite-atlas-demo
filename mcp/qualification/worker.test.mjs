@@ -5,7 +5,7 @@ import { join } from "node:path";
 import { createServer } from "node:net";
 import test from "node:test";
 import { fixtureOrigin } from "../../test/fixtures/cache-releases.mjs";
-import { checkpointKey } from "../worker/checkpoint.mjs";
+import { checkpointKey, checkpointURL } from "../worker/checkpoint.mjs";
 import { promote } from "./promote.mjs";
 import { localRelease, runtime } from "./runtime.mjs";
 
@@ -67,6 +67,16 @@ test("two workerd instances validate independently through corrections, withdraw
   const attempts = await Promise.allSettled([promote(deployment.bucket,genesis,ids.A),promote(deployment.bucket,genesis,ids.A)]);
   assert.equal(attempts.filter(x=>x.status==="fulfilled").length,1);
   const a = attempts.find(x=>x.status==="fulfilled").value;
+  // Exercise the actual private service binding with emulated R2. These are route
+  // checks only. Hosted IAM and bucket retention require independent evidence.
+  const reader = await deployment.mf.getWorker("checkpoint-reader");
+  for (const method of ["POST", "PUT", "DELETE"]) {
+    const response = await reader.fetch(checkpointURL, { method });
+    assert.equal(response.status, 404);
+    assert.equal(response.headers.get("cache-control"), "no-store");
+  }
+  assert.deepEqual(await (await reader.fetch(checkpointURL)).json(), a);
+  assert.equal((await fetch(first + "/current")).status, 404);
   for (const response of await Promise.all([get(first),get(second)])) {
     assert.equal(response.structuredContent.releaseId,ids.A,JSON.stringify(response));
     assert.equal(response.structuredContent.availabilityStatus,"unverified");

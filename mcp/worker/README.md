@@ -79,3 +79,5 @@ All 39 production website files, including all five JavaScript files, were byte-
 ## HTTP qualification boundary
 
 On this Windows host, an HTTP/1.1 request carrying the MCP version header and requesting identity encoding could receive unchunked bytes with a chunked header. The same observation reproduced with a standalone Node HTTP server returning five bytes with an explicit content length. Gzip-capable reference clients completed the tested exchanges. Verify identity encoding and normal compression on an independent host before expanding the preview audience. The local results do not isolate the host component responsible.
+
+The [004E independent transport and checkpoint assessment](../qualification/transport-004e.md) records the subsequent paired-byte tests on Windows and Ubuntu, the remaining host limitation and the storage-enforcement gates.
