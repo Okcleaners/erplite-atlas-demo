@@ -1,4 +1,5 @@
-import { sha256, recordDigest } from "./knowledge-release.mjs";
+import { readBoundedBody } from "./bounded-body.mjs";
+import { sha256, recordDigest } from "./release-digests.mjs";
 import { publicSchema, graphSchema, manifestSchema } from "./knowledge-schema.mjs";
 import { check, validateCatalog } from "./validate-catalog.mjs";
 
@@ -23,7 +24,7 @@ export function currentKnowledge(origin, { now = () => new Date() } = {}) {
       return prior;
     }
     if (response.status !== 200) throw new Error("Current manifest unavailable");
-    const data = await response.json();
+    const data = JSON.parse((await readBoundedBody(response, 16 * 1024)).toString("utf8"));
     check(data, manifestSchema, "manifest");
     if (data.artifacts.length !== required.length || !required.every(path => data.artifacts.some(a => a.path === path)))
       throw new Error("Unexpected manifest inventory");
@@ -38,11 +39,12 @@ export function currentKnowledge(origin, { now = () => new Date() } = {}) {
     const nextCache = new Map();
     const documents = new Map();
     for (const artifact of data.artifacts) {
+      if (artifact.bytes > 256 * 1024) throw new Error("Public artifact exceeds size limit");
       let bytes = bytesByDigest.get(artifact.sha256);
       if (!bytes) {
         const response = await fetch(new URL(artifact.path, origin), { cache: "no-cache", redirect: "error", signal });
         if (response.status !== 200) throw new Error("Missing current artifact: " + artifact.path);
-        bytes = Buffer.from(await response.arrayBuffer());
+        bytes = await readBoundedBody(response, 256 * 1024);
       }
       if (bytes.length !== artifact.bytes || sha256(bytes) !== artifact.sha256) throw new Error("Digest mismatch: " + artifact.path);
       documents.set(artifact.path, JSON.parse(bytes.toString("utf8")));

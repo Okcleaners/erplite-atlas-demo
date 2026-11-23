@@ -1,5 +1,5 @@
-import {readFile} from "node:fs/promises";
-export const legacySchema = JSON.parse(await readFile(new URL("../public/finder/catalog.schema.json", import.meta.url)));
+import legacySchema from "../public/finder/catalog.schema.json" with { type: "json" };
+export { legacySchema };
 export function check(value, rule, path) {
   const fail = () => { throw new Error("Invalid public capability field: " + path); };
   if (rule.anyOf) {

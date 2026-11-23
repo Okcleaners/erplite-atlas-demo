@@ -1,13 +1,10 @@
-import { createHash } from "node:crypto";
+import { serialize, sha256, recordDigest } from "./release-digests.mjs";
+export { serialize, sha256, recordDigest } from "./release-digests.mjs";
 import { readFile } from "node:fs/promises";
 import { site } from "../src/public-content.js";
 import { check, legacySchema } from "./validate-catalog.mjs";
 import { publicSchema, sourceSchema, graphSchema, manifestSchema } from "./knowledge-schema.mjs";
 
-const orderedKeys = (_, value) => value && typeof value === "object" && !Array.isArray(value)
-  ? Object.fromEntries(Object.keys(value).sort().map(key => [key, value[key]])) : value;
-export const serialize = value => JSON.stringify(value, orderedKeys, 2) + "\n";
-export const sha256 = bytes => createHash("sha256").update(bytes).digest("hex");
 const readJSON = async path => JSON.parse(await readFile(new URL(path, import.meta.url), "utf8"));
 const legacyKeys = Object.keys(legacySchema.properties.records.items.properties);
 const notices = {
@@ -15,11 +12,6 @@ const notices = {
   expired: "The evidence review has expired. This capability requires a new review.",
   unknown: "There is no verified answer for this capability."
 };
-
-// Object key order and checkout line endings do not affect a wording approval.
-export function recordDigest(record) {
-  return sha256(JSON.stringify(record, orderedKeys));
-}
 
 function rejectPrivateText(record) {
   for (const value of Object.values(record)) {
