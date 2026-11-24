@@ -33,6 +33,8 @@ The proposal connected the oat-bar line to River stock (12 to 11, with Hill stay
 
 ## Future demonstration uses
 
+For lessons with a variable the visitor can change, see the [interactive education review and planning exercise](interactive-product-education-review.md).
+
 - **River & Oak and Business Day.** Trace one synthetic sale through its receipt, location and drawer. Extend the story to verified operational milestones after their evidence and wording have been approved.
 - **Merchant-specific scenes.** Build from one reviewed workflow using original assets and safe fixtures. Represent role permissions and persistence only when evidence supports them.
 - **Capability and location explanations.** Use the symbol library and one labeled relationship. Keep citations and merchant availability visible in static HTML. A visit to a citation should leave the active transaction intact.

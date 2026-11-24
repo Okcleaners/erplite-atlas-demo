@@ -1,6 +1,6 @@
 ---
 name: atlasade-visual-design
-description: Plan, implement, or visually review Quiet Orbit experiences for the Atlasade public website, including merchant demonstrations, product storytelling, record connections, and capability documentation. Use for Atlasade visual work, including planning-only requests.
+description: Plan, implement, or visually review Quiet Orbit experiences for the Atlasade public website, including interactive product education, merchant demonstrations, record connections, and capability documentation. Use for Atlasade visual work, including planning-only requests.
 ---
 
 # Atlasade visual design
@@ -10,6 +10,8 @@ description: Plan, implement, or visually review Quiet Orbit experiences for the
 1. Identify the page or scene, the merchant's question, the record they need to recognize, and the action or decision the design should support. Honor the requested mode. For a planning exercise, return a proposal and verification plan. Implement only when the task authorizes implementation.
 2. Find the website root and read `docs/quiet-orbit.md` and `public/quiet-orbit.css`. Review the existing implementation for the surface. Use `src/SalePortrait.jsx` and `src/day/` as references for how the River & Oak receipt links to effects without creating another transaction. Use `public/images/quiet-orbit.svg` for established symbols.
 3. Establish the evidence behind the screen. Use the site's approved capability content and citations for public wording. Keep the location, record ID, lifecycle and merchant availability explicit where they affect the answer. Use synthetic data for illustrative scenes and label them visibly. Leave unverified actions, commercial claims, permissions and persistence unverified. Product screenshots need an approved interface and synthetic or approved public data.
+
+For a lesson where a visitor changes a fictional business input and examines the consequences, use [interactive product education](references/product-education.md). Keep ordinary documentation direct when the merchant simply wants an answer.
 
 ## Compose in Quiet Orbit
 
