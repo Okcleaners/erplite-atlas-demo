@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 600" width="1040" height="600" role="img" aria-labelledby="title desc">
+  <title id="title">A connected business</title>
+  <desc id="desc">Fictional River &amp; Oak café. Receipt 104 at River records an 8.40 dollar sale. River has 11 oat bars remaining and retains 8.40 dollars in cash. Hill still has 9 bars.</desc>
+  <defs>
+    <radialGradient id="night" cx=".34" cy=".38" r=".82"><stop stop-color="#284747"/><stop offset=".64" stop-color="#142e36"/><stop offset="1" stop-color="#101e2c"/></radialGradient>
+    <linearGradient id="paper" x2=".85" y2="1"><stop stop-color="#fffdf3"/><stop offset=".55" stop-color="#faf6e9"/><stop offset="1" stop-color="#e8ddc4"/></linearGradient>
+    <linearGradient id="plaster" x2=".8" y2="1"><stop stop-color="#efe2be"/><stop offset="1" stop-color="#b7a785"/></linearGradient>
+    <linearGradient id="window" x2="1" y2="1"><stop stop-color="#72978c"/><stop offset=".46" stop-color="#355e5b"/><stop offset="1" stop-color="#193b40"/></linearGradient>
+    <linearGradient id="brass" x2="1" y2=".4"><stop stop-color="#f2d9a9"/><stop offset="1" stop-color="#958565"/></linearGradient>
+    <linearGradient id="panel" x2="1" y2="1"><stop stop-color="#294b49"/><stop offset="1" stop-color="#183039"/></linearGradient>
+    <filter id="lift" x="-35%" y="-30%" width="180%" height="195%"><feGaussianBlur stdDeviation="8"/></filter>
+    <filter id="halo" x="-.2" y="-.4" width="1.4" height="1.8"><feGaussianBlur stdDeviation="3"/></filter>
+    <path id="wire" d="M267 285 C330 285 313 225 405 225 M487 377 V406 Q487 425 466 425 H313 Q292 425 292 448 M553 377 V406 Q553 425 574 425 H728 Q749 425 749 448"/>
+    <g id="store">
+      <!-- An original corner shop, drawn as a raised architectural model. -->
+      <ellipse cx="0" cy="48" rx="105" ry="24" fill="#07191e" opacity=".7" filter="url(#lift)"/>
+      <path d="m-104 18 98 38 113-37 v8L-6 65l-98-39z" fill="#294547"/>
+      <path d="m-104 18 109-34 102 35L-6 56z" fill="#6b7871"/>
+      <path d="m-86 9 78 30V-25l-78-27z" fill="url(#plaster)"/>
+      <path d="m-8 39 91-29v-62L-8-25z" fill="#807e69"/>
+      <path d="m-92-48 83 32 99-32v-7l-99 31-83-31z" fill="#b3a486"/>
+      <path d="m-92-55 99-31 83 31-99 31z" fill="#f1e6c9"/>
+      <path d="m-78-55 85-25 68 25-84 26z" fill="#adad95"/>
+      <path d="m-65-54 74-21 55 20-73 23z" fill="#839488"/>
+      <path d="m-75-32 54 20v39l-54-21z" fill="url(#window)" stroke="#715f47" stroke-width="2"/>
+      <path d="m-50-22 0 37m-25-29 54 20" fill="none" stroke="#d5c49a" stroke-width="2"/>
+      <path d="m-74-31 11 4-12 21v-16zm20 7 7 3-15 24-7-3z" fill="#d5e4cd" opacity=".23"/>
+      <path d="M5 26V-7l21-7v34z" fill="#294c4d" stroke="#beab83" stroke-width="2"/>
+      <path d="m36-17 34-11v23L36 6z" fill="url(#window)" stroke="#c1af88" stroke-width="2"/>
+      <path d="m-85-42 72 27-8 8-73-27z" fill="#649084"/>
+      <path d="m-94-34 73 27v6l-73-27z" fill="#385c54"/>
+      <path d="m-84-34 64 24" stroke="#e9c995" stroke-width="1.5" opacity=".8"/>
+      <path d="m4 29 24-8 7 2-24 8z" fill="#a59e88"/>
+      <path d="m-90 12 80 31 92-29" fill="none" stroke="#dacba8" opacity=".8"/>
+    </g>
+    <style>
+      text{font-family:'Segoe UI',Arial,sans-serif;fill:#faf6e9}
+      .display{font-family:Georgia,serif}
+      .mono{font-family:Consolas,'Courier New',monospace;letter-spacing:1.5px;font-size:12px}
+      .ink{fill:#203c35}.mint{fill:#a8d1c2}.gold{fill:#e9c995}.muted{fill:#c0d3cb}
+    </style>
+  </defs>
+  <g id="backdrop">
+    <rect width="1040" height="600" rx="24" fill="url(#night)"/>
+    <g fill="none" stroke="#a8d1c2" opacity=".09"><ellipse cx="521" cy="293" rx="450" ry="101"/><ellipse cx="521" cy="293" rx="407" ry="82"/></g>
+    <path d="M42 99H998 M42 543H998" stroke="#7b948e" opacity=".37"/>
+  </g>
+  <g id="caption">
+    <text x="48" y="64" font-size="40" class="display">A connected business</text>
+    <text x="991" y="59" text-anchor="end" class="mono gold">RIVER &amp; OAK  /  FICTIONAL STUDY</text>
+  </g>
+  <g id="connections" fill="none" stroke="#e9c995">
+    <use href="#wire" stroke-width="4" opacity=".34" filter="url(#halo)"/>
+    <use href="#wire" stroke-width="1.5"/>
+    <g fill="#f9dfaa"><circle cx="267" cy="285" r="3"/><circle cx="292" cy="448" r="3"/><circle cx="749" cy="448" r="3"/></g>
+  </g>
+  <g id="river">
+    <use href="#store" transform="translate(196 256)"/>
+    <text x="195" y="357" class="display" font-size="26" text-anchor="middle">River</text>
+    <text x="195" y="380" class="mint" font-size="15" text-anchor="middle">Sale location</text>
+  </g>
+  <g id="hill">
+    <use href="#store" transform="translate(840 243) scale(.83)"/>
+    <g transform="translate(857 185)"><path d="m0 0 22-7 12 4-22 7z" fill="#efe3c7"/><path d="m0 0 12 4v12L0 12z" fill="#d3c5a9"/><path d="m12 4 22-7V9l-22 7z" fill="#969681"/></g>
+    <text x="840" y="345" class="display" font-size="26" text-anchor="middle">Hill</text>
+    <text x="840" y="368" class="muted" font-size="15" text-anchor="middle">9 oat bars · unchanged</text>
+  </g>
+  <g id="receipt" transform="translate(406 126)">
+    <rect x="7" y="16" width="224" height="243" rx="8" fill="#071923" opacity=".65" filter="url(#lift)"/>
+    <path d="M4 6h222v239l-8 4-8-4-8 4-8-4-8 4-8-4-8 4-8-4-8 4-8-4-8 4-8-4-8 4-8-4-8 4-8-4-8 4-8-4-8 4-8-4-8 4-8-4-8 4-8-4-8 4-8-4-7 4z" fill="#b3a78a"/>
+    <path d="M0 0h224v243l-8 4-8-4-8 4-8-4-8 4-8-4-8 4-8-4-8 4-8-4-8 4-8-4-8 4-8-4-8 4-8-4-8 4-8-4-8 4-8-4-8 4-8-4-8 4-8-4-8 4-8-4-8 4-8-4z" fill="url(#paper)"/>
+    <text x="20" y="32" class="mono ink">RECEIPT  /  104</text>
+    <text x="20" y="71" class="display ink" font-size="30">River &amp; Oak</text>
+    <text x="20" y="94" class="ink" font-size="14">River · Front counter</text>
+    <path d="M20 111h184M20 180h184" stroke="#b4b6a1" stroke-dasharray="3 3"/>
+    <g font-size="14"><text x="20" y="134" class="ink">House coffee</text><text x="204" y="134" text-anchor="end" class="ink">$5.00</text>
+      <text x="20" y="154" class="ink">Oat bar</text><text x="204" y="154" text-anchor="end" class="ink">$3.00</text>
+      <text x="20" y="174" class="ink">Illustrative tax</text><text x="204" y="174" text-anchor="end" class="ink">$0.40</text></g>
+    <text x="20" y="215" class="ink" font-size="16">Paid in cash</text><text x="204" y="217" class="display ink" text-anchor="end" font-size="30">$8.40</text>
+  </g>
+  <g id="inventory" transform="translate(117 450)">
+    <rect width="350" height="71" rx="9" fill="url(#panel)" stroke="#728e83"/>
+    <g transform="translate(17 18)" stroke="#a8d1c2" fill="none" stroke-linejoin="round"><path d="m0 9 18-7 18 7-18 7zM0 9v17l18 7 18-7V9m-18 7v17m-9-27 18 7v7"/></g>
+    <text x="70" y="26" class="mono mint">INVENTORY  /  RIVER</text><text x="70" y="52" font-size="20">11 oat bars remaining</text>
+  </g>
+  <g id="finance" transform="translate(573 450)">
+    <rect width="350" height="71" rx="9" fill="url(#panel)" stroke="#958e76"/>
+    <g transform="translate(17 21)" stroke="#e9c995" fill="none" stroke-linejoin="round"><path d="m0 9 25-8 15 8-25 9zM0 14l15 9 25-9M0 20l15 9 25-9"/><ellipse cx="20" cy="9" rx="5" ry="2"/></g>
+    <text x="70" y="26" class="mono gold">FINANCE  /  RIVER</text><text x="70" y="52" font-size="20">$8.40 cash retained</text>
+  </g>
+  <text id="legend" x="48" y="575" class="muted" font-size="16">One receipt links the stock movement and cash record at River.</text>
+</svg>
