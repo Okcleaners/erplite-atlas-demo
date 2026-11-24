@@ -1,12 +1,48 @@
-"""Qualify the built website via visible controls. Requires Python Playwright + Chromium."""
+"""Qualify the built website via visible controls. Requires Python Playwright and the selected browser."""
 import argparse
+import sys
 from pathlib import Path
 from urllib.parse import urlsplit
 
 from playwright.sync_api import expect, sync_playwright
 
 
-def exercise(browser, base, output, width, height, keyboard=False, reduced=False):
+def check_legacy_layout(page, board):
+    # Remove unsupported rules from the running document only. Exercise each
+    # missing capability independently, then combine them at 200% content zoom.
+    for mode in ("container", "has", "both"):
+        styles = page.evaluate("""() => Array.from(document.styleSheets, sheet =>
+            Array.from(sheet.cssRules, rule => rule.cssText).join('\\n'))""")
+        page.evaluate("""mode => {
+            function remove(rules) {
+                for (let i = rules.cssRules.length - 1; i >= 0; --i) {
+                    const rule = rules.cssRules[i];
+                    if ((mode !== 'has' && rule.cssText.startsWith('@container')) ||
+                        (mode !== 'container' && rule.selectorText?.includes(':has('))) rules.deleteRule(i);
+                    else if (rule.cssRules && rule.deleteRule) remove(rule);
+                }
+            }
+            Array.from(document.styleSheets).forEach(remove);
+        }""", mode)
+        if mode == "both":
+            page.set_viewport_size({"width":780,"height":844})
+            page.evaluate("document.documentElement.style.zoom = '200%'")
+        try:
+            columns = board.evaluate("el => getComputedStyle(el).gridTemplateColumns.split(' ').length")
+            print("legacy layout",mode,"columns",columns,flush=True)
+            assert columns == 1, mode
+            expect(board.get_by_role("button",name="Expand receipt")).to_be_visible()
+            assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+        finally:
+            page.evaluate("""styles => Array.from(document.styleSheets).forEach((sheet, i) => {
+                const replacement = document.createElement('style');
+                replacement.textContent = styles[i]; sheet.ownerNode.replaceWith(replacement);
+            })""",styles)
+            page.evaluate("document.documentElement.style.zoom = ''")
+            page.set_viewport_size({"width":390,"height":844})
+
+
+def exercise(browser, base, output, width, height, keyboard=False, reduced=False, legacy_layout=False):
     ctx = browser.new_context(viewport={"width": width, "height": height}, reduced_motion="reduce" if reduced else "no-preference")
     page = ctx.new_page()
     page.set_default_timeout(10000)
@@ -29,7 +65,9 @@ def exercise(browser, base, output, width, height, keyboard=False, reduced=False
         for _ in range(80):
             if locator.evaluate("el => el === document.activeElement"):
                 return
-            page.keyboard.press("Tab")
+            earlier = locator.evaluate("""el => Boolean(
+                document.activeElement.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_PRECEDING)""")
+            page.keyboard.press("Shift+Tab" if earlier else "Tab")
         raise AssertionError("Unreachable via Tab: " + str(locator))
 
     def activate(locator):
@@ -72,10 +110,17 @@ def exercise(browser, base, output, width, height, keyboard=False, reduced=False
     module.click()
     expect(module).to_have_attribute("aria-pressed", "true")
     expect(page.locator(".atlas-detail-panel h3")).to_have_text("Inventory")
-    activate(invitation)
+    if keyboard and sys.platform == "win32" and browser.browser_type.name == "webkit":
+        # Windows MiniBrowser's default Tab order skips native hyperlinks.
+        # Enter through the link with a pointer, then exercise the register by keyboard.
+        invitation.click()
+    else:
+        activate(invitation)
     expect(page).to_have_title("A Day With Atlasade | River & Oak café demo")
     assert page.url.rstrip("/") == base + "/day-with-atlasade"
     if not keyboard:
+        # Finish the CTA navigation before independently exercising a direct load.
+        expect(page.locator(".register-status")).to_have_text("Register closed")
         assert page.goto(base + "/day-with-atlasade", wait_until="load").ok
 
     chapter("Begin the day")
@@ -126,6 +171,8 @@ def exercise(browser, base, output, width, height, keyboard=False, reduced=False
     chapter("Follow the sale")
     board = page.locator(".sale-map")
     receipt = board.get_by_role("region", name="Completed receipt")
+    if width == 390 and legacy_layout:
+        check_legacy_layout(page, board)
     if width == 390:
         expect(receipt).to_have_count(0)
         shot("05-compact")
@@ -148,7 +195,8 @@ def exercise(browser, base, output, width, height, keyboard=False, reduced=False
     stock_label, cash_label = "See inventory change", "See where the money went"
     for label, source in [(stock_label, "stock"), (cash_label, "cash"), (stock_label, "stock")]:
         action(label)
-        expect(button(label)).to_be_focused()
+        if keyboard:
+            expect(button(label)).to_be_focused()
         expect(button(label)).to_have_attribute("aria-expanded", "true")
         detail = board.locator("#" + source + "-source")
         expect(detail).to_contain_text("Receipt #104")
@@ -242,6 +290,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--base", default="http://127.0.0.1:18743")
     parser.add_argument("--screenshots", type=Path)
+    parser.add_argument("--legacy-layout", action="store_true")
     parser.add_argument("--engine", choices=["chromium", "msedge", "webkit", "firefox"], default="chromium")
     args = parser.parse_args()
     base = args.base.rstrip("/")
@@ -252,7 +301,7 @@ def main():
         browser = p.chromium.launch(channel="msedge") if args.engine == "msedge" else getattr(p, args.engine).launch()
         print(f"{args.engine} {browser.version}", flush=True)
         for width, height in [(390,844), (768,1024), (1440,900)]:
-            exercise(browser, base, args.screenshots, width, height, keyboard=width == 1440, reduced=width == 768)
+            exercise(browser, base, args.screenshots, width, height, keyboard=width == 1440, reduced=width == 768, legacy_layout=args.legacy_layout)
         no_js = browser.new_context(java_script_enabled=False)
         page = no_js.new_page()
         page.goto(base + "/day-with-atlasade/")

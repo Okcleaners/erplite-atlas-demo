@@ -74,12 +74,35 @@ update();
 // A page restored from the back-forward cache can predate the current release.
 // Keep keystrokes local. Recheck on return and once a minute while visible.
 let checking = false;
+async function checkManifest(signal) {
+  const response = await fetch("/agents/manifest.json", { cache: "no-cache", redirect: "error", signal });
+  if (!response.ok || (await response.json()).releaseId !== releaseId) throw new Error("Release unavailable");
+}
+
+async function checkCurrentRelease() {
+  const deadline = 10000;
+  if (typeof AbortSignal !== "undefined" && typeof AbortSignal.timeout === "function") {
+    return checkManifest(AbortSignal.timeout(deadline));
+  }
+  const controller = typeof AbortController === "function" ? new AbortController() : null;
+  let timer;
+  try {
+    const timeout = new Promise((_, reject) => {
+      timer = setTimeout(() => {
+        controller?.abort();
+        reject(new Error("Release check timed out"));
+      }, deadline);
+    });
+    await Promise.race([checkManifest(controller?.signal), timeout]);
+  } finally {
+    clearTimeout(timer);
+  }
+}
 async function revalidate() {
   if (checking || document.hidden || !available) return;
   checking = true;
   try {
-    const response = await fetch("/agents/manifest.json", { cache: "no-cache", redirect: "error", signal: AbortSignal.timeout(10000) });
-    if (!response.ok || (await response.json()).releaseId !== releaseId) throw new Error("Release unavailable");
+    await checkCurrentRelease();
     form.hidden = false;
   } catch {
     available = false;

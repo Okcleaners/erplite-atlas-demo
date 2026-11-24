@@ -166,12 +166,12 @@ input { min-height: 44px; border: 1px solid #8aa098; padding: 9px 12px; backgrou
 }
 
 /* The connector follows receipt → effects, including when the work panel stacks. */
-.task:has(.sale-map) { container-type: inline-size; }
+.sale-container { container-type: inline-size; }
 .sale-map {
   --link: var(--qo-wire);
   display: grid;
-  grid-template-columns: 1.08fr 1fr;
-  gap: 32px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 15px;
   align-items: stretch;
 }
 .sale-desk {
@@ -212,6 +212,7 @@ input { min-height: 44px; border: 1px solid #8aa098; padding: 9px 12px; backgrou
               linear-gradient(225deg,#fffcf1 25%,transparent 25%) -5px 0/10px 10px;
 }
 .sale-effects {
+  padding-left: 18px;
   position: relative;
   display: grid;
   grid-template-rows: 1fr 1fr;
@@ -224,8 +225,8 @@ input { min-height: 44px; border: 1px solid #8aa098; padding: 9px 12px; backgrou
   border-style: solid;
   border-width: 0;
 }
-.sale-effects::before { left: -16px; top: calc(25% - 3px); bottom: calc(25% - 3px); border-left-width: 1px; }
-.sale-effects::after { top: 50%; left: -32px; width: 16px; border-top-width: 1px; }
+.sale-effects::before { left: 6px; top: -15px; bottom: calc(25% - 3px); border-left-width: 1px; }
+.sale-effects::after { display: none; top: 50%; left: -32px; width: 16px; border-top-width: 1px; }
 .effect {
   position: relative;
   padding: 16px 18px 10px;
@@ -233,7 +234,7 @@ input { min-height: 44px; border: 1px solid #8aa098; padding: 9px 12px; backgrou
   border-radius: 12px;
   background: #edf2e8;
 }
-.effect::before { right: 100%; width: 17px; top: 50%; border-top-width: 1px; }
+.effect::before { right: 100%; width: 13px; top: 50%; border-top-width: 1px; }
 .effect.finance { background: #f2eee4; }
 .effect .sale-caption { color: #496156; }
 .effect h3 { font: 400 1.28rem/1.2 Georgia, serif; letter-spacing: -.025em; margin: 10px 0 2px; }
@@ -257,25 +258,24 @@ input { min-height: 44px; border: 1px solid #8aa098; padding: 9px 12px; backgrou
   background: #d8ead6;
   box-shadow: -4px 0 #397354, 4px 0 #d8ead6;
 }
-.effect:has([aria-expanded=true]) { border-color: #447058; }
+:is(.sale-map[data-lens=Operator] .effect.inventory, .sale-map[data-lens=Finance] .effect.finance) { border-color: #447058; }
 @media (prefers-reduced-motion: no-preference) {
-  .effect:has([aria-expanded=true])::before { transform-origin: right; animation: sale-link var(--qo-reveal) var(--qo-ease); }
+  :is(.sale-map[data-lens=Operator] .effect.inventory, .sale-map[data-lens=Finance] .effect.finance)::before { transform-origin: right; animation: sale-link var(--qo-reveal) var(--qo-ease); }
   @keyframes sale-link { from { transform: scaleX(.1); } }
 }
-@container (max-width: 540px) {
-  .sale-map { grid-template-columns: 1fr; gap: 15px; }
-  .sale-effects { padding-left: 18px; }
-  .sale-effects::before { left: 6px; top: -15px; }
-  .sale-effects::after { display: none; }
-  .effect::before { width: 13px; }
-}
+.mobile-slip { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: #fffcf1; color: var(--ink); padding: 10px 12px; }
+.mobile-slip strong, .mobile-slip span { display: block; }
+.mobile-slip span { font-size: .82rem; }
+.mobile-slip button { border: 0; padding: 3px; background: transparent; color: var(--forest); font-size: .84rem; text-decoration: underline; }
+#full-sale-receipt[data-expanded=false] { display: none; }
+#full-sale-receipt[data-expanded=true] { border-top: 1px dashed #aebdaf; }
 
-.mobile-slip { display: none; }
-@container (max-width: 540px) {
-  .mobile-slip { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: #fffcf1; color: var(--ink); padding: 10px 12px; }
-  .mobile-slip strong, .mobile-slip span { display: block; }
-  .mobile-slip span { font-size: .82rem; }
-  .mobile-slip button { border: 0; padding: 3px; background: transparent; color: var(--forest); font-size: .84rem; text-decoration: underline; }
-  #full-sale-receipt[data-expanded=false] { display: none; }
-  #full-sale-receipt[data-expanded=true] { border-top: 1px dashed #aebdaf; }
+@container (min-width: 540.01px) {
+  .sale-map { grid-template-columns: 1.08fr 1fr; gap: 32px; }
+  .sale-effects { padding-left: 0; }
+  .sale-effects::before { left: -16px; top: calc(25% - 3px); }
+  .sale-effects::after { display: block; }
+  .effect::before { width: 17px; }
+  .mobile-slip { display: none; }
+  #full-sale-receipt[data-expanded] { display: block; border-top: 0; }
 }

@@ -254,7 +254,7 @@ function Player() {
       <div className="panel-body">
         <div className="chapter-meta"><span>Chapter {chapter + 1} of 6</span><span>{current.time}</span></div>
         <h2 ref={heading} tabIndex="-1" id="chapter-title">{current.title}</h2>{current.line && <p className="intro-line">{day.close && chapter === 5 ? "Here’s how the day balanced at the River counter." : current.line}</p>}
-        <div key={chapter} className="task">
+        <div key={chapter} className={chapter === 4 ? "task sale-container" : "task"}>
           {chapter === 0 && <Opening {...{ day, dispatch, next }} />}
           {chapter === 1 && <Basket {...{ day, dispatch, next }} />}
           {chapter === 2 && <Customer {...{ day, dispatch, next }} />}
