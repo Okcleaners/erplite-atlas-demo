@@ -1,0 +1,6 @@
+{
+  "name": "atlasade-browser-guidance-tools",
+  "private": true,
+  "engines": { "node": ">=22" },
+  "devDependencies": { "modern-web-guidance": "1.0.2" }
+}
