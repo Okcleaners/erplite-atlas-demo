@@ -105,9 +105,11 @@ def verify(page, out, width, target):
     expect(page.locator('[data-total="drawer"]')).to_have_text("$350.00")
     expect(page.locator('[data-total="receipts"]')).to_have_text("0")
     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
-    # Some file-scheme browser drivers omit the document's request event.
-    assert page.url == target and all(request == target for request in requests), requests
-    assert page.evaluate("performance.getEntriesByType('resource').length === 0")
+    # Firefox may look up the origin favicon even though the document loads no assets.
+    favicon = urlsplit(target)._replace(path="/favicon.ico", query="", fragment="").geturl()
+    assert page.url == target and all(request in (target, favicon) for request in requests), requests
+    resources = page.evaluate("performance.getEntriesByType('resource').map(({name, initiatorType}) => [name, initiatorType])")
+    assert all(name == favicon and initiator == "other" for name, initiator in resources), resources
     assert not errors, errors
 
 
