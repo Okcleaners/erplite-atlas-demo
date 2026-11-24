@@ -1,5 +1,7 @@
 # Atlas website Cloudflare readiness
 
+This document records the pre-cutover readiness work. Start from [production promotion 011](publication-011.md) for the deployed baseline, active projects, and current rollback procedure.
+
 Task: ATLAS-WEBSITE-CLOUDFLARE-001. Repository-only preparation. No deployment authorization is implied by these files.
 
 ## Build and architecture

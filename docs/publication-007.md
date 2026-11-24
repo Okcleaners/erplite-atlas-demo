@@ -1,5 +1,7 @@
 # AtlasADE public website publication
 
+This is the original Cloudflare Pages cutover record. The deployment below is the retained rollback target for [production promotion 011](publication-011.md), which records the current production baseline.
+
 On November 23, 2026, Cloudflare Pages project `atlasade-website` received the first public release of the approved Quiet Orbit website. The build source is commit `b622dd29025cc9171cf9ed4f5b58aedf168fab08` on `codex/atlas-web-visual-005d`. [Approved GitHub source](https://github.com/Okcleaners/erplite-atlas-demo/commit/b622dd29025cc9171cf9ed4f5b58aedf168fab08)
 
 | Release item | Value |
