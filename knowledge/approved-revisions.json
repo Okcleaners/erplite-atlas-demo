@@ -19,5 +19,74 @@
   ],
   "offline-card": [
     "9868183cdff8c1d58278521a8d38e089be50d8ad0325c3ca98bbf924b8529b1b"
+  ],
+  "point-of-sale": [
+    "42f102388d7651f8814e000160725ae92155f4403880f554ce19965d1a41a57c"
+  ],
+  "crm": [
+    "35f0b78a44d12dcffffd3e465056a98e42cf18899527c9b150790c98a7100039"
+  ],
+  "inventory": [
+    "a68adc8271268345a957c78f516de9cd14ec8c29b7c46b9ddb0999276dcef9c1"
+  ],
+  "payments-recovery": [
+    "082ed72cfc4858b962b5058bea4a61b9ca48a99690406128f5da15338db00dfc"
+  ],
+  "reporting": [
+    "fdea3824d405aacf8cc134109db242d197b323121c7b57beb751d8e3bf57900c"
+  ],
+  "business-operations": [
+    "4076a105573c7221a96c3febdc78bb0e95cc177686645bf8428363bf5b44de25"
+  ],
+  "guidance-assistant": [
+    "d60f2cd1179cb676f236f0062b6717994b395cdcea0302e235773b72d2e7fe68"
+  ],
+  "content-studio": [
+    "617cbb3a6e0f2676690335399030f89c99d4468e25954e420736cb887a023bde"
+  ],
+  "integrations": [
+    "c6b5e0ce40cfe1e40ef49de6ba807d52778e98f772713e65778f60a2913ca7ba"
+  ],
+  "backup-replay": [
+    "fb60f9cc6a1f73386c160e0102441328edc7251b32db0f9b0fdf2f9906250256"
+  ],
+  "products-pricing": [
+    "b1ddb9348d99550820e0de21ca79d99353b50be372cf169036184d53d4b15635"
+  ],
+  "employee-management": [
+    "d62a0b36439bdf8375c5c5c5df06407e42359f147ffd51cb8eaf033ef5f42c2a"
+  ],
+  "multi-location": [
+    "1b349846a0fa5ca7620a2ed10879e812f13ecec274d987c9c90895e8d807926b"
+  ],
+  "erp-lite": [
+    "0e96009e956480ef7eec99ad6fc41a078fc77f65a1b23a5299fc114967d6496d"
+  ],
+  "appointments-service-history": [
+    "2028200e8ab98536d117b91cb02519aecf369ad5be709369e08aa6cf8ba33f67"
+  ],
+  "purchasing-suppliers": [
+    "caf110a542ec622e4c6441c7e098ff92d90b03109fdb99e56b1102272dd0e8b6"
+  ],
+  "pos-deployment": [
+    "6db38bb73234ee5d42d31f1f970e008027d9255064624102b5892dd225bcfec1"
+  ],
+  "merchant-availability": [
+    "0f960c08311a85a02d0321d01f0520b55581a8b202d74fb56754183894dfc070"
+  ],
+  "loyalty-customer-segments": [
+    "e28fb4073d0fedafaecca6893a6eba608b0161682d9e20d513dc20dc176c6084"
+  ],
+  "refunds-voids": [
+    "2d4e60d1ab5595840de0cd86f227eb88c3868d66ca861c246ccabb493fa98574"
+  ],
+  "accounting-exports": [
+    "b06188403ae7c43a3310ae149e4e3e57698ef57d811c249566ee8dfc6d4756b1"
+  ],
+  "online-ordering": [
+    "c2a6180ba4210b7134fbcd04430b8cf8270e5c363dc8bf71a75399e389d8d6bb"
+  ],
+  "cafe-sale-trace": [
+    "496f17c177686794397c040a85afd8ba796efb1b9baf71d933669f7b2936ddc1"
   ]
 }

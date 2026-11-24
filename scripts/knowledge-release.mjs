@@ -53,7 +53,7 @@ export function createRelease(source, approvals, asOf = new Date().toISOString()
         (publication.state !== "active" && !publication.supersedes)) throw new Error("Invalid revision lineage for " + slug);
     if (record.claimScope === "synthetic_demo" && (!record.demo || record.lifecycle !== "unverified")) throw new Error("Invalid demo scope");
     if (record.demo && !/^\/day-with-atlasade\/#walkthrough-[a-z-]+$/.test(record.demo.href)) throw new Error("Invalid chapter");
-    if (record.sources.some(({ href }) => !/^\/(?:availability|faq|deployment|product)\/#[a-z0-9-]+$/.test(href))) throw new Error("Invalid source");
+    if (record.sources.some(({ href }) => !/^\/(?:(?:availability|faq|deployment|product)\/#[a-z0-9-]+|#(?:atlas|erp-lite|hardware))$/.test(href))) throw new Error("Invalid source");
     return project(record, asOf);
   });
   if (seen.size !== Object.keys(approvals).length) throw new Error("Removed feature needs a withdrawal notice");

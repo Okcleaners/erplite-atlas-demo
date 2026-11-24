@@ -18,12 +18,9 @@ function detail(r) {
 
 function assess(requirement, index) {
   const { answer, records } = search(index, requirement);
-  // The shared English search index drops non-Latin tokens and symbolic operators.
-  // A removed qualifier must not become an exact requirement match.
-  const lostQualifier = /[^a-zA-Z0-9\p{Script=Latin}\p{M}\s'’.,?!-]/u.test(requirement);
-  if (!answer || lostQualifier) return { requirement, outcome: "unverified", relatedIds: records.slice(0, 3).map(r => r.slug) };
+  if (!answer) return { requirement, outcome: "unverified", relatedIds: records.slice(0, 3).map(r => r.slug) };
   // Only reviewed merchant-product wording can explicitly exclude a capability.
-  // The current seven records contain no such exclusion or implemented product claim.
+  // The current records contain no such exclusion or implemented product claim.
   let outcome = "unverified";
   if (answer.claimScope === "synthetic_demo") outcome = "synthetic_demo_only";
   else if (answer.answer.startsWith("Explicitly excluded: ")) outcome = "explicitly_excluded";

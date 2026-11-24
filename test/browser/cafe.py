@@ -121,7 +121,10 @@ def exercise(browser, base, output, width, height, keyboard=False, reduced=False
     if not keyboard:
         # Finish the CTA navigation before independently exercising a direct load.
         expect(page.locator(".register-status")).to_have_text("Register closed")
-        assert page.goto(base + "/day-with-atlasade", wait_until="load").ok
+        response = page.goto(base + "/day-with-atlasade", wait_until="load")
+        # A repeat navigation can revalidate the canonical document from cache.
+        assert response.ok or response.status == 304
+        assert page.url == base + "/day-with-atlasade/"
 
     chapter("Begin the day")
     expect(page.locator(".float-value")).to_have_text("$200.00")

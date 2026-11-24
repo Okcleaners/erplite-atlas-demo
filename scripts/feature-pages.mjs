@@ -6,9 +6,14 @@ const anchor = ({ href, label }) => '<a href="' + escape(href) + '">' + escape(l
 const status = record => '<span class="pill">Product lifecycle · ' + escape(record.lifecycle) + '</span>';
 const chapters = record => record.demo ? anchor({href:record.demo.href,label:"Read “" + record.demo.label + "”"}) : "";
 const options = values => values.map(value => '<option value="'+escape(value)+'">'+escape(value[0].toUpperCase()+value.slice(1))+'</option>').join("");
-const symbols = { Register: "register", Payments: "payments", Customers: "customers", Inventory: "inventory", Reporting: "reporting" };
-const categoryArt = record => symbols[record.category]
-  ? `<svg class="qo-glyph" aria-hidden="true"><use href="/images/quiet-orbit.svg#${symbols[record.category]}"/></svg>` : "";
+const symbols = {
+  Register: "register", Customers: "customers", Payments: "payments", Inventory: "inventory",
+  Operations: "operations", Reporting: "reporting", Marketing: "drafts", "Setup & Integrations": "operations"
+};
+const capabilitySymbols = { "employee-management": "employees", "multi-location": "locations" };
+const art = symbol => symbol
+  ? `<svg class="qo-glyph" aria-hidden="true"><use href="/images/quiet-orbit.svg#${symbol}"/></svg>` : "";
+const categoryArt = record => art(capabilitySymbols[record.slug] ?? symbols[record.category]);
 export function shell(title, description, path, body, script = "") {
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${escape(title)} | Atlasade</title><meta name="description" content="${escape(description)}"><link rel="canonical" href="${site}${path}">
@@ -18,8 +23,12 @@ export function shell(title, description, path, body, script = "") {
 }
 const datedNotice = record => "This entry requires a current check. Its review deadline is " + record.publication.expiresOn + " at 00:00 UTC. Ask about this feature in Feature Finder.";
 function card(record) {
-  return `<article class="card" data-feature="${escape(record.slug)}" data-revision="${record.review.revision}"><div class="category">${categoryArt(record)}${escape(record.category)}</div><h2><a href="${url(record)}">${escape(record.title)}</a></h2>
+  return `<article class="card" data-feature="${escape(record.slug)}" data-revision="${record.review.revision}"><div class="category">${categoryArt(record)}${escape(record.category)}</div><h3><a href="${url(record)}">${escape(record.title)}</a></h3>
   <p>${escape(record.publication.expiresOn ? datedNotice(record) : record.answer)}</p><div class="card-foot">${status(record)}${record.publication.expiresOn ? "" : chapters(record)}</div></article>`;
+}
+function categoryGroup(category, records) {
+  return `<details class="feature-group" data-category="${escape(category)}"><summary><span class="group-label">${art(symbols[category])}<span>${escape(category)}</span><span class="group-count">${records.length}</span></span></summary>
+    <div class="card-grid">${records.map(card).join("")}</div></details>`;
 }
 function detail(record, releaseId) {
   const stamp = '<p class="review" data-release="' + releaseId + '" data-revision="' + record.review.revision + '">Revision ' + record.review.revision + ' · <a href="/agents/manifest.json">Knowledge release ' + releaseId.slice(9,21) + '</a></p>';
@@ -36,17 +45,18 @@ export async function featureDocuments(release) {
   release ??= await loadRelease();
   const records = release.current;
   const { releaseId } = release.manifest;
-  const categories = [...new Set(records.map(r=>r.category))].sort();
+  const byCategory = Map.groupBy([...records].sort((a,b) => a.title.localeCompare(b.title,"en")), r => r.category);
+  const categories = [...new Set([...Object.keys(symbols), ...byCategory.keys()])].filter(category => byCategory.has(category));
   const directory = shell("Feature Finder","Search Atlasade capabilities, explore the River & Oak demo and check the limits for your merchant setup.","/features/",`
     <div class="hero"><div><p class="eyebrow">Atlasade Help</p><h1>Feature Finder</h1><p class="lead">Find out what you can try, where it applies, and what to confirm for your business.</p></div>
     <a class="photo" href="/day-with-atlasade/"><img src="/images/cafe-morning.webp" alt="" width="900" height="600"><span>Explore the River &amp; Oak demo</span></a></div>
-    <form id="feature-search" role="search" hidden><label for="query">Search features or ask a question</label><div class="searchbox"><input id="query" name="query" type="search" placeholder="Try “oat bar stock” or “cash checkout”" autocomplete="off" maxlength="400"><button class="ask" type="submit">Ask about a feature</button></div>
+    <form id="feature-search" role="search" hidden><label for="query">Search features or ask a question</label><div class="searchbox"><input id="query" name="query" type="search" placeholder="Try “CRM”, “POS” or “multiple stores”" autocomplete="off" maxlength="400"><button class="ask" type="submit">Ask about a feature</button></div>
     <div class="filters"><div><label for="category-filter">Category</label> <select id="category-filter" name="category"><option value="">All categories</option>${options(categories)}</select></div><div><label for="lifecycle-filter">Product lifecycle</label> <select id="lifecycle-filter" name="lifecycle"><option value="">All states</option>${options(["implemented","experimental","planned","unverified"])}</select></div><button type="reset" hidden>Clear filters</button></div></form>
     <section id="help-result" role="status" aria-label="Atlasade Help answer" hidden></section>
-    <div class="list-head"><h2>Browse capabilities</h2><span id="result-count" aria-live="polite">${records.length} features</span></div>
+    <div class="list-head"><h2 id="results-heading">Browse capabilities</h2><span id="result-count" role="status">${records.length} features</span></div>
     <p class="note">Product lifecycle describes the merchant product. Café examples use fictional data. <a href="/availability/#labels">About availability</a></p>
     <p id="no-matches" hidden>No matching features. Try a broader term or clear the filters.</p>
-    <div id="results">${[...records].sort((a,b)=>a.title.localeCompare(b.title,"en")).map(card).join("")}</div>
+    <div id="results"><div class="feature-groups">${categories.map(category=>categoryGroup(category,byCategory.get(category))).join("")}</div></div>
     <p class="note">Knowledge release <a href="/agents/" data-release="${releaseId}">${releaseId.slice(9,21)}</a></p>
     <script id="catalog" type="application/json">${JSON.stringify(records).replaceAll("<","\\u003c")}</script>`,'<script type="module" src="/finder/ui.js"></script>');
   return new Map([["/features/",directory],...release.capabilities.records.map(record=>[url(record),detail(record,releaseId)])]);

@@ -53,7 +53,7 @@ test("per-request discovery, listing, input boundaries, host/origin and transpor
   assert.equal(fixture.requests.length, 0);
 });
 
-test("seven scoped records, citations, ranking, compound requirements and one-hop edges", async t => {
+test("scoped records, citations, CRM discovery, compound requirements and one-hop edges", async t => {
   const { fixture, call } = await setup(t);
   for (const r of fixture.releases.A.current) {
     const result = await call("fetch", { id:r.slug });
@@ -63,7 +63,7 @@ test("seven scoped records, citations, ranking, compound requirements and one-ho
     assert.equal(data.revision, r.review.revision);
     assert.equal(data.text,r.answer);
     assert.equal(data.scope,r.scope);
-    assert.equal(data.lifecycle,"unverified");
+    assert.equal(data.lifecycle,r.lifecycle);
     assert.equal(data.availabilityStatus,"unverified");
     assert.deepEqual(data.citations,r.citations);
     assert.doesNotMatch(JSON.stringify(data), /file:|Graphify|Okcleaners|operator_harness|127\.0\.0\.1/i);
@@ -72,6 +72,9 @@ test("seven scoped records, citations, ranking, compound requirements and one-ho
   const hits = (await call("search",{query:question})).structuredContent;
   assert.equal(hits.matchType,"related");
   assert.equal(hits.results[0].id,"location-stock");
+  assert.equal((await call("search",{query:"CRM"})).structuredContent.results[0].id,"crm");
+  assert.equal((await call("compare_requirements",{requirements:["CRM"]})).structuredContent.assessments[0].evidence.id,"crm");
+  assert.equal((await call("compare_requirements",{requirements:["CRM and automatic social publishing"]})).structuredContent.assessments[0].outcome,"unverified");
   assert.equal((await call("search",{query:"automatic refunds"})).structuredContent.results.length,0);
   assert.equal((await call("compare_requirements",{requirements:["open the till 日本語"]})).structuredContent.assessments[0].outcome,"unverified");
   const compound = "open the till and accept offline refunds";

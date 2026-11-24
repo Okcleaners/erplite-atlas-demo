@@ -6,7 +6,15 @@ const lifecycle = form.elements.lifecycle;
 const records = JSON.parse(document.querySelector("#catalog").textContent);
 const index = makeIndex(records);
 const list = document.querySelector("#results");
-const cards = new Map([...list.children].map(card => [card.dataset.feature, card]));
+const browse = list.querySelector(".feature-groups");
+const groups = [...browse.children].map(group => ({
+  group, category: group.dataset.category,
+  cards: group.querySelector(".card-grid"), count: group.querySelector(".group-count")
+}));
+const matches = document.createElement("div");
+matches.className = "card-grid";
+const cards = new Map([...browse.querySelectorAll("[data-feature]")].map(card => [card.dataset.feature, card]));
+const heading = document.querySelector("#results-heading");
 const count = document.querySelector("#result-count");
 const help = document.querySelector("#help-result");
 const reset = form.querySelector("[type=reset]");
@@ -20,11 +28,41 @@ function link(label, href) {
 }
 const releaseId = document.querySelector("[data-release]").dataset.release;
 let available = true;
+function placeCards(container, ordered) {
+  const keep = new Set(ordered);
+  for (const card of [...container.children]) if (!keep.has(card)) card.remove();
+  ordered.forEach((card, index) => {
+    const before = container.children[index] ?? null;
+    if (card === before) return;
+    if (typeof container.moveBefore === "function" && card.isConnected) container.moveBefore(card, before);
+    else container.insertBefore(card, before);
+  });
+}
+function showResults(records, browsing) {
+  if (!browsing) {
+    if (!matches.isConnected) list.append(matches);
+    placeCards(matches, records.map(record => cards.get(record.slug)));
+    browse.remove();
+    return;
+  }
+  if (!browse.isConnected) list.append(browse);
+  for (const entry of groups) {
+    const selected = records.filter(record => record.category === entry.category);
+    placeCards(entry.cards, selected.map(record => cards.get(record.slug)));
+    entry.group.hidden = !selected.length;
+    const total = String(selected.length);
+    if (entry.count.textContent !== total) entry.count.textContent = total;
+  }
+  matches.remove();
+}
 function update(ask = false) {
   if (!available) return;
+  const browsing = !query.value.trim() && !category.value && !lifecycle.value;
   const result = search(index, query.value, category.value, lifecycle.value);
-  list.replaceChildren(...result.records.map(record => cards.get(record.slug)));
-  count.textContent = result.records.length + (result.records.length === 1 ? " feature" : " features");
+  showResults(result.records, browsing);
+  heading.textContent = browsing ? "Browse capabilities" : "Matching capabilities";
+  const total = result.records.length + (result.records.length === 1 ? " feature" : " features");
+  if (count.textContent !== total) count.textContent = total;
   empty.hidden = !!result.records.length;
   reset.hidden = !query.value && !category.value && !lifecycle.value;
   help.replaceChildren();
@@ -35,14 +73,15 @@ function update(ask = false) {
     return;
   }
   const record = result.answer;
-  const heading = document.createElement("h2");
-  heading.textContent = record.title;
-  help.append(heading);
+  const answerHeading = document.createElement("h2");
+  answerHeading.textContent = record.title;
+  help.append(answerHeading);
   const direct = document.createElement("p");
   direct.className = "direct-answer";
   direct.textContent = record.answer;
   const facts = document.createElement("dl");
   for (const [label, value] of [["Scope", record.scope], ["Product lifecycle", record.lifecycle],
+    ["Evidence", record.claimScope === "synthetic_demo" ? "Fictional café demonstration" : "Merchant product documentation"],
     ["What to confirm", record.limitation], ["Merchant availability", record.availability]]) {
     const term = document.createElement("dt");
     const detail = document.createElement("dd");
@@ -57,6 +96,7 @@ function update(ask = false) {
   revision.textContent = "Revision " + record.review.revision + " · Release " + releaseId.slice(9,21) +
     " · Merchant availability " + record.availabilityStatus;
   help.append(revision);
+  help.append(link("Read feature details", "/features/" + record.slug + "/"));
   for (const source of [...record.sources, ...(record.demo ? [record.demo] : [])]) help.append(link(source.label, source.href));
 }
 form.addEventListener("input", () => update());

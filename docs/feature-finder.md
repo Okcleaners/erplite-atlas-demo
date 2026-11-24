@@ -20,7 +20,7 @@ A private Graphify review process can propose changes keyed by public slug and v
 
 ## Public release maintenance
 
-The catalog is the single authored set of seven records. An entry in `knowledge/approved-revisions.json` pins each reviewed revision's content by SHA-256. The initial entries carry forward the scoped wording and demo links from the Feature Finder baseline. Keep private evidence, decisions and identities outside the public release. A digest detects changes and does not authenticate a reviewer.
+The catalog is the single authored set of public capability records. An entry in `knowledge/approved-revisions.json` pins each reviewed revision's content by SHA-256. Keep private evidence, decisions and identities outside the public release. A digest detects changes and does not authenticate a reviewer. The [coverage matrix](public-capability-coverage-011.md) maps the public product descriptions and café examples to their Feature Finder entries.
 
 For a correction or withdrawal, increment the record revision, set `publication.supersedes` to the prior revision, and update the review, record issue and release issue dates. Set the publication state to `corrected` or `withdrawn`. Use `evidence: "unknown"` for lost support. An optional `expiresOn` is exclusive at midnight UTC. Keep the slug even for a withdrawal. After approval of the exact edited record, append its `recordDigest(record)` from `scripts/knowledge-release.mjs` to that slug's review history. The build rejects silently missing slugs, unpinned edits and invalid lineage. Never overwrite the prior digest to authorize an edit.
 

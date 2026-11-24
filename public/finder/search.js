@@ -3,10 +3,14 @@ const normalize = value => value.normalize("NFKD").replace(/\p{M}/gu, "").toLowe
 const filler = new Set("a an the at by is are can do does i my your and or to in of with when for it how what me please".split(" "));
 const words = phrase => phrase.split(" ").filter(word => word && !filler.has(word));
 const guards = [
-  [/\b(offline|outage|without internet|internet goes down)\b/, ["offline-card"]],
-  [/\b(refund\w*|revers\w*|automatic\w*|autopost\w*)\b/, []],
-  [/\b((other|another|different|across) (stores?|locations?)|hill)\b/, ["location-stock"]],
+  [/\b(automatic\w*|autopost\w*|auto post)\b/, []],
+  [/^(?=.*\b(?:offline|outage|without internet|internet goes down)\b)(?=.*\b(?:cards?|cash|payments?|checkout)\b)/, ["offline-card"]],
+  [/\b(refund\w*|revers\w*)\b/, ["refunds-voids", "reporting"]],
+  [/\b((other|another|different|across) (stores?|locations?)|hill)\b/, ["location-stock", "multi-location"]],
 ];
+// Normalization may discard qualifiers. Only punctuation used in reviewed public
+// terms and questions may be ignored when deciding whether a match is exact.
+const exactInput = /^[a-z0-9\p{Script=Latin}\p{M}\s'’.,?!()&/-]*$/iu;
 export function makeIndex(records) {
   return records.map(record => {
     const title = normalize(record.title);
@@ -20,19 +24,22 @@ export function makeIndex(records) {
 export function search(index, value, category = "", lifecycle = "") {
   const query = normalize(value);
   const tokens = [...new Set(words(query))];
+  const today = new Date().toISOString().slice(0,10);
+  const canAnswer = exactInput.test(value);
+  const allowed = guards.filter(([pattern]) => pattern.test(query));
   const matches = [];
   for (const item of index) {
     const { record } = item;
     const publication = record.publication;
     if (publication && (publication.state === "withdrawn" || publication.evidence !== "documented" ||
-        (publication.expiresOn && publication.expiresOn <= new Date().toISOString().slice(0,10)))) continue;
+        (publication.expiresOn && publication.expiresOn <= today))) continue;
     if ((category && category !== record.category) || (lifecycle && lifecycle !== record.lifecycle)) continue;
-    if (guards.some(([pattern, allowed]) => pattern.test(query) && !allowed.includes(record.slug))) continue;
     // A complete grammar covers ordinary rephrasings of the two-store example.
     // Extra conditions (refunds, integrations, etc.) cannot become direct answers.
     const stockQuestion = record.slug === "location-stock" &&
       /^(?:(?:does|will|would|can) (?:selling|ringing up) (?:an?|one) oat bar(?: at river)? (?:change|affect|reduce|decrease)|if i sell (?:an?|one) oat bar(?: at river)? (?:does|will) (?:it )?(?:change|affect)) (?:the )?(?:stock|inventory)(?: levels?)? (?:at|in|for) (?:my other|the other|another|a different) (?:store|location)$/.test(query);
-    const exact = stockQuestion || item.questions.includes(query) || item.title === query || item.aliases.includes(query);
+    const exact = canAnswer && (stockQuestion || item.questions.includes(query) || item.title === query || item.aliases.includes(query));
+    if (!exact && allowed.some(([, slugs]) => !slugs.includes(record.slug))) continue;
     const hits = tokens.filter(token => item.vocabulary.has(token)).length;
     const supportingHits = tokens.filter(token => item.supporting.has(token)).length;
     let score = hits ? 10 * hits / tokens.length + (item.title.includes(query) ? 5 : 0) : 0;

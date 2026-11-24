@@ -21,10 +21,14 @@ with sync_playwright() as p:
     for width, height in [(390,844), (768,1024), (1440,900)]:
         ctx = browser.new_context(viewport={"width":width,"height":height}, reduced_motion="reduce" if width==768 else "no-preference")
         page = ctx.new_page()
-        errors, requests = [], []
+        errors, requests, data_requests = [], [], []
         page.on("pageerror", lambda e: errors.append(str(e)))
         page.on("console", lambda e: errors.append(e.text) if e.type=="error" else None)
-        page.on("request", lambda r: requests.append(r.url))
+        def record_request(request):
+            requests.append(request.url)
+            if request.resource_type in {"fetch", "xhr", "eventsource", "websocket"}:
+                data_requests.append(request.url)
+        page.on("request", record_request)
         def shot(label):
             assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
             page.screenshot(path=args.output/f"{width}-{label}.png")
@@ -40,15 +44,32 @@ with sync_playwright() as p:
             expect(field).to_be_focused()
         category = page.get_by_label("Category", exact=True)
         category.select_option("Payments")
-        expect(page.locator("#results article")).to_have_count(2)
+        expect(page.locator("#results article")).to_have_count(4)
         page.get_by_label("Product lifecycle",exact=True).select_option("planned")
         expect(page.locator("#no-matches")).to_be_visible()
         page.get_by_role("button",name="Clear filters").click()
-        for q in ["drawer","Can cash checkout automatically refund another location?"]:
+        group = page.locator('details[data-category="Customers"]')
+        group.locator("summary").focus()
+        page.keyboard.press("Enter")
+        expect(group.get_by_role("link", name="CRM and Customer Management")).to_be_visible()
+        page.keyboard.press("Enter")
+        for q in ["drawer","Can cash checkout automatically refund another location?",
+                  "Can I use CRM and transfer stock between stores?", "CRM +"]:
             field.fill(q)
             field.press("Enter")
             expect(page.locator("#help-result")).to_contain_text("no verified answer")
-        before = len(requests)
+        manifest = page.request.get(args.base + "/agents/manifest.json").json()
+        catalog = page.request.get(args.base + "/agents/capabilities.json").json()["records"]
+        before = len(data_requests)
+        for record in catalog:
+            field.fill(record["title"])
+            expect(page.locator("#results article").first).to_have_attribute("data-feature", record["slug"])
+        for q in ["CRM", "customer relationship management", "Can staff find a returning customer's purchase history?"]:
+            field.fill(q)
+            field.press("Enter")
+            expect(page.locator("#help-result")).to_contain_text("CRM and Customer Management")
+            expect(page.locator("#help-result")).to_contain_text("Merchant availability unverified")
+            expect(page.locator("#help-result").get_by_role("link", name="Read feature details")).to_have_attribute("href", "/features/crm/")
         field.fill(question)
         field.press("Enter")
         answer = page.locator("#help-result")
@@ -57,7 +78,7 @@ with sync_playwright() as p:
         expect(answer).to_contain_text("Confirm")
         release_id = page.locator("#help-result [data-release]").get_attribute("data-release")
         expect(page.locator("#help-result [data-revision]")).to_have_attribute("data-revision", "1")
-        assert len(requests) == before
+        assert not data_requests[before:], data_requests[before:]
         answer.scroll_into_view_if_needed()
         shot("answer")
         page.get_by_role("link",name="Location-scoped inventory",exact=True).click()
@@ -75,7 +96,6 @@ with sync_playwright() as p:
         page.keyboard.press("Enter")
         expect(page.locator("code[data-release]")).to_have_text(release_id)
         shot("agent-guide")
-        manifest = page.request.get(args.base + "/agents/manifest.json").json()
         assert manifest["releaseId"] == release_id
         for artifact in manifest["artifacts"]:
             response = page.request.get(args.base + artifact["path"])
@@ -91,13 +111,14 @@ with sync_playwright() as p:
     expect(page.get_by_role("link", name="capability records")).to_be_visible()
     page.goto(args.base+"/")
     page.get_by_role("link", name="Find a feature", exact=True).first.click()
-    for href in page.locator("#results h2 a").evaluate_all("links => links.map(link => link.href)"):
+    for href in page.locator("#results article h3 a").evaluate_all("links => links.map(link => link.href)"):
         response = page.goto(href)
         assert response.status == 200
         expect(page.get_by_role("heading", name="Supporting documentation")).to_be_visible()
         expect(page.locator("link[rel=canonical]")).to_have_attribute("href", "https://www.atlasade.com"+urlsplit(href).path)
     page.goto(args.base+"/features/")
-    expect(page.locator("#results article")).to_have_count(7)
+    expect(page.locator("#results article")).to_have_count(len(catalog))
+    page.locator('details[data-category="Inventory"] > summary').click()
     page.get_by_role("link",name="Location-scoped inventory").click()
     page.get_by_role("link",name="Read “Follow the sale”").click()
     expect(page.locator("#walkthrough-follow-the-sale")).to_be_in_viewport()

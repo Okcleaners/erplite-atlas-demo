@@ -86,13 +86,15 @@ test("withdrawal, unknown evidence and exclusive UTC expiry strip claim content 
     assert.equal(notice.citations,undefined);
     assert.ok(docs.get("/features/location-stock/").includes(notice.notice));
     assert.ok(!release.graph.edges.some(e=>e.from===notice.slug));
-    assert.ok(!release.graph.nodes.some(n=>n.id==="walkthrough-follow-the-sale"));
+    const chapter = "walkthrough-follow-the-sale";
+    assert.ok(release.graph.nodes.some(n=>n.id===chapter));
+    assert.ok(release.graph.edges.some(e=>e.from==="cafe-sale-trace" && e.to===chapter));
     assert.ok(!validateCatalog(JSON.parse(release.files.get("/finder/catalog.v1.json"))).some(r=>r.slug===notice.slug));
     assert.equal(search(makeIndex(browserIndex(docs)),question).answer,null);
     for (const bytes of [...release.files.values(),...docs.values(),agentGuide(release)]) assert.ok(!bytes.includes("Hill stays at 9"));
   }
   const before = revised(r=>{r.publication.expiresOn="2026-12-02";});
-  assert.equal(before.current.length,7);
+  assert.equal(before.current.length,current.current.length);
   const past = structuredClone(before.current);
   past.find(r=>r.slug==="location-stock").publication.expiresOn="2000-01-01";
   assert.equal(search(makeIndex(past),question).answer,null);

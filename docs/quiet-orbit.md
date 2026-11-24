@@ -36,6 +36,7 @@ Use a 60 × 48 view box, rounded 1.7-unit strokes and a quiet secondary plane. R
 | reporting | Statement and columns |
 | locations | Two stores with a route |
 | employees | Staff identity badge |
+| drafts | Draft sheet and pencil |
 | operations | Module hierarchy and connections |
 
 ## Future demonstration candidates

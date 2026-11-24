@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "issuedOn": "2026-11-22",
+  "issuedOn": "2026-11-24",
   "records": [
     {
       "slug": "open-register",
@@ -345,6 +345,1327 @@
       "publication": {
         "state": "active",
         "issuedOn": "2026-11-22",
+        "expiresOn": null,
+        "supersedes": null,
+        "evidence": "documented"
+      }
+    },
+    {
+      "slug": "point-of-sale",
+      "title": "Sales Register (POS)",
+      "category": "Register",
+      "answer": "Atlasade’s Sales Register has controlled-beta demonstrations for adding items, linking a customer, and completing a cash sale with tax and a receipt.",
+      "scope": "Point of sale for everyday merchant checkout.",
+      "limitation": "Confirm item types, tax setup, receipt handling, and supported tenders for your package. Register modes by role and deeper order handoff are roadmap ideas.",
+      "lifecycle": "unverified",
+      "availability": "Confirm the current package and supported workflow with Atlasade.",
+      "aliases": [
+        "Sales Register",
+        "POS",
+        "P.O.S.",
+        "point of sale",
+        "cash register",
+        "checkout",
+        "register",
+        "till",
+        "sales tax",
+        "sales receipt",
+        "kitchen display"
+      ],
+      "questions": [
+        "What does the Atlasade point of sale do?",
+        "Can I ring up a sale and print a receipt?",
+        "How does the Sales Register handle tax and receipts?"
+      ],
+      "demo": null,
+      "sources": [
+        {
+          "label": "Sales Register product map",
+          "href": "/#atlas"
+        },
+        {
+          "label": "Connected merchant workflows",
+          "href": "/product/#connected-work"
+        }
+      ],
+      "review": {
+        "revision": 1,
+        "basis": "Existing public documentation",
+        "checkedOn": "2026-11-24"
+      },
+      "claimScope": "merchant_product",
+      "availabilityStatus": "unverified",
+      "dependencies": [
+        "Item catalog",
+        "Tax setup",
+        "Supported tender and receipt workflow"
+      ],
+      "publication": {
+        "state": "active",
+        "issuedOn": "2026-11-24",
+        "expiresOn": null,
+        "supersedes": null,
+        "evidence": "documented"
+      }
+    },
+    {
+      "slug": "crm",
+      "title": "CRM and Customer Management",
+      "category": "Customers",
+      "answer": "Bounded Atlasade demonstrations connect customer lookup with linked purchase history. The wider customer relationship management direction includes customer context and follow-up.",
+      "scope": "Customer profiles, returning visits, and purchase history associated with Atlasade sales.",
+      "limitation": "Confirm the lookup method, fields recorded, history views, staff access, and customer follow-up tools for your setup. Marketing exports and configurable privacy controls require separate confirmation.",
+      "lifecycle": "unverified",
+      "availability": "Confirm the current package and supported workflow with Atlasade.",
+      "aliases": [
+        "Customer/CRM",
+        "CRM",
+        "C.R.M.",
+        "customer relationship management",
+        "customer management",
+        "customer history",
+        "customer profiles",
+        "purchase history",
+        "customer database",
+        "customer phone lookup",
+        "customer follow-up",
+        "customer records",
+        "customer privacy",
+        "customer timeline"
+      ],
+      "questions": [
+        "Can staff find a returning customer's purchase history?",
+        "Can I look up a customer by phone and see their purchase history?",
+        "What does Atlasade CRM do?",
+        "Who can see a customer's sales history?",
+        "Who came in?",
+        "What needs follow up?"
+      ],
+      "demo": null,
+      "sources": [
+        {
+          "label": "Customer records and history",
+          "href": "/faq/#customers"
+        },
+        {
+          "label": "Customer/CRM product map",
+          "href": "/#atlas"
+        }
+      ],
+      "review": {
+        "revision": 1,
+        "basis": "Existing public documentation",
+        "checkedOn": "2026-11-24"
+      },
+      "claimScope": "merchant_product",
+      "availabilityStatus": "unverified",
+      "dependencies": [
+        "Customer identification",
+        "Staff permissions",
+        "Supported history views"
+      ],
+      "publication": {
+        "state": "active",
+        "issuedOn": "2026-11-24",
+        "expiresOn": null,
+        "supersedes": null,
+        "evidence": "documented"
+      }
+    },
+    {
+      "slug": "inventory",
+      "title": "Inventory and Stock Control",
+      "category": "Inventory",
+      "answer": "Controlled-beta demonstrations include receiving, counts, adjustments, and stock checks for tracked items. The product direction distinguishes tracked goods from prepared items.",
+      "scope": "Stock control for the item types supported by the proposed setup.",
+      "limitation": "Confirm how each item is tracked and when availability is checked. Low-stock alerts, ingredient tracking, and broader multi-location inventory are roadmap ideas.",
+      "lifecycle": "unverified",
+      "availability": "Confirm the current package and supported workflow with Atlasade.",
+      "aliases": [
+        "Inventory",
+        "stock",
+        "stock control",
+        "inventory management",
+        "stocktake",
+        "stock count",
+        "inventory adjustments",
+        "receiving stock",
+        "restocking",
+        "low stock alerts",
+        "ingredient tracking"
+      ],
+      "questions": [
+        "How do I receive, count, and adjust stock?",
+        "Can I check tracked stock before completing a sale?",
+        "When is tracked stock checked?",
+        "What needs restocking?",
+        "What stock needs attention?"
+      ],
+      "demo": null,
+      "sources": [
+        {
+          "label": "Inventory product map",
+          "href": "/#atlas"
+        },
+        {
+          "label": "Tracked stock and availability",
+          "href": "/faq/#stock"
+        }
+      ],
+      "review": {
+        "revision": 1,
+        "basis": "Existing public documentation",
+        "checkedOn": "2026-11-24"
+      },
+      "claimScope": "merchant_product",
+      "availabilityStatus": "unverified",
+      "dependencies": [
+        "Supported item types",
+        "Tracked stock policy",
+        "Receiving and counts"
+      ],
+      "publication": {
+        "state": "active",
+        "issuedOn": "2026-11-24",
+        "expiresOn": null,
+        "supersedes": null,
+        "evidence": "documented"
+      }
+    },
+    {
+      "slug": "payments-recovery",
+      "title": "Payments & Recovery",
+      "category": "Payments",
+      "answer": "Cash checkout has controlled-beta demonstration evidence. Card and recovery demonstrations are bounded and cover questions about tenders, unclear payment outcomes, and manager review.",
+      "scope": "Merchant tenders, payment status, and interrupted-payment review.",
+      "limitation": "Confirm the provider, terminal, region, and recovery workflow. Live card processing, settlement, supported devices, retry behavior, and duplicate-charge prevention require separate confirmation.",
+      "lifecycle": "unverified",
+      "availability": "Confirm the current package and supported workflow with Atlasade.",
+      "aliases": [
+        "payments",
+        "payments and recovery",
+        "payment processing",
+        "card payments",
+        "card terminal",
+        "credit card processing",
+        "payment recovery",
+        "tender handling",
+        "declined card",
+        "payment settlement"
+      ],
+      "questions": [
+        "What happens after an unclear payment?",
+        "Which payments and terminals can I use?",
+        "How does Atlasade handle interrupted card payments?"
+      ],
+      "demo": null,
+      "sources": [
+        {
+          "label": "Payments & Recovery product map",
+          "href": "/#atlas"
+        },
+        {
+          "label": "Provider and device compatibility",
+          "href": "/availability/#payments-and-integrations"
+        }
+      ],
+      "review": {
+        "revision": 1,
+        "basis": "Existing public documentation",
+        "checkedOn": "2026-11-24"
+      },
+      "claimScope": "merchant_product",
+      "availabilityStatus": "unverified",
+      "dependencies": [
+        "Payment provider",
+        "Device",
+        "Region",
+        "Payment and recovery rules"
+      ],
+      "publication": {
+        "state": "active",
+        "issuedOn": "2026-11-24",
+        "expiresOn": null,
+        "supersedes": null,
+        "evidence": "documented"
+      }
+    },
+    {
+      "slug": "reporting",
+      "title": "Reporting and Business Analytics",
+      "category": "Reporting",
+      "answer": "Bounded demonstrations include daily sales, tax, tender, and closeout views. The product map also identifies refund, correction, customer activity, and export questions.",
+      "scope": "Reviewing merchant activity, sales reports, and daily financial totals.",
+      "limitation": "Confirm the fields, exports, and reports included with your setup. Scheduled reports, store comparisons, and report views by role are roadmap ideas. Email delivery and automated reconciliation require separate confirmation.",
+      "lifecycle": "unverified",
+      "availability": "Confirm the current package and supported workflow with Atlasade.",
+      "aliases": [
+        "Reporting",
+        "sales reports",
+        "sales analytics",
+        "business analytics",
+        "daily totals",
+        "tax reports",
+        "tender summary",
+        "daily sales view",
+        "scheduled reports",
+        "store comparisons",
+        "refund reporting",
+        "customer activity reports",
+        "automated reconciliation"
+      ],
+      "questions": [
+        "How do I see my daily sales, tax, and tender totals?",
+        "Which totals can be reviewed?",
+        "Can I schedule and email sales reports?",
+        "What sold?",
+        "What happened today?"
+      ],
+      "demo": null,
+      "sources": [
+        {
+          "label": "Reporting product map",
+          "href": "/#atlas"
+        },
+        {
+          "label": "Daily review and closeout",
+          "href": "/faq/#close"
+        }
+      ],
+      "review": {
+        "revision": 1,
+        "basis": "Existing public documentation",
+        "checkedOn": "2026-11-24"
+      },
+      "claimScope": "merchant_product",
+      "availabilityStatus": "unverified",
+      "dependencies": [
+        "Included report fields",
+        "Supported closeout workflow"
+      ],
+      "publication": {
+        "state": "active",
+        "issuedOn": "2026-11-24",
+        "expiresOn": null,
+        "supersedes": null,
+        "evidence": "documented"
+      }
+    },
+    {
+      "slug": "business-operations",
+      "title": "Business Operations",
+      "category": "Operations",
+      "answer": "Controlled-beta demonstrations cover saving and reopening tickets, staff roles, manager review, and business-day workflows. The aim is to make unresolved work visible before close.",
+      "scope": "Daily merchant operations and manager review of unfinished work.",
+      "limitation": "Confirm the permissions, handling of unresolved work, and closeout rules. Shift management, task checklists, and broader approval workflows are roadmap ideas.",
+      "lifecycle": "unverified",
+      "availability": "Confirm the current package and supported workflow with Atlasade.",
+      "aliases": [
+        "daily operations",
+        "business day",
+        "day close",
+        "closeout",
+        "saved tickets",
+        "held orders",
+        "park a sale",
+        "reopen a ticket",
+        "manager review",
+        "needs attention queue",
+        "unresolved work",
+        "task checklists",
+        "approval workflows"
+      ],
+      "questions": [
+        "What needs attention before closing?",
+        "Can I save and reopen a ticket before closing the business day?",
+        "How is unfinished work shown?"
+      ],
+      "demo": null,
+      "sources": [
+        {
+          "label": "Business Operations product map",
+          "href": "/#atlas"
+        },
+        {
+          "label": "Daily review and closeout",
+          "href": "/faq/#close"
+        }
+      ],
+      "review": {
+        "revision": 1,
+        "basis": "Existing public documentation",
+        "checkedOn": "2026-11-24"
+      },
+      "claimScope": "merchant_product",
+      "availabilityStatus": "unverified",
+      "dependencies": [
+        "Business-day rules",
+        "Staff roles",
+        "Ticket status"
+      ],
+      "publication": {
+        "state": "active",
+        "issuedOn": "2026-11-24",
+        "expiresOn": null,
+        "supersedes": null,
+        "evidence": "documented"
+      }
+    },
+    {
+      "slug": "guidance-assistant",
+      "title": "Guidance Assistant",
+      "category": "Operations",
+      "answer": "Atlasade describes broader guidance as planned, with bounded development demonstrations. The direction includes item help, explanations, recovery guidance, and follow-up suggestions.",
+      "scope": "Merchant and cashier guidance with decisions kept with staff and owners.",
+      "limitation": "Confirm which guidance can be demonstrated. Voice, store-specific knowledge, autonomous decisions, and live customer follow-up are not established as commercially available.",
+      "lifecycle": "planned",
+      "availability": "Confirm the current package and supported workflow with Atlasade.",
+      "aliases": [
+        "Atlas Assistant",
+        "AI assistant",
+        "AI guidance",
+        "cashier help",
+        "item lookup help",
+        "recovery guidance",
+        "staff training suggestions",
+        "voice guided help",
+        "policy prompts"
+      ],
+      "questions": [
+        "What can the Atlas Assistant help with?",
+        "Can AI run my business for me?",
+        "Can cashiers ask for register help?"
+      ],
+      "demo": null,
+      "sources": [
+        {
+          "label": "Guidance Assistant product map",
+          "href": "/#atlas"
+        },
+        {
+          "label": "AI guidance and owner control",
+          "href": "/faq/#ai"
+        }
+      ],
+      "review": {
+        "revision": 1,
+        "basis": "Existing public documentation",
+        "checkedOn": "2026-11-24"
+      },
+      "claimScope": "merchant_product",
+      "availabilityStatus": "unverified",
+      "dependencies": [
+        "Approved guidance scope",
+        "Staff or owner review"
+      ],
+      "publication": {
+        "state": "active",
+        "issuedOn": "2026-11-24",
+        "expiresOn": null,
+        "supersedes": null,
+        "evidence": "documented"
+      }
+    },
+    {
+      "slug": "content-studio",
+      "title": "Content Studio / Social Observer",
+      "category": "Marketing",
+      "answer": "Local draft components explore business-informed content ideas for merchant review. The broader direction includes products, services, trends, and seasonal campaign ideas.",
+      "scope": "Marketing draft support with the merchant controlling review and publication.",
+      "limitation": "Confirm the signals and draft tools that can be demonstrated. Live business feeds, social-platform connections, automatic publishing, and campaign results are unverified.",
+      "lifecycle": "unverified",
+      "availability": "Confirm the current package and supported workflow with Atlasade.",
+      "aliases": [
+        "Content Studio",
+        "Social Observer",
+        "marketing",
+        "marketing drafts",
+        "social media",
+        "campaign ideas",
+        "content calendar",
+        "content planning",
+        "promotion ideas",
+        "brand voice",
+        "automatic publishing",
+        "auto post to social media"
+      ],
+      "questions": [
+        "What could I post or promote?",
+        "Can Atlasade draft social media content for me to review?",
+        "Does Social Observer publish automatically?"
+      ],
+      "demo": null,
+      "sources": [
+        {
+          "label": "Content Studio / Social Observer product map",
+          "href": "/#atlas"
+        },
+        {
+          "label": "AI guidance and draft review",
+          "href": "/faq/#ai"
+        }
+      ],
+      "review": {
+        "revision": 1,
+        "basis": "Existing public documentation",
+        "checkedOn": "2026-11-24"
+      },
+      "claimScope": "merchant_product",
+      "availabilityStatus": "unverified",
+      "dependencies": [
+        "Available draft inputs",
+        "Merchant review"
+      ],
+      "publication": {
+        "state": "active",
+        "issuedOn": "2026-11-24",
+        "expiresOn": null,
+        "supersedes": null,
+        "evidence": "documented"
+      }
+    },
+    {
+      "slug": "integrations",
+      "title": "Integrations",
+      "category": "Setup & Integrations",
+      "answer": "The product map describes a direction for connections across payments, accounting, inventory, marketing, hardware, and reporting.",
+      "scope": "Merchant integrations and handoffs, such as receipt peripherals, external providers, and exports.",
+      "limitation": "Confirm whether a connection or manual export is involved, the exact provider or model, and the end-to-end workflow. Compatibility and synchronization require separate confirmation.",
+      "lifecycle": "unverified",
+      "availability": "Confirm the current package and supported workflow with Atlasade.",
+      "aliases": [
+        "integrations",
+        "connectors",
+        "third-party integrations",
+        "data sync",
+        "hardware integrations",
+        "payment integrations",
+        "marketing integrations",
+        "inventory integration",
+        "analytics connections"
+      ],
+      "questions": [
+        "What systems does Atlasade integrate with?",
+        "Will my current tools connect to Atlasade?",
+        "Is a connector or manual export involved?"
+      ],
+      "demo": null,
+      "sources": [
+        {
+          "label": "Integrations product map",
+          "href": "/#atlas"
+        },
+        {
+          "label": "Provider and integration compatibility",
+          "href": "/availability/#payments-and-integrations"
+        }
+      ],
+      "review": {
+        "revision": 1,
+        "basis": "Existing public documentation",
+        "checkedOn": "2026-11-24"
+      },
+      "claimScope": "merchant_product",
+      "availabilityStatus": "unverified",
+      "dependencies": [
+        "Provider",
+        "Device or export format",
+        "Supported workflow"
+      ],
+      "publication": {
+        "state": "active",
+        "issuedOn": "2026-11-24",
+        "expiresOn": null,
+        "supersedes": null,
+        "evidence": "documented"
+      }
+    },
+    {
+      "slug": "backup-replay",
+      "title": "Backup & Replay",
+      "category": "Setup & Integrations",
+      "answer": "Backup and restart recovery are areas of development with bounded checks. The product map raises questions about restoring records and reviewing consistency after a restart.",
+      "scope": "Merchant operational records, checkpoints, backups, and restart review.",
+      "limitation": "Confirm the supported backup, restore, and restart procedures and their recovery limits. Cloud backup and cross-device recovery are roadmap ideas.",
+      "lifecycle": "unverified",
+      "availability": "Confirm the current package and supported workflow with Atlasade.",
+      "aliases": [
+        "backup and replay",
+        "data backup",
+        "backup and restore",
+        "backups",
+        "restore",
+        "restart recovery",
+        "disaster recovery",
+        "cloud backup",
+        "event history",
+        "checkpoints",
+        "recovery logs",
+        "restart after an outage"
+      ],
+      "questions": [
+        "Can I back up and restore my sales records?",
+        "What is backed up and when?",
+        "How is a restore checked?"
+      ],
+      "demo": null,
+      "sources": [
+        {
+          "label": "Backup & Replay product map",
+          "href": "/#atlas"
+        },
+        {
+          "label": "Merchant deployment scope",
+          "href": "/deployment/#supported-deployment"
+        }
+      ],
+      "review": {
+        "revision": 1,
+        "basis": "Existing public documentation",
+        "checkedOn": "2026-11-24"
+      },
+      "claimScope": "merchant_product",
+      "availabilityStatus": "unverified",
+      "dependencies": [
+        "Current package",
+        "Backup procedure",
+        "Restore and restart validation"
+      ],
+      "publication": {
+        "state": "active",
+        "issuedOn": "2026-11-24",
+        "expiresOn": null,
+        "supersedes": null,
+        "evidence": "documented"
+      }
+    },
+    {
+      "slug": "products-pricing",
+      "title": "Products, Menu Items and Pricing",
+      "category": "Register",
+      "answer": "The product map connects the Sales Register with a menu and item catalog. The River & Oak exercise shows adding two products at fixed example prices and calculating illustrative tax.",
+      "scope": "The item catalog and how menu items, products, or services would appear at checkout.",
+      "limitation": "Confirm supported item types and price and tax setup. Price lists, bulk updates, modifiers, and price overrides require setup-specific confirmation.",
+      "lifecycle": "unverified",
+      "availability": "Confirm the current package and supported workflow with Atlasade.",
+      "aliases": [
+        "products and pricing",
+        "product catalog",
+        "item catalog",
+        "products",
+        "menu items",
+        "menu setup",
+        "item prices",
+        "SKU",
+        "product pricing",
+        "service catalog",
+        "product modifiers",
+        "price lists"
+      ],
+      "questions": [
+        "Can I set prices for products and services?",
+        "How do menu items and prices appear at checkout?"
+      ],
+      "demo": {
+        "label": "The first customer",
+        "href": "/day-with-atlasade/#walkthrough-ticket"
+      },
+      "sources": [
+        {
+          "label": "Sales Register and item catalog",
+          "href": "/#atlas"
+        },
+        {
+          "label": "Connected merchant workflows",
+          "href": "/product/#connected-work"
+        }
+      ],
+      "review": {
+        "revision": 1,
+        "basis": "Existing public documentation",
+        "checkedOn": "2026-11-24"
+      },
+      "claimScope": "merchant_product",
+      "availabilityStatus": "unverified",
+      "dependencies": [
+        "Item types",
+        "Price and tax setup"
+      ],
+      "publication": {
+        "state": "active",
+        "issuedOn": "2026-11-24",
+        "expiresOn": null,
+        "supersedes": null,
+        "evidence": "documented"
+      }
+    },
+    {
+      "slug": "employee-management",
+      "title": "Employees, Staff and Permissions",
+      "category": "Operations",
+      "answer": "Controlled-beta Business Operations demonstrations include staff roles and manager review. Operator login, permissions, and switching users appear in the product map.",
+      "scope": "Staff access to daily merchant tasks.",
+      "limitation": "Confirm which actions each role can perform. Shift management is a roadmap idea. Payroll, time clocks, and employee scheduling are unverified.",
+      "lifecycle": "unverified",
+      "availability": "Confirm the current package and supported workflow with Atlasade.",
+      "aliases": [
+        "employee management",
+        "staff",
+        "employees",
+        "staff permissions",
+        "roles and permissions",
+        "user roles",
+        "staff login",
+        "operator login",
+        "switch user",
+        "manager approval",
+        "shift management",
+        "staff scheduling"
+      ],
+      "questions": [
+        "Can I give cashiers and managers different permissions?",
+        "Which actions require a manager?",
+        "Does Atlasade handle staff scheduling or payroll?"
+      ],
+      "demo": null,
+      "sources": [
+        {
+          "label": "Business Operations product map",
+          "href": "/#atlas"
+        },
+        {
+          "label": "Current product limits",
+          "href": "/availability/#status"
+        }
+      ],
+      "review": {
+        "revision": 1,
+        "basis": "Existing public documentation",
+        "checkedOn": "2026-11-24"
+      },
+      "claimScope": "merchant_product",
+      "availabilityStatus": "unverified",
+      "dependencies": [
+        "Operator accounts",
+        "Role rules",
+        "Manager workflow"
+      ],
+      "publication": {
+        "state": "active",
+        "issuedOn": "2026-11-24",
+        "expiresOn": null,
+        "supersedes": null,
+        "evidence": "documented"
+      }
+    },
+    {
+      "slug": "multi-location",
+      "title": "Multi-Location Operations",
+      "category": "Operations",
+      "answer": "The public River & Oak example compares River and Hill. A sale at River reduces stock at River and leaves Hill’s stock unchanged. The product map lists broader multi-location inventory as a roadmap idea.",
+      "scope": "Growing merchants comparing branches or stores. The stock example uses two fictional locations.",
+      "limitation": "Confirm location assignment, stock, reports, and staff access for your proposed setup. Stock transfers, shared counts, and consolidated reporting require separate confirmation.",
+      "lifecycle": "unverified",
+      "availability": "Confirm the current package and supported workflow with Atlasade.",
+      "aliases": [
+        "multiple stores",
+        "multiple locations",
+        "multi location",
+        "multi store",
+        "branches",
+        "locations",
+        "store locations",
+        "location management",
+        "multi location inventory",
+        "stock transfers",
+        "headquarters reporting"
+      ],
+      "questions": [
+        "Can I manage multiple stores or branches?",
+        "Can I transfer inventory between locations?",
+        "Can I see reporting across locations?"
+      ],
+      "demo": {
+        "label": "Follow the sale",
+        "href": "/day-with-atlasade/#walkthrough-follow-the-sale"
+      },
+      "sources": [
+        {
+          "label": "Inventory and Reporting product map",
+          "href": "/#atlas"
+        },
+        {
+          "label": "Tracked stock and availability",
+          "href": "/faq/#stock"
+        }
+      ],
+      "review": {
+        "revision": 1,
+        "basis": "Existing public documentation",
+        "checkedOn": "2026-11-24"
+      },
+      "claimScope": "merchant_product",
+      "availabilityStatus": "unverified",
+      "dependencies": [
+        "Location scope",
+        "Stock policy",
+        "Report and staff access rules"
+      ],
+      "publication": {
+        "state": "active",
+        "issuedOn": "2026-11-24",
+        "expiresOn": null,
+        "supersedes": null,
+        "evidence": "documented"
+      }
+    },
+    {
+      "slug": "erp-lite",
+      "title": "ERP Lite (Enterprise Resource Planning)",
+      "category": "Operations",
+      "answer": "ERP Lite is Atlasade’s product direction for connecting everyday sales, customers, inventory, payments, reporting, content ideas, and daily work for smaller merchants.",
+      "scope": "Connected operations for independent merchants and teams exploring modular ERP.",
+      "limitation": "Atlasade is presented as ERP Lite. Confirm each needed workflow, integration, and site before relying on a broader enterprise rollout.",
+      "lifecycle": "unverified",
+      "availability": "Confirm the current package and supported workflow with Atlasade.",
+      "aliases": [
+        "ERP",
+        "E.R.P.",
+        "ERP Lite",
+        "enterprise resource planning",
+        "enterprise ERP",
+        "enterprise operations",
+        "connected business software",
+        "multi module ERP"
+      ],
+      "questions": [
+        "Is Atlasade a full enterprise ERP replacement?",
+        "What does ERP Lite connect?"
+      ],
+      "demo": null,
+      "sources": [
+        {
+          "label": "ERP Lite product explanation",
+          "href": "/product/#erp-lite"
+        },
+        {
+          "label": "Enterprise and ERP direction",
+          "href": "/#erp-lite"
+        }
+      ],
+      "review": {
+        "revision": 1,
+        "basis": "Existing public documentation",
+        "checkedOn": "2026-11-24"
+      },
+      "claimScope": "merchant_product",
+      "availabilityStatus": "unverified",
+      "dependencies": [
+        "Required merchant workflows",
+        "Integration and deployment fit"
+      ],
+      "publication": {
+        "state": "active",
+        "issuedOn": "2026-11-24",
+        "expiresOn": null,
+        "supersedes": null,
+        "evidence": "documented"
+      }
+    },
+    {
+      "slug": "appointments-service-history",
+      "title": "Appointments and Service History",
+      "category": "Customers",
+      "answer": "Appointment or service history appears as a CRM roadmap idea. The public description gives no availability commitment for booking or reservations.",
+      "scope": "Potential customer history for service visits, salons, and other appointment-based merchants.",
+      "limitation": "Confirm whether appointment scheduling, reservations, calendars, capacity, and customer booking are supported in the proposed setup.",
+      "lifecycle": "unverified",
+      "availability": "Confirm the current package and supported workflow with Atlasade.",
+      "aliases": [
+        "appointment history",
+        "service history",
+        "customer appointments",
+        "appointment scheduling",
+        "scheduling and reservations",
+        "reservations",
+        "online booking",
+        "booking calendar",
+        "scheduling"
+      ],
+      "questions": [
+        "Can customers book appointments or reservations online?",
+        "Can staff see a returning client's appointment history?"
+      ],
+      "demo": null,
+      "sources": [
+        {
+          "label": "Appointment history roadmap",
+          "href": "/product/#roadmap"
+        },
+        {
+          "label": "Customer records and history",
+          "href": "/faq/#customers"
+        }
+      ],
+      "review": {
+        "revision": 1,
+        "basis": "Existing public documentation",
+        "checkedOn": "2026-11-24"
+      },
+      "claimScope": "merchant_product",
+      "availabilityStatus": "unverified",
+      "dependencies": [
+        "Service history scope",
+        "Booking and calendar requirements"
+      ],
+      "publication": {
+        "state": "active",
+        "issuedOn": "2026-11-24",
+        "expiresOn": null,
+        "supersedes": null,
+        "evidence": "documented"
+      }
+    },
+    {
+      "slug": "purchasing-suppliers",
+      "title": "Purchasing and Suppliers",
+      "category": "Inventory",
+      "answer": "The product map lists supplier ordering and inventory supplier connections as roadmap ideas. Receiving stock appears in controlled-beta demonstrations.",
+      "scope": "Supplier ordering and its potential relationship to merchant inventory.",
+      "limitation": "Confirm purchasing, supplier management, purchase orders, supplier connections, and any automatic reordering needs before relying on them.",
+      "lifecycle": "unverified",
+      "availability": "Confirm the current package and supported workflow with Atlasade.",
+      "aliases": [
+        "purchasing",
+        "supplier ordering",
+        "suppliers",
+        "purchase orders",
+        "PO",
+        "procurement",
+        "supplier management",
+        "inventory suppliers",
+        "vendor ordering",
+        "vendor management"
+      ],
+      "questions": [
+        "Can I create purchase orders for my suppliers?",
+        "Does Atlasade order stock from vendors?"
+      ],
+      "demo": null,
+      "sources": [
+        {
+          "label": "Supplier ordering roadmap",
+          "href": "/product/#roadmap"
+        },
+        {
+          "label": "Inventory and Integrations product map",
+          "href": "/#atlas"
+        }
+      ],
+      "review": {
+        "revision": 1,
+        "basis": "Existing public documentation",
+        "checkedOn": "2026-11-24"
+      },
+      "claimScope": "merchant_product",
+      "availabilityStatus": "unverified",
+      "dependencies": [
+        "Supplier connection",
+        "Purchasing workflow",
+        "Receiving scope"
+      ],
+      "publication": {
+        "state": "active",
+        "issuedOn": "2026-11-24",
+        "expiresOn": null,
+        "supersedes": null,
+        "evidence": "documented"
+      }
+    },
+    {
+      "slug": "pos-deployment",
+      "title": "POS Deployment and Hardware",
+      "category": "Setup & Integrations",
+      "answer": "The public site describes controlled local Mac deployment rehearsals. Installation, peripherals, and connectivity need confirmation for the current alpha.",
+      "scope": "Where the merchant POS runs and which workstation, printer, cash drawer, or other peripheral can be used.",
+      "limitation": "Confirm the operating system, hardware, installation, hosting, and internet requirements. Public website hosting does not establish merchant hosting. Card acceptance also depends on the payment setup.",
+      "lifecycle": "unverified",
+      "availability": "Confirm the current package and supported workflow with Atlasade.",
+      "aliases": [
+        "deployment",
+        "hardware",
+        "POS installation",
+        "install POS",
+        "local POS",
+        "hosted POS",
+        "Mac POS",
+        "cloud POS",
+        "receipt printer",
+        "cash drawer",
+        "peripherals",
+        "POS without internet",
+        "merchant data hosting",
+        "offline POS"
+      ],
+      "questions": [
+        "Which devices and deployment options can I use?",
+        "Can I run Atlasade POS without internet?",
+        "Does hosting the website in the cloud mean merchant data is hosted there?"
+      ],
+      "demo": null,
+      "sources": [
+        {
+          "label": "Supported deployment",
+          "href": "/deployment/#supported-deployment"
+        },
+        {
+          "label": "Hardware direction",
+          "href": "/#hardware"
+        },
+        {
+          "label": "Website hosting and merchant data",
+          "href": "/deployment/#website-hosting"
+        }
+      ],
+      "review": {
+        "revision": 1,
+        "basis": "Existing public documentation",
+        "checkedOn": "2026-11-24"
+      },
+      "claimScope": "merchant_product",
+      "availabilityStatus": "unverified",
+      "dependencies": [
+        "Operating system",
+        "Hardware",
+        "Connectivity",
+        "Current package"
+      ],
+      "publication": {
+        "state": "active",
+        "issuedOn": "2026-11-24",
+        "expiresOn": null,
+        "supersedes": null,
+        "evidence": "documented"
+      }
+    },
+    {
+      "slug": "merchant-availability",
+      "title": "Atlasade Plans, Pricing and Access",
+      "category": "Setup & Integrations",
+      "answer": "Atlasade invites merchants to ask about current alpha access, terms, and demonstrations of specific workflows. Access and suitability depend on the proposed setup.",
+      "scope": "Atlasade software access and commercial terms.",
+      "limitation": "Confirm price and current terms with the team. The site gives no release date, self-service account creation, installer download, or online purchase.",
+      "lifecycle": "unverified",
+      "availability": "Confirm the current package and supported workflow with Atlasade.",
+      "aliases": [
+        "Atlasade pricing",
+        "software pricing",
+        "pricing",
+        "subscription",
+        "pricing plans",
+        "free plan",
+        "alpha access",
+        "commercial availability",
+        "availability",
+        "sign up",
+        "software download"
+      ],
+      "questions": [
+        "Where can I confirm pricing?",
+        "Can I sign up and start using Atlasade today?",
+        "Is Atlasade available for my business?"
+      ],
+      "demo": null,
+      "sources": [
+        {
+          "label": "Current alpha access",
+          "href": "/availability/#access"
+        },
+        {
+          "label": "Software pricing and terms",
+          "href": "/availability/#pricing"
+        },
+        {
+          "label": "Intended audience",
+          "href": "/product/#who-it-is-for"
+        }
+      ],
+      "review": {
+        "revision": 1,
+        "basis": "Existing public documentation",
+        "checkedOn": "2026-11-24"
+      },
+      "claimScope": "merchant_product",
+      "availabilityStatus": "unverified",
+      "dependencies": [
+        "Current package",
+        "Business fit",
+        "Terms and access"
+      ],
+      "publication": {
+        "state": "active",
+        "issuedOn": "2026-11-24",
+        "expiresOn": null,
+        "supersedes": null,
+        "evidence": "documented"
+      }
+    },
+    {
+      "slug": "loyalty-customer-segments",
+      "title": "Loyalty and Customer Segments",
+      "category": "Customers",
+      "answer": "Loyalty offers and customer segmentation are CRM roadmap ideas. Current public descriptions show bounded customer lookup and linked purchase-history demonstrations.",
+      "scope": "Potential CRM features for groups of customers and returning visits.",
+      "limitation": "Confirm loyalty programs, rewards, segmentation, marketing exports, and configurable privacy rules before relying on them.",
+      "lifecycle": "unverified",
+      "availability": "Confirm the current package and supported workflow with Atlasade.",
+      "aliases": [
+        "loyalty",
+        "loyalty offers",
+        "customer loyalty",
+        "rewards program",
+        "customer segments",
+        "customer segmentation",
+        "marketing exports",
+        "configurable privacy rules"
+      ],
+      "questions": [
+        "Can I create a loyalty rewards program?",
+        "Can I segment customers for marketing?"
+      ],
+      "demo": null,
+      "sources": [
+        {
+          "label": "CRM roadmap ideas",
+          "href": "/product/#roadmap"
+        },
+        {
+          "label": "Customer records and history",
+          "href": "/faq/#customers"
+        }
+      ],
+      "review": {
+        "revision": 1,
+        "basis": "Existing public documentation",
+        "checkedOn": "2026-11-24"
+      },
+      "claimScope": "merchant_product",
+      "availabilityStatus": "unverified",
+      "dependencies": [
+        "Approved loyalty workflow",
+        "Customer data and access rules"
+      ],
+      "publication": {
+        "state": "active",
+        "issuedOn": "2026-11-24",
+        "expiresOn": null,
+        "supersedes": null,
+        "evidence": "documented"
+      }
+    },
+    {
+      "slug": "refunds-voids",
+      "title": "Refunds, Voids and Corrections",
+      "category": "Payments",
+      "answer": "Atlasade’s public map identifies refund, void, correction, and restock questions for payment, inventory, and daily reporting reviews.",
+      "scope": "Payment changes, any related inventory treatment, and reporting for the proposed merchant setup.",
+      "limitation": "Confirm permitted actions, tender and settlement rules, restock policy, and which correction views are available. Automatic refunds and reversals are unverified.",
+      "lifecycle": "unverified",
+      "availability": "Confirm the current package and supported workflow with Atlasade.",
+      "aliases": [
+        "refunds",
+        "voids",
+        "returns",
+        "payment reversals",
+        "refund and restock",
+        "restock after a return",
+        "payment corrections"
+      ],
+      "questions": [
+        "Can I refund a sale and restock the item?",
+        "Which refund and restock policies apply?"
+      ],
+      "demo": null,
+      "sources": [
+        {
+          "label": "Payments, Inventory and Reporting product map",
+          "href": "/#atlas"
+        },
+        {
+          "label": "Payment and integration limits",
+          "href": "/availability/#payments-and-integrations"
+        }
+      ],
+      "review": {
+        "revision": 1,
+        "basis": "Existing public documentation",
+        "checkedOn": "2026-11-24"
+      },
+      "claimScope": "merchant_product",
+      "availabilityStatus": "unverified",
+      "dependencies": [
+        "Tender and settlement rules",
+        "Refund policy",
+        "Item restock policy"
+      ],
+      "publication": {
+        "state": "active",
+        "issuedOn": "2026-11-24",
+        "expiresOn": null,
+        "supersedes": null,
+        "evidence": "documented"
+      }
+    },
+    {
+      "slug": "accounting-exports",
+      "title": "Accounting Handoffs and Exports",
+      "category": "Reporting",
+      "answer": "Reporting and Integrations describe accounting handoffs and exports as areas to confirm. Accounting integrations are roadmap direction.",
+      "scope": "Moving daily sales, tender, tax, or other supported report data to an accounting workflow.",
+      "limitation": "Confirm available reports, file formats, and whether any named accounting connector exists. Automated posting and ledger synchronization are unverified.",
+      "lifecycle": "unverified",
+      "availability": "Confirm the current package and supported workflow with Atlasade.",
+      "aliases": [
+        "accounting",
+        "accounting exports",
+        "export reports",
+        "CSV export",
+        "accounting integrations",
+        "accounting handoff",
+        "bookkeeping",
+        "ledger export"
+      ],
+      "questions": [
+        "Can I export sales reports for my accountant?",
+        "Does Atlasade connect to my accounting software?"
+      ],
+      "demo": null,
+      "sources": [
+        {
+          "label": "Reporting and Integrations product map",
+          "href": "/#atlas"
+        },
+        {
+          "label": "Integration compatibility",
+          "href": "/availability/#payments-and-integrations"
+        }
+      ],
+      "review": {
+        "revision": 1,
+        "basis": "Existing public documentation",
+        "checkedOn": "2026-11-24"
+      },
+      "claimScope": "merchant_product",
+      "availabilityStatus": "unverified",
+      "dependencies": [
+        "Available report fields",
+        "Export formats",
+        "Accounting system"
+      ],
+      "publication": {
+        "state": "active",
+        "issuedOn": "2026-11-24",
+        "expiresOn": null,
+        "supersedes": null,
+        "evidence": "documented"
+      }
+    },
+    {
+      "slug": "online-ordering",
+      "title": "Online Ordering",
+      "category": "Setup & Integrations",
+      "answer": "The Integrations area lists online ordering as a roadmap idea. The public site provides the café walkthrough and product information.",
+      "scope": "Potential orders placed away from the in-store register.",
+      "limitation": "Confirm ordering channels, fulfillment, and payment availability for your setup. The website makes no availability commitment for an online ordering service.",
+      "lifecycle": "unverified",
+      "availability": "Confirm the current package and supported workflow with Atlasade.",
+      "aliases": [
+        "online orders",
+        "web ordering",
+        "customer ordering",
+        "order online",
+        "ecommerce ordering",
+        "online store"
+      ],
+      "questions": [
+        "Can customers place orders online?",
+        "Does Atlasade offer online ordering for my shop?"
+      ],
+      "demo": null,
+      "sources": [
+        {
+          "label": "Online ordering roadmap",
+          "href": "/product/#roadmap"
+        },
+        {
+          "label": "Provider and integration compatibility",
+          "href": "/availability/#payments-and-integrations"
+        }
+      ],
+      "review": {
+        "revision": 1,
+        "basis": "Existing public documentation",
+        "checkedOn": "2026-11-24"
+      },
+      "claimScope": "merchant_product",
+      "availabilityStatus": "unverified",
+      "dependencies": [
+        "Ordering channel",
+        "Fulfillment workflow",
+        "Payment provider"
+      ],
+      "publication": {
+        "state": "active",
+        "issuedOn": "2026-11-24",
+        "expiresOn": null,
+        "supersedes": null,
+        "evidence": "documented"
+      }
+    },
+    {
+      "slug": "cafe-sale-trace",
+      "title": "Follow a Café Sale",
+      "category": "Reporting",
+      "answer": "In the fictional café, one completed cash sale appears as a customer-linked receipt, a River stock movement, and a finance view that distinguishes sales revenue from tax.",
+      "scope": "One simulated sale at the River & Oak front counter.",
+      "limitation": "The example uses fixed products, customer, tax, and cash amounts. Confirm live records, reports, and staff access for your merchant setup.",
+      "lifecycle": "unverified",
+      "availability": "Confirm the current package and supported workflow with Atlasade.",
+      "aliases": [
+        "follow the sale",
+        "sale trace",
+        "receipt stock and finance",
+        "cashier operator finance",
+        "trace a sale",
+        "café receipt"
+      ],
+      "questions": [
+        "How do I follow the café sale across the receipt, stock, and reports?",
+        "Where does the café show sales revenue and tax?"
+      ],
+      "demo": {
+        "label": "Follow the sale",
+        "href": "/day-with-atlasade/#walkthrough-follow-the-sale"
+      },
+      "sources": [
+        {
+          "label": "Connected merchant workflows",
+          "href": "/product/#connected-work"
+        }
+      ],
+      "review": {
+        "revision": 1,
+        "basis": "Existing public documentation",
+        "checkedOn": "2026-11-24"
+      },
+      "claimScope": "synthetic_demo",
+      "availabilityStatus": "unverified",
+      "dependencies": [
+        "Completed fictional cash sale"
+      ],
+      "publication": {
+        "state": "active",
+        "issuedOn": "2026-11-24",
         "expiresOn": null,
         "supersedes": null,
         "evidence": "documented"
