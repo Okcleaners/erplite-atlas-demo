@@ -269,3 +269,13 @@ input { min-height: 44px; border: 1px solid #8aa098; padding: 9px 12px; backgrou
   .sale-effects::after { display: none; }
   .effect::before { width: 13px; }
 }
+
+.mobile-slip { display: none; }
+@container (max-width: 540px) {
+  .mobile-slip { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: #fffcf1; color: var(--ink); padding: 10px 12px; }
+  .mobile-slip strong, .mobile-slip span { display: block; }
+  .mobile-slip span { font-size: .82rem; }
+  .mobile-slip button { border: 0; padding: 3px; background: transparent; color: var(--forest); font-size: .84rem; text-decoration: underline; }
+  #full-sale-receipt[data-expanded=false] { display: none; }
+  #full-sale-receipt[data-expanded=true] { border-top: 1px dashed #aebdaf; }
+}

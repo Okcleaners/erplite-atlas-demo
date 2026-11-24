@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import atlasData from "../atlas-data.json";
 import "./styles.css";
+import SalePortrait from "./SalePortrait.jsx";
 import { KnowledgeLinks, AvailabilityNotice } from "./PublicPages.jsx";
 
 const navItems = [
@@ -180,18 +181,15 @@ function Hero() {
     <div className="hero-inner">
       <div className="hero-copy">
         <p className="eyebrow">A Day With Atlasade</p>
-        <h1>One day. One business. <em>Everything connected.</em></h1>
-        <p className="hero-subtitle">Step behind the counter at River &amp; Oak. Discover how Atlasade brings everyday business operations together, one café sale at a time.</p>
+        <h1><span>One day.</span> <span>One business.</span> <em>Everything connected.</em></h1>
+        <p className="hero-subtitle">Step behind the counter at River &amp; Oak. See how one café sale connects a customer, a shelf, and a cash drawer.</p>
         <div className="hero-actions">
           <a className="button primary" href="/day-with-atlasade/"><Coffee size={18} aria-hidden="true" />Try the café day</a>
           <a className="button secondary" href="/features/">Find a feature</a>
-          <a className="button secondary" href="#atlas">Explore the product map</a>
         </div>
+        <a className="map-jump" href="#atlas">Explore the product map <span aria-hidden="true">↓</span></a>
       </div>
-      <figure className="cafe-cover">
-        <img src="/images/cafe-morning.webp" width="900" height="600" alt="Coffee and a hand-cut oat bar on the sunlit café counter" />
-        <figcaption><span>River &amp; Oak</span><small>Interactive café story</small></figcaption>
-      </figure>
+      <SalePortrait />
     </div>
   </section>;
 }

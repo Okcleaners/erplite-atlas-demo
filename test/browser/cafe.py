@@ -126,6 +126,16 @@ def exercise(browser, base, output, width, height, keyboard=False, reduced=False
     chapter("Follow the sale")
     board = page.locator(".sale-map")
     receipt = board.get_by_role("region", name="Completed receipt")
+    if width == 390:
+        expect(receipt).to_have_count(0)
+        shot("05-compact")
+        action("See inventory change")
+        expect(board.locator("#stock-source")).to_contain_text("1 × Oat bar")
+        action("See where the money went")
+        expect(board.locator("#cash-source")).to_contain_text("$8.40")
+        action("See where the money went")
+        action("Expand receipt")
+        expect(button("Collapse receipt")).to_have_attribute("aria-expanded", "true")
     expected_receipt = receipt.inner_text()
     assert receipt.locator(".amount b").all_text_contents() == [
         "$5.00", "$3.00", "$8.00", "$0.40", "$8.40", "$10.00", "$1.60"]
@@ -144,7 +154,7 @@ def exercise(browser, base, output, width, height, keyboard=False, reduced=False
         expect(detail).to_contain_text("Receipt #104")
         expect(detail).to_be_visible()
         expect(detail).to_contain_text("1 × Oat bar at River · $3.00" if source == "stock" else "$10.00 tendered less $1.60 change leaves $8.40")
-        expect(board.locator("button[aria-expanded=true]")).to_have_count(1)
+        expect(board.locator(".trace-button[aria-expanded=true]")).to_have_count(1)
         assert receipt.inner_text() == expected_receipt
         if reduced:
             assert detail.evaluate("e => getComputedStyle(e.closest('section'),'::before').animationName") == "none"
@@ -179,6 +189,9 @@ def exercise(browser, base, output, width, height, keyboard=False, reduced=False
         expect(button("Complete simulated sale")).to_have_count(0)
         choose.select_option("4")
         expect(button(stock_label)).to_have_attribute("aria-expanded", "true")
+        if width == 390:
+            expect(button("Expand receipt")).to_have_attribute("aria-expanded", "false")
+            action("Expand receipt")
         assert receipt.inner_text() == expected_receipt
     action("Go to the closing count")
     chapter("Close the day")

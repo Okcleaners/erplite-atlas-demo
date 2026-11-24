@@ -105,6 +105,7 @@ function Trace({ label, id, active, onToggle, children }) {
 }
 
 function ConnectedSale({ day, lens, setLens, next }) {
+  const [expanded, setExpanded] = useState(false);
   const { receipt, scenario } = day;
   const location = scenario.locations.find(place => place.id === receipt.locationId);
   const movement = receipt.stockMovements[0];
@@ -119,7 +120,13 @@ function ConnectedSale({ day, lens, setLens, next }) {
     <div className="sale-map" data-lens={lens}>
       <div className="sale-desk">
         <div className="sale-caption"><span>Cashier</span><span>✓ Paid</span></div>
-        <Receipt day={day} />
+        <div className="mobile-slip">
+          <div><strong>{ref}</strong><span>{scenario.customers.find(person => person.id === receipt.customerId).name} · {money(receipt.total)}</span></div>
+          <button type="button" aria-expanded={expanded} aria-controls="full-sale-receipt" onClick={() => setExpanded(value => !value)}>
+            {expanded ? "Collapse receipt" : "Expand receipt"}
+          </button>
+        </div>
+        <div id="full-sale-receipt" data-expanded={expanded}><Receipt day={day} /></div>
       </div>
       <div className="sale-effects">
         <section className="effect inventory" aria-labelledby="stock-heading">
