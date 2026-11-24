@@ -6,9 +6,13 @@ The site is a React + Vite single-page homepage with the original ERP-Lite Opera
 
 ## Current production and handoff
 
-The canonical site is [www.atlasade.com](https://www.atlasade.com/) on the Cloudflare Pages project `atlasade-website`. The current production source is `461614980e3382018973656483caf5fdec14a598` on `codex/atlas-web-feature-coverage-011`. Production deployment `8c7a8be5-e265-4d71-9867-81678269d2d3` includes the 010 browser compatibility fixes and expands Feature Finder from 7 to 30 records across all 10 product-map modules.
+The canonical site is [www.atlasade.com](https://www.atlasade.com/) on Cloudflare Pages project `atlasade-website`. Production deployment `402e62a6-e9f1-4ef8-8f90-369db36a5e29` serves source `73f72df485a903f590955a6b7148dd5211529f1d` from `codex/atlas-web-interactive-013b`. It includes the Connected Business Explorer and the 011 Finder catalog of 30 records across all 10 product-map modules.
 
-Begin website handoff from [production promotion 011](docs/publication-011.md) for the exact source, knowledge release, validation, and rollback. The [coverage matrix](docs/public-capability-coverage-011.md) records the scope of public claims and search qualification. The separate `atlasade-preview` Pages project hosts the [Access-protected review](https://review.atlasade-preview.pages.dev/features/).
+Begin website handoff from [production release 013B](docs/publication-013b.md) for the exact source, knowledge release, validation, and rollback. The [coverage matrix](docs/public-capability-coverage-011.md) records public claim scope. The separate `atlasade-preview` Pages project hosts the [Access-protected Explorer review](https://review.atlasade-preview.pages.dev/connected-business-explorer/).
+
+## Connected Business Explorer
+
+Visit [Connected Business Explorer](https://www.atlasade.com/connected-business-explorer/) to try a fictional café sale at River or Hill and compare selling-location stock and cash with the combined report. The regular website build includes the Explorer and its JavaScript-free worked example. The [prototype guide](prototype/connected-business-explorer/README.md) documents the underlying experiment and local qualification.
 
 ## A Day With Atlasade
 

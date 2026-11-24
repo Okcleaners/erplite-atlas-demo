@@ -1,5 +1,7 @@
 # Atlasade production promotion 011
 
+The 011 deployment is the rollback target for the current [013B production release](publication-013b.md).
+
 On November 24, 2026, the owner-approved Feature Finder release was promoted to the existing Cloudflare Pages production project. The canonical site is [www.atlasade.com](https://www.atlasade.com/). The production source remains the exact protected-preview candidate. This documentation follows that source commit on the release branch.
 
 | Release item | Value |
