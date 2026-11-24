@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 188" role="img" aria-labelledby="models-title">
+  <title id="models-title">River and Hill storefront models</title>
+  <defs>
+    <linearGradient id="shop-wall" x2="1" y2="1">
+      <stop stop-color="#f0e5c8"/><stop offset="1" stop-color="#b5a684"/>
+    </linearGradient>
+    <linearGradient id="shop-side" x2=".9" y2="1">
+      <stop stop-color="#948f74"/><stop offset="1" stop-color="#555e55"/>
+    </linearGradient>
+    <linearGradient id="shop-glass" x1=".15" y1="0" x2=".66" y2="1">
+      <stop stop-color="#6d9689"/><stop offset=".48" stop-color="#365b57"/><stop offset="1" stop-color="#1b383a"/>
+    </linearGradient>
+    <linearGradient id="shop-light" x2="1" y2="1">
+      <stop stop-color="#ffdba0" stop-opacity=".92"/><stop offset="1" stop-color="#e5a771" stop-opacity=".15"/>
+    </linearGradient>
+    <linearGradient id="shop-plinth" x2=".8" y2="1">
+      <stop stop-color="#839188"/><stop offset="1" stop-color="#475f5d"/>
+    </linearGradient>
+    <linearGradient id="shop-blue" x2="1" y2="1">
+      <stop stop-color="#a9bdac"/><stop offset="1" stop-color="#54786f"/>
+    </linearGradient>
+    <filter id="shop-shadow" x="-50%" y="-100%" width="200%" height="300%"><feGaussianBlur stdDeviation="7"/></filter>
+    <filter id="shop-glow" x="-50%" y="-60%" width="200%" height="240%"><feGaussianBlur stdDeviation="4"/></filter>
+
+    <!-- Shared corner-shop geometry adapted from the original Mirage evaluation study. -->
+    <g id="shop-platform" transform="translate(150 111)">
+      <ellipse cx="6" cy="44" rx="114" ry="21" fill="#06171c" opacity=".78" filter="url(#shop-shadow)"/>
+      <path d="m-110 20 103 40 118-41v9L-7 70l-103-40z" fill="#283f43"/>
+      <path d="m-110 20 115-37 106 36L-7 60z" fill="url(#shop-plinth)" stroke="#91a295" stroke-width=".6"/>
+      <path d="m-108 26 101 39 116-40M-7 60v10" fill="none" stroke="#64817a" stroke-width=".7"/>
+      <path d="m-95 25 88 34 104-38m-108 33 8 3m49-18 8 2m-132-9 9 4" fill="none" stroke="#b1b6a1" stroke-width=".75" opacity=".65"/>
+    </g>
+    <g id="shop-building">
+      <path d="m-86 9 78 30V-25l-78-27z" fill="url(#shop-wall)"/>
+      <path d="m-8 39 91-29v-62L-8-25z" fill="url(#shop-side)"/>
+      <path d="m-92-48 83 32 99-32v-7l-99 31-83-31z" fill="#b4a78d"/>
+      <path d="m-92-55 99-31 83 31-99 31z" fill="#f1e6c9" stroke="#f7ebcc" stroke-width=".7"/>
+      <path d="m-78-55 85-25 68 25-84 26z" fill="#a9aa94"/>
+      <path d="m-65-54 74-21 55 20-73 23z" fill="var(--roof, #779085)"/>
+      <path d="m-62-54 71-19 50 18m-75 21 75-21" fill="none" stroke="#d5dac4" opacity=".46"/>
+      <path d="m-75-32 54 20v39L-75 6z" fill="url(#shop-glass)" stroke="#776347" stroke-width="2"/>
+      <path d="m-72-14 49 18v20L-72 5z" fill="url(#shop-light)" opacity=".77" filter="url(#shop-glow)"/>
+      <path d="m-72-12 49 18v18L-72 5z" fill="url(#shop-light)" opacity=".8"/>
+      <path d="m-50-22 0 37m-25-29 54 20" fill="none" stroke="#e2c89e" stroke-width="1.6"/>
+      <path d="m-74-31 11 4-12 21v-16zm20 7 7 3-15 24-7-3z" fill="#d5e4cd" opacity=".28"/>
+      <path d="M5 26V-7l21-7v34z" fill="#294c4d" stroke="#c9b68e" stroke-width="1.6"/>
+      <path d="m10 9 11-4v-12l-11 4z" fill="#759b88"/>
+      <path d="m36-17 34-11v23L36 6z" fill="url(#shop-glass)" stroke="#c1af88" stroke-width="1.7"/>
+      <path d="m39-9 29-10v12L39 3z" fill="url(#shop-light)" opacity=".69"/>
+      <path d="m51-22 0 22m-14-7 33-11" stroke="#bcad8b" opacity=".79"/>
+      <path d="m-85-42 72 27-8 8-73-27z" fill="var(--awning, #649084)"/>
+      <path d="m-94-34 73 27v6l-73-27z" fill="#345851"/>
+      <path d="m-84-34 64 24" stroke="#e9c995" stroke-width="1.4" opacity=".8"/>
+      <path d="m4 29 24-8 7 2-24 8z" fill="#aa9f85"/>
+      <path d="m-90 12 80 31 92-29" fill="none" stroke="#dacba8" opacity=".8"/>
+      <path d="m3-16 25-8v4L3-12z" fill="var(--awning, #649084)" stroke="#cdb18a" stroke-width=".7"/>
+      <path d="m73-15 5-2v8l-5 2z" fill="#ecd298"/>
+      <ellipse cx="75" cy="-10" rx="7" ry="9" fill="#ffcd79" opacity=".29" filter="url(#shop-glow)"/>
+    </g>
+    <g id="shop-plant">
+      <path d="m-7 1 7 3 7-3-2 9-5 2-5-2z" fill="#8f8170"/>
+      <path d="M0 3v-14m0 7c-8-1-9-5-8-9 6 0 8 3 8 9zm0-2c6-1 8-5 7-10-5 1-7 4-7 10z" stroke="#789787" fill="#587f6c" stroke-width="1"/>
+    </g>
+    <g id="river-model" transform="translate(150 111)">
+      <use href="#shop-building"/>
+      <path d="m-23-58 24-8 17 5-23 8z" fill="#c0c8ae" stroke="#dedbc4" stroke-width=".7"/>
+      <path d="m-23-58 18 5 23-8v3l-23 8-18-5z" fill="#677b71"/>
+      <path d="m-4-62 0 8m8-11 0 8" stroke="#687b70" stroke-width=".8"/>
+      <use href="#shop-plant" transform="translate(-89 15) scale(.89)"/>
+      <use href="#shop-plant" transform="translate(78 14) scale(.8)"/>
+      <path d="m18 28 13-4m-10 7 13-4" stroke="#d8b781" stroke-width="1.2" opacity=".63"/>
+    </g>
+    <g id="hill-model" transform="translate(150 111)" style="--roof:#52766e;--awning:#627e88">
+      <use href="#shop-building"/>
+      <path d="m19-63 20-6 12 4-21 7z" fill="url(#shop-blue)"/>
+      <path d="m19-63 11 5 21-7v5l-21 7-11-5z" fill="#678379"/>
+      <path d="m55-62 13-4 7 3-13 4zM55-62v-10l7 3v10z" fill="#9eaa93" stroke="#c5c7ad" stroke-width=".65"/>
+      <path d="m62-69 13-4v10l-13 4z" fill="#61776d"/>
+      <use href="#shop-plant" transform="translate(-90 17) scale(.72)"/>
+      <use href="#shop-plant" transform="translate(81 16) scale(1.05)"/>
+    </g>
+  </defs>
+  <g><use href="#shop-platform"/><use href="#river-model"/></g>
+  <g transform="translate(300)"><use href="#shop-platform"/><use href="#hill-model"/></g>
+</svg>
