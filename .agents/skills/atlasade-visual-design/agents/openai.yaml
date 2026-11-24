@@ -1,0 +1,4 @@
+interface:
+  display_name: "Atlasade Visual Design"
+  short_description: "Quiet Orbit design for Atlasade merchant experiences"
+  default_prompt: "Use $atlasade-visual-design to plan a Quiet Orbit demonstration and its visual acceptance checks."
