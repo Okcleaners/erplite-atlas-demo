@@ -168,7 +168,7 @@ input { min-height: 44px; border: 1px solid #8aa098; padding: 9px 12px; backgrou
 /* The connector follows receipt → effects, including when the work panel stacks. */
 .task:has(.sale-map) { container-type: inline-size; }
 .sale-map {
-  --link: #8b9f90;
+  --link: var(--qo-wire);
   display: grid;
   grid-template-columns: 1.08fr 1fr;
   gap: 32px;
@@ -259,7 +259,7 @@ input { min-height: 44px; border: 1px solid #8aa098; padding: 9px 12px; backgrou
 }
 .effect:has([aria-expanded=true]) { border-color: #447058; }
 @media (prefers-reduced-motion: no-preference) {
-  .effect:has([aria-expanded=true])::before { transform-origin: right; animation: sale-link 240ms ease-out; }
+  .effect:has([aria-expanded=true])::before { transform-origin: right; animation: sale-link var(--qo-reveal) var(--qo-ease); }
   @keyframes sale-link { from { transform: scaleX(.1); } }
 }
 @container (max-width: 540px) {

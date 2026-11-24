@@ -6,16 +6,19 @@ const anchor = ({ href, label }) => '<a href="' + escape(href) + '">' + escape(l
 const status = record => '<span class="pill">Product lifecycle · ' + escape(record.lifecycle) + '</span>';
 const chapters = record => record.demo ? anchor({href:record.demo.href,label:"Read “" + record.demo.label + "”"}) : "";
 const options = values => values.map(value => '<option value="'+escape(value)+'">'+escape(value[0].toUpperCase()+value.slice(1))+'</option>').join("");
+const symbols = { Register: "register", Payments: "payments", Customers: "customers", Inventory: "inventory", Reporting: "reporting" };
+const categoryArt = record => symbols[record.category]
+  ? `<svg class="qo-glyph" aria-hidden="true"><use href="/images/quiet-orbit.svg#${symbols[record.category]}"/></svg>` : "";
 export function shell(title, description, path, body, script = "") {
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${escape(title)} | Atlasade</title><meta name="description" content="${escape(description)}"><link rel="canonical" href="${site}${path}">
 <meta property="og:title" content="${escape(title)} | Atlasade"><meta property="og:description" content="${escape(description)}"><meta property="og:url" content="${site}${path}">
-<link rel="stylesheet" href="/finder/style.css">${script}</head><body><a class="skip" href="#main">Skip to content</a><header><div class="wrap top"><a class="brand" href="/" aria-label="Atlasade home"><img src="/favicon.ico" width="30" height="30" alt="">ATLAS<b>ADE</b></a><nav aria-label="Website"><a href="/features/">Feature Finder</a><a href="/day-with-atlasade/">Café day</a></nav></div></header>
+<link rel="stylesheet" href="/quiet-orbit.css"><link rel="stylesheet" href="/finder/style.css">${script}</head><body><a class="skip" href="#main">Skip to content</a><header><div class="wrap top"><a class="brand" href="/" aria-label="Atlasade home"><svg class="qo-brand" aria-hidden="true"><use href="/images/quiet-orbit.svg#brand"/></svg>ATLAS<b>ADE</b></a><nav aria-label="Website"><a href="/features/">Feature Finder</a><a href="/day-with-atlasade/">Café day</a></nav></div></header>
 <main class="wrap" id="main">${body}</main><footer class="wrap"><a href="/">Atlasade home</a><a href="/availability/">Product availability</a><a href="/faq/">Merchant FAQ</a><a href="/agents/">Agent guide</a></footer></body></html>`;
 }
 const datedNotice = record => "This entry requires a current check. Its review deadline is " + record.publication.expiresOn + " at 00:00 UTC. Ask about this feature in Feature Finder.";
 function card(record) {
-  return `<article class="card" data-feature="${escape(record.slug)}" data-revision="${record.review.revision}"><div class="category">${escape(record.category)}</div><h2><a href="${url(record)}">${escape(record.title)}</a></h2>
+  return `<article class="card" data-feature="${escape(record.slug)}" data-revision="${record.review.revision}"><div class="category">${categoryArt(record)}${escape(record.category)}</div><h2><a href="${url(record)}">${escape(record.title)}</a></h2>
   <p>${escape(record.publication.expiresOn ? datedNotice(record) : record.answer)}</p><div class="card-foot">${status(record)}${record.publication.expiresOn ? "" : chapters(record)}</div></article>`;
 }
 function detail(record, releaseId) {
@@ -23,7 +26,7 @@ function detail(record, releaseId) {
   if (record.notice || record.publication.expiresOn) return shell(record.title, record.notice || datedNotice(record), url(record),
     '<a class="back" href="/features/">All features</a><h1>' + escape(record.title) + '</h1><p>' + escape(record.notice || datedNotice(record)) + '</p>' + stamp);
   return shell(record.title,record.answer,url(record),`<a class="back" href="/features/">All features</a>
-    <div class="detail-head"><p class="eyebrow">${escape(record.category)}</p><h1>${escape(record.title)}</h1><p class="lead">${escape(record.answer)}</p></div>
+    <div class="detail-head"><p class="eyebrow feature-category">${categoryArt(record)}${escape(record.category)}</p><h1>${escape(record.title)}</h1><p class="lead">${escape(record.answer)}</p></div>
     <section class="details"><h2>Scope and availability</h2>${status(record)}<dl><dt>Evidence</dt><dd>${record.claimScope === "synthetic_demo" ? "Fictional café demonstration" : "Merchant product documentation"}</dd><dt>Where this applies</dt><dd>${escape(record.scope)}</dd><dt>Dependencies</dt><dd>${record.dependencies.map(escape).join(" · ")}</dd><dt>Merchant availability · ${escape(record.availabilityStatus)}</dt><dd>${escape(record.availability)}</dd><dt>What to confirm</dt><dd>${escape(record.limitation)}</dd></dl>
     <h2>Supporting documentation</h2><ul>${[...record.sources,...(record.demo?[record.demo]:[])].map(source=>"<li>"+anchor(source)+"</li>").join("")}</ul>
     <p class="review">Public wording checked ${escape(record.review.checkedOn)}${record.status === "corrected" ? " · Corrects revision " + record.publication.supersedes : ""}</p>${stamp}</section>

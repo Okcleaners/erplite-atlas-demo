@@ -36,7 +36,7 @@ const navItems = [
   ["Contact", "contact"],
 ];
 
-const accentCycle = ["#2bb3ff", "#2de2d2", "#97ff4f", "#ff9b4a", "#b16dff"];
+const accentCycle = ["#85c9df", "#a8d1c2", "#e9c995", "#a6bfc3", "#c5beca"];
 
 const iconByModule = {
   "sales-register": Store,
@@ -194,6 +194,31 @@ function Hero() {
   </section>;
 }
 
+const businessPaths = [
+  { symbol: "register", partner: "customers", title: "Independent businesses", text: "Follow a customer from the counter to a completed receipt in the fictional café.", href: "/day-with-atlasade/", link: "Step inside River & Oak" },
+  { symbol: "locations", partner: "inventory", title: "Growing across locations", text: "See why an oat bar sold at River changes the count there while Hill keeps its stock.", href: "/features/location-stock/", link: "Explore location scope" },
+  { symbol: "operations", partner: "reporting", title: "Enterprise and ERP", text: "Explore the modular product direction and the integration questions to confirm for your operation.", href: "#erp-lite", link: "Explore the ERP direction" },
+];
+const moduleSymbols = { "sales-register": "register", inventory: "inventory", reporting: "reporting",
+  "customer-crm": "customers", "payments-recovery": "payments", integrations: "operations" };
+
+function CapabilityArt({ symbol }) {
+  return <svg className="qo-glyph" aria-hidden="true"><use href={"/images/quiet-orbit.svg#" + symbol} /></svg>;
+}
+function BusinessPaths() {
+  return <section className="business-paths section-inner" aria-label="Explore by business size">
+    {businessPaths.map(path => <a key={path.symbol} href={path.href} className={"business-path path-" + path.symbol}>
+      <svg className="business-figure" viewBox="0 0 176 64" aria-hidden="true">
+        <path className="figure-wire" d="M62 32h19l8-8h24" />
+        <circle cx="80" cy="32" r="2.5" fill="#b99862" />
+        <use href={"/images/quiet-orbit.svg#" + path.symbol} x="7" y="5" width="66" height="54" />
+        <use href={"/images/quiet-orbit.svg#" + path.partner} x="109" y="4" width="55" height="44" />
+      </svg>
+      <h2>{path.title}</h2><p>{path.text}</p><span>{path.link} <i aria-hidden="true">↗</i></span>
+    </a>)}
+  </section>;
+}
+
 function MerchantTypesSection() {
   return (
     <section className="section merchant-types-section" id="merchant-types">
@@ -310,7 +335,7 @@ function InteractiveAtlasSection() {
           >
             <div className="atlas-detail-top">
               <span className="card-icon" aria-hidden="true">
-                <SelectedIcon size={24} />
+                {moduleSymbols[selectedModule.id] ? <CapabilityArt symbol={moduleSymbols[selectedModule.id]} /> : <SelectedIcon size={24} />}
               </span>
               <div>
                 <p className="eyebrow">Selected Module</p>
@@ -652,6 +677,7 @@ export default function App() {
       <Navigation />
       <main id="main">
         <Hero />
+        <BusinessPaths />
         <div className="section-inner"><AvailabilityNotice /><KnowledgeLinks /></div>
         <MerchantTypesSection />
         <InteractiveAtlasSection />

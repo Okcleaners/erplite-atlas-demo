@@ -36,7 +36,7 @@ export async function fixtureOrigin() {
     const files = new Map(r.files);
     for (const [path,html] of await featureDocuments(r)) files.set(path,html);
     files.set("/agents/",agentGuide(r));
-    for (const path of ["/finder/ui.js","/finder/search.js","/finder/style.css","/favicon.ico","/images/cafe-morning.webp"])
+    for (const path of ["/finder/ui.js","/finder/search.js","/finder/style.css","/favicon.ico","/quiet-orbit.css","/images/quiet-orbit.svg","/images/cafe-morning.webp"])
       files.set(path, await readFile(new URL("../../public"+path,import.meta.url)));
     resources[label] = files;
   }
@@ -51,7 +51,7 @@ export async function fixtureOrigin() {
     const etag = content == null ? null : '"' + sha256(content) + '"';
     if (etag && request.headers["if-none-match"]===etag) status=304;
     const type = path.endsWith(".json") ? "application/json" : path.endsWith(".js") ? "text/javascript" :
-      path.endsWith(".css") ? "text/css" : path.endsWith(".webp") ? "image/webp" : "text/html";
+      path.endsWith(".svg") ? "image/svg+xml" : path.endsWith(".css") ? "text/css" : path.endsWith(".webp") ? "image/webp" : "text/html";
     response.writeHead(status,{...(etag?{ETag:etag}:{}),"Cache-Control":"public, no-cache, must-revalidate","Content-Type":type+"; charset=utf-8"});
     response.end(status===200 ? content : undefined);
     requests.push({path,status,etag,conditional:request.headers["if-none-match"]});

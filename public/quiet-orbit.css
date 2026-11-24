@@ -1,0 +1,25 @@
+:root {
+  --qo-night: #101e2c;
+  --qo-deep: #183a3a;
+  --qo-paper: #faf6e9;
+  --qo-ink: #203c35;
+  --qo-gold: #e9c995;
+  --qo-mint: #a8d1c2;
+  --qo-edge: #b9c9bc;
+  --qo-wire: #94ac9e;
+  --qo-blue: #39adf2;
+  --qo-focus: #3181ab;
+  --qo-display: Georgia, "Times New Roman", serif;
+  --qo-interface: Inter, "Segoe UI", system-ui, sans-serif;
+  --qo-label: ui-monospace, Consolas, monospace;
+  --qo-gap: clamp(16px, 2vw, 28px);
+  --qo-radius: 12px;
+  --qo-lift: 0 14px 24px -13px #031d25a6, 0 2px 3px #071d251f;
+  --qo-light: linear-gradient(135deg, #fffdf3, #f4eddc);
+  --qo-atmosphere: radial-gradient(ellipse at 78% 22%, #344c48, transparent 56%), linear-gradient(125deg, var(--qo-night), #142d33);
+  --qo-ease: cubic-bezier(.2,.7,.25,1);
+  --qo-travel: 950ms;
+  --qo-reveal: 240ms;
+}
+.qo-glyph { width: 52px; height: 40px; flex: none; color: inherit; }
+.qo-brand { width: 32px; height: 32px; flex: none; margin-right: 9px; }

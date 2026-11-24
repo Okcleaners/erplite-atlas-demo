@@ -19,7 +19,7 @@ await build({
 });
 const { renderHome, renderPage } = await import(pathToFileURL(join(root, ".prerender/prerender.mjs")));
 let template = (await readFile(join(dist, "index.html"), "utf8")).replaceAll("\r\n", "\n");
-template = template.replaceAll('"./assets/', '"/assets/').replaceAll('"../assets/', '"/assets/');
+template = template.replaceAll('href="../quiet-orbit.css"', 'href="/quiet-orbit.css"').replaceAll('"./assets/', '"/assets/').replaceAll('"../assets/', '"/assets/');
 const escape = (value) => value.replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;");
 const json = (value) => JSON.stringify(value).replaceAll("<", "\\u003c");
 const organization = { "@type": "Organization", "@id": `${site}/#organization`, name: "AtlasADE", url: `${site}/`, email: contact };

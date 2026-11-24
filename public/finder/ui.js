@@ -38,11 +38,19 @@ function update(ask = false) {
   const heading = document.createElement("h2");
   heading.textContent = record.title;
   help.append(heading);
-  for (const value of [record.answer, "Scope · " + record.scope, "Product lifecycle · " + record.lifecycle, record.limitation, record.availability]) {
-    const p = document.createElement("p");
-    p.textContent = value;
-    help.append(p);
+  const direct = document.createElement("p");
+  direct.className = "direct-answer";
+  direct.textContent = record.answer;
+  const facts = document.createElement("dl");
+  for (const [label, value] of [["Scope", record.scope], ["Product lifecycle", record.lifecycle],
+    ["What to confirm", record.limitation], ["Merchant availability", record.availability]]) {
+    const term = document.createElement("dt");
+    const detail = document.createElement("dd");
+    term.textContent = label;
+    detail.textContent = value;
+    facts.append(term, detail);
   }
+  help.append(direct, facts);
   const revision = document.createElement("p");
   revision.dataset.release = releaseId;
   revision.dataset.revision = record.review.revision;

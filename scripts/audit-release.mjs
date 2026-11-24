@@ -10,7 +10,7 @@ export async function auditRelease(root, release) {
   const routes = ["/", "/app/", "/features/", "/agents/", "/day-with-atlasade/",
     ...pages.map(p => p.path), ...capabilities.records.map(r => "/features/" + r.slug + "/")];
   const allowed = new Set(["404.html", "CNAME", "_headers", ".nojekyll", "sitemap.xml", "robots.txt",
-    "atlasade-brand-reference.png", "images/cafe-morning.webp", "favicon.ico",
+    "atlasade-brand-reference.png", "images/cafe-morning.webp", "quiet-orbit.css", "images/quiet-orbit.svg", "favicon.ico",
     "finder/ui.js", "finder/search.js", "finder/style.css", "finder/catalog.schema.json",
     ...routes.map(path => path.slice(1) + "index.html"), ...[...files.keys()].map(path => path.slice(1))]);
   async function inspect(directory = "") {
@@ -19,7 +19,7 @@ export async function auditRelease(root, release) {
       if (entry.isDirectory()) { await inspect(path + "/"); continue; }
       if (!entry.isFile() || (!allowed.has(path) && !/^assets\/[a-z0-9-]+-[\w-]{8}\.(?:js|css)$/i.test(path)))
         throw new Error("Unexpected compiled asset: " + path);
-      if (/\.(?:html|js|css|json|txt|xml)$/.test(path)) {
+      if (/\.(?:html|js|css|json|txt|xml|svg)$/.test(path)) {
         const contents = await readFile(join(root,path), "utf8");
         if (/Okcleaners\/|rust_core[\\/]|operator_harness[\\/]|docs[\\/]graphify|approved-revisions\.json|[A-Z]:[\\/]Users[\\/]|-----BEGIN (?:\w+ )*PRIVATE KEY-----/i.test(contents))
           throw new Error("Internal reference in compiled asset: " + path);

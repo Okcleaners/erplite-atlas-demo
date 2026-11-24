@@ -2064,3 +2064,57 @@ h4 {
   .portrait-top { gap: 4px; padding-inline: 10px; letter-spacing: .04em; }
   .portrait-top button { white-space: nowrap; font-family: system-ui,sans-serif; }
 }
+
+/* The photograph is a recessed counter plane underneath three independent paper records. */
+.cafe-hero { background: var(--qo-atmosphere); }
+.sale-portrait { border: 0; border-radius: 0; background: none; box-shadow: none; }
+.sale-portrait::before {
+  inset: 16% 4% 14% 8%;
+  border-radius: 44% 12px 18% 24px;
+  transform: rotate(-4deg);
+  background: linear-gradient(135deg,#2c42435e,#152f33c9 88%), url('/images/cafe-morning.webp') center/cover;
+  border: 1px solid #ded2ae60;
+  box-shadow: var(--qo-lift);
+}
+.portrait-top { padding-inline: 5%; }
+.portrait-stage { padding-top: 12px; }
+.portrait-slip { box-shadow: 0 22px 24px -14px #081d24dd; }
+.portrait-slip::before { inset: 0 4px -3px -6px; transform: rotate(-3deg); background: #d3c4a5; }
+.portrait-slip::after { background: var(--qo-light); }
+.sale-filaments { position: relative; height: 44px; width: calc(100% + 14px); margin-left: -7px; }
+.portrait-outcomes { gap: 14px; }
+.portrait-outcomes > div { border-radius: 4px 12px 8px 8px; box-shadow: var(--qo-lift); }
+.portrait-outcomes > div:last-child { margin-top: 9px; margin-bottom: -9px; }
+.portrait-outcomes > div:last-child::after { content:""; position:absolute; bottom:100%; left:50%; height:10px; border-left:1px solid var(--qo-wire); }
+[data-tracing=true] .signal { animation-duration: var(--qo-travel); }
+.business-paths { width:min(calc(100% - 32px),var(--max-width)); margin-bottom:var(--qo-gap); display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--qo-gap); padding: clamp(32px,5vw,68px) 0 0; }
+.business-path {
+  display:flex; flex-direction:column; align-items:flex-start; border-top:1px solid #a6caba80;
+  padding:20px 20px 17px; background:linear-gradient(150deg,#2b4744,#172c32 85%);
+  color:#f5f1e5; text-decoration:none; border-radius:3px 14px 6px 6px;
+}
+.business-path.path-register { background:linear-gradient(140deg,#514639,#293537 80%); border-color:#c8ab84; }
+.business-path.path-operations { background:linear-gradient(140deg,#334650,#172837); border-color:#8ca9b7; }
+.business-figure { width:176px; height:64px; max-width:100%; color:#27473d; background:var(--qo-light); border-radius:4px 22px 4px 4px; box-shadow:0 5px 10px #0c212830; }
+.figure-wire { fill:none; stroke:#819e8e; stroke-width:1.5; }
+.path-locations .business-figure { background:linear-gradient(120deg,#d2e9db,#edf0e0); }
+.path-operations .business-figure { background:linear-gradient(120deg,#ccdae0,#edf1e8); }
+.business-path h2 { font:400 clamp(1.45rem,2.1vw,2rem)/1.12 var(--qo-display); margin:12px 0 8px; letter-spacing:-.035em; }
+.business-path p { font-size:.94rem; color:#d4e1da; line-height:1.55; margin:0 0 22px; }
+.business-path > span { margin-top:auto; padding-top:10px; border-top:1px solid #abbfb53d; width:100%; font-size:.84rem; font-weight:650; color:#ebd4a9; }
+.business-path i { float:right; font-style:normal; }
+.business-path:hover > span { text-decoration:underline; }
+.business-path:focus-visible { outline:3px solid var(--qo-gold); outline-offset:3px; }
+.atlas-detail-top .qo-glyph { width:38px; color:#193f38; }
+.knowledge-page h1 { font-family:var(--qo-display); font-weight:400; }
+.knowledge-nav { gap:12px 22px; }
+.knowledge-nav a { color:#badbd6; text-decoration-color:#709b90; text-underline-offset:.25em; }
+@media (max-width:720px) {
+  .business-paths { grid-template-columns:1fr; gap:12px; }
+  .business-path { padding:18px; }
+  .business-figure { width:132px; height:48px; margin-bottom:12px; }
+  .business-path h2 { margin:0; }
+  .business-path p { margin:2px 0 8px; }
+  .business-path > span { grid-column:2; }
+  .portrait-stage { padding:4px 6px 16px; }
+}
