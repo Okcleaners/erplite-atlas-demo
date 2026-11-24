@@ -25,6 +25,7 @@ import atlasData from "../atlas-data.json";
 import "./styles.css";
 import SalePortrait from "./SalePortrait.jsx";
 import { KnowledgeLinks, AvailabilityNotice } from "./PublicPages.jsx";
+import { explorerPath } from "./public-content.js";
 
 const navItems = [
   ["Home", "home"],
@@ -196,7 +197,7 @@ function Hero() {
 
 const businessPaths = [
   { symbol: "register", partner: "customers", title: "Independent businesses", text: "Follow a customer from the counter to a completed receipt in the fictional café.", href: "/day-with-atlasade/", link: "Step inside River & Oak" },
-  { symbol: "locations", partner: "inventory", title: "Growing across locations", text: "See why an oat bar sold at River changes the count there while Hill keeps its stock.", href: "/features/location-stock/", link: "Explore location scope" },
+  { symbol: "locations", partner: "inventory", title: "Growing across locations", text: "Try a fictional sale at River or Hill and see which records change.", href: explorerPath, link: "Open the Connected Business Explorer" },
   { symbol: "operations", partner: "reporting", title: "Enterprise and ERP", text: "Explore the modular product direction and the integration questions to confirm for your operation.", href: "#erp-lite", link: "Explore the ERP direction" },
 ];
 const moduleSymbols = { "sales-register": "register", inventory: "inventory", reporting: "reporting",

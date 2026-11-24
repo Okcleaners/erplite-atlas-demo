@@ -1,5 +1,6 @@
 export const site = "https://www.atlasade.com";
 export const contact = "jwong@atlasade.com";
+export const explorerPath = "/connected-business-explorer/";
 export const productDescription = "AtlasADE is an early ERP Lite project for connected merchant work. Selected workflows have controlled-beta demonstrations; commercial availability and compatibility require setup-specific confirmation.";
 
 // Only existing public statements and explicit availability limits belong here.

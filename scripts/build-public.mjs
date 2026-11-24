@@ -6,7 +6,8 @@ import react from "@vitejs/plugin-react";
 import { loadRelease } from "./knowledge-release.mjs";
 import { writeKnowledge } from "./write-knowledge.mjs";
 import { auditRelease } from "./audit-release.mjs";
-import { pages, site, contact, productDescription } from "../src/public-content.js";
+import { writeExplorer } from "../prototype/connected-business-explorer/build.mjs";
+import { explorerPath, pages, site, contact, productDescription } from "../src/public-content.js";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const dist = join(root, "dist");
@@ -72,7 +73,8 @@ errorHtml = withoutClientScripts(errorHtml).replace("</head>", '<meta name="robo
 await writeFile(join(dist, "404.html"), errorHtml);
 const release = await loadRelease();
 const knowledgePaths = await writeKnowledge(dist, release);
-const paths = [...knowledgePaths, "/", "/day-with-atlasade/", ...pages.map((page) => page.path)];
+await writeExplorer(dist, { website: true });
+const paths = [...knowledgePaths, "/", "/day-with-atlasade/", explorerPath, ...pages.map((page) => page.path)];
 await writeFile(join(dist, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${paths.map((path) => `<url><loc>${site}${path}</loc></url>`).join("")}</urlset>\n`);
 // Keep the generated root entry aligned with the existing Pages compatibility copy.
 await writeFile(join(root, "index.html"), home);

@@ -1,9 +1,6 @@
-import { locations, nextId, post, sale, start, usd, view } from "./scenario.mjs";
-
-export function outcome(last) {
-  const { current, other, beforeStock, beforeDrawer } = last;
-  return `${current.name} sold ${sale.stockPerSale} oat bar. Stock went from ${beforeStock} to ${current.stock} and drawer cash from ${usd(beforeDrawer)} to ${usd(current.drawer)}. ${other.name} stayed at ${other.stock} oat bars and ${usd(other.drawer)}.`;
-}
+import { locations, nextId, outcome, post, sale, start, usd, view } from "./scenario.mjs";
+import { contact, explorerPath, site } from "../../src/public-content.js";
+import { siteFooter, siteHeader } from "../../scripts/site-chrome.mjs";
 
 const glyph = name => `<svg class="glyph" aria-hidden="true"><use href="#${name}"/></svg>`;
 const connection = `<svg class="connections" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true">
@@ -28,28 +25,36 @@ function store(record, index) {
 
 export const totalLabels = { stock: "Oat bars", sales: "Net sales", tax: "Sales tax", drawer: "Drawer cash", receipts: "Receipts" };
 
-export function document({ sharedCss, css, script, symbols, models }) {
+export function document({ sharedCss, css, script, symbols, models, website = false }) {
   const initial = start();
   const { records, combined } = view(initial);
   const worked = view(post(initial, { id: nextId(initial), location: locations[0].id }));
+  const description = "Explore how a fictional cash sale affects local inventory, drawer cash, and combined totals in two Atlasade storefronts.";
+  const canonical = site + explorerPath;
+  const websiteMetadata = `<meta name="description" content="${description}">
+  <link rel="canonical" href="${canonical}">
+  <meta property="og:title" content="Connected Business Explorer | Atlasade">
+  <meta property="og:description" content="${description}">
+  <meta property="og:url" content="${canonical}">`;
   return `<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex">
+  ${website ? websiteMetadata : '<meta name="robots" content="noindex">'}
   <title>Connected Business Explorer | Atlasade</title>
   <style>${sharedCss}\n${css}</style>
 </head>
 <body>
   <a class="skip" href="#main">Skip to experiment</a>
   <svg class="symbol-sheet" aria-hidden="true" width="0" height="0">${symbols}${models}</svg>
-  <header class="mast"><div class="frame mast-inner">
+  ${website ? siteHeader("#brand") : `<header class="mast"><div class="frame mast-inner">
     <span class="wordmark"><svg class="qo-brand" aria-hidden="true"><use href="#brand"/></svg>ATLAS<b>ADE</b></span>
     <span class="simulation">Fictional simulation</span>
-  </div></header>
+  </div></header>`}
   <main id="main" class="frame">
     <header class="introduction">
+      ${website ? '<p class="simulation">Fictional simulation</p>' : ""}
       <h1>Connected Business <em>Explorer</em></h1>
       <p>Post a cash sale at River or Hill. See which local records move and how one sale changes the totals for both shops.</p>
     </header>
@@ -89,9 +94,16 @@ export function document({ sharedCss, css, script, symbols, models }) {
         <summary>Why the other store stays the same</summary>
         <p id="scope-proof">Each receipt belongs to the store that made the sale. It deducts an item from that store and adds the cash kept after change to that store’s drawer. The combined report adds both stores’ records.</p>
         <p>${usd(sale.tender)} tendered − ${usd(sale.change)} change = ${usd(sale.total)} retained. That includes ${usd(sale.subtotal)} in net sales and ${usd(sale.tax)} in illustrative tax. Drawer balances include opening cash.</p>
+        ${website ? '<p><a href="/features/location-stock/">Read about location-scoped inventory</a></p>' : ""}
       </details>
     </section>
+    ${website ? `<section class="feedback" aria-labelledby="feedback-heading">
+      <div><h2 id="feedback-heading">Help shape Atlasade</h2>
+      <p>Tell us what helped and which business workflow you’d like to explore next. Please leave out customer, payment, and other sensitive business details.</p></div>
+      <a href="mailto:${contact}?subject=Atlasade%20Explorer%20feedback">Email feedback</a>
+    </section>` : ""}
   </main>
+  ${website ? siteFooter() : ""}
   <script>${script}</script>
 </body>
 </html>

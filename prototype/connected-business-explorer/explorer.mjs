@@ -1,5 +1,4 @@
-import { outcome } from "./page.mjs";
-import { nextId, post, reset, sale, start, usd, view } from "./scenario.mjs";
+import { nextId, outcome, post, reset, sale, start, usd, view } from "./scenario.mjs";
 
 const form = document.querySelector("#experiment");
 const complete = document.querySelector("#complete");

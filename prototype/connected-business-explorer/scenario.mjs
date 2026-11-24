@@ -20,6 +20,11 @@ export const locations = Object.freeze(cafe.locations.map(location => Object.fre
 const dollars = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" });
 export const usd = cents => dollars.format(cents / 100);
 
+export function outcome(last) {
+  const { current, other, beforeStock, beforeDrawer } = last;
+  return `${current.name} sold ${sale.stockPerSale} oat bar. Stock went from ${beforeStock} to ${current.stock} and drawer cash from ${usd(beforeDrawer)} to ${usd(current.drawer)}. ${other.name} stayed at ${other.stock} oat bars and ${usd(other.drawer)}.`;
+}
+
 export function start() {
   return { generation: 1, events: [] };
 }

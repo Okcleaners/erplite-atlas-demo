@@ -1,5 +1,6 @@
-import { site } from "../src/public-content.js";
+import { explorerPath, site } from "../src/public-content.js";
 import { loadRelease } from "./knowledge-release.mjs";
+import { siteFooter, siteHeader } from "./site-chrome.mjs";
 const escape = value => String(value).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;");
 const url = record => "/features/" + record.slug + "/";
 const anchor = ({ href, label }) => '<a href="' + escape(href) + '">' + escape(label) + '</a>';
@@ -18,8 +19,8 @@ export function shell(title, description, path, body, script = "") {
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${escape(title)} | Atlasade</title><meta name="description" content="${escape(description)}"><link rel="canonical" href="${site}${path}">
 <meta property="og:title" content="${escape(title)} | Atlasade"><meta property="og:description" content="${escape(description)}"><meta property="og:url" content="${site}${path}">
-<link rel="stylesheet" href="/quiet-orbit.css"><link rel="stylesheet" href="/finder/style.css">${script}</head><body><a class="skip" href="#main">Skip to content</a><header><div class="wrap top"><a class="brand" href="/" aria-label="Atlasade home"><svg class="qo-brand" aria-hidden="true"><use href="/images/quiet-orbit.svg#brand"/></svg>ATLAS<b>ADE</b></a><nav aria-label="Website"><a href="/features/">Feature Finder</a><a href="/day-with-atlasade/">Café day</a></nav></div></header>
-<main class="wrap" id="main">${body}</main><footer class="wrap"><a href="/">Atlasade home</a><a href="/availability/">Product availability</a><a href="/faq/">Merchant FAQ</a><a href="/agents/">Agent guide</a></footer></body></html>`;
+<link rel="stylesheet" href="/quiet-orbit.css"><link rel="stylesheet" href="/finder/style.css">${script}</head><body><a class="skip" href="#main">Skip to content</a>${siteHeader()}
+<main class="wrap" id="main">${body}</main>${siteFooter()}</body></html>`;
 }
 const datedNotice = record => "This entry requires a current check. Its review deadline is " + record.publication.expiresOn + " at 00:00 UTC. Ask about this feature in Feature Finder.";
 function card(record) {
@@ -39,7 +40,8 @@ function detail(record, releaseId) {
     <section class="details"><h2>Scope and availability</h2>${status(record)}<dl><dt>Evidence</dt><dd>${record.claimScope === "synthetic_demo" ? "Fictional café demonstration" : "Merchant product documentation"}</dd><dt>Where this applies</dt><dd>${escape(record.scope)}</dd><dt>Dependencies</dt><dd>${record.dependencies.map(escape).join(" · ")}</dd><dt>Merchant availability · ${escape(record.availabilityStatus)}</dt><dd>${escape(record.availability)}</dd><dt>What to confirm</dt><dd>${escape(record.limitation)}</dd></dl>
     <h2>Supporting documentation</h2><ul>${[...record.sources,...(record.demo?[record.demo]:[])].map(source=>"<li>"+anchor(source)+"</li>").join("")}</ul>
     <p class="review">Public wording checked ${escape(record.review.checkedOn)}${record.status === "corrected" ? " · Corrects revision " + record.publication.supersedes : ""}</p>${stamp}</section>
-    ${record.demo?'<aside class="demo"><div><p class="eyebrow">River &amp; Oak</p><h2>See it in the café</h2></div><div>'+chapters(record)+'<a href="/day-with-atlasade/">Play the café day</a></div></aside>':""}`);
+    ${record.demo?'<aside class="demo"><div><p class="eyebrow">River &amp; Oak</p><h2>See it in the café</h2></div><div>'+chapters(record)+'<a href="/day-with-atlasade/">Play the café day</a></div></aside>':""}
+    ${["location-stock","multi-location","cafe-sale-trace"].includes(record.slug) ? `<aside class="demo"><div><h2>Try a sale at either store</h2><p>Compare two fictional locations and their combined totals.</p></div><a href="${explorerPath}">Open the Connected Business Explorer</a></aside>` : ""}`);
 }
 export async function featureDocuments(release) {
   release ??= await loadRelease();

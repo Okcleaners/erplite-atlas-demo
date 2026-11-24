@@ -2,12 +2,12 @@ import { readFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { featureDocuments } from "./feature-pages.mjs";
 import { agentGuide } from "./agent-guide.mjs";
-import { pages } from "../src/public-content.js";
+import { explorerPath, pages } from "../src/public-content.js";
 import { sha256 } from "./knowledge-release.mjs";
 
 export async function auditRelease(root, release) {
   const { manifest, files, capabilities } = release;
-  const routes = ["/", "/app/", "/features/", "/agents/", "/day-with-atlasade/",
+  const routes = ["/", "/app/", "/features/", "/agents/", "/day-with-atlasade/", explorerPath,
     ...pages.map(p => p.path), ...capabilities.records.map(r => "/features/" + r.slug + "/")];
   const allowed = new Set(["404.html", "CNAME", "_headers", ".nojekyll", "sitemap.xml", "robots.txt",
     "atlasade-brand-reference.png", "images/cafe-morning.webp", "quiet-orbit.css", "images/quiet-orbit.svg", "favicon.ico",

@@ -7,7 +7,7 @@ import { tmpdir } from "node:os";
 import { fileURLToPath } from "node:url";
 import { spawn } from "node:child_process";
 import { createServer } from "node:net";
-import { pages, site, productDescription } from "../src/public-content.js";
+import { explorerPath, pages, site, productDescription } from "../src/public-content.js";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const read = (path, variant = "dist") => readFile(join(root, variant, path), "utf8");
@@ -107,7 +107,7 @@ test("every canonical page has substantial readable HTML, unique metadata, and m
 });
 
 test("all generated internal links, fragments, stylesheets, scripts, and images resolve", async () => {
-  const files = [...pageFiles, "day-with-atlasade/index.html", "app/index.html", "404.html"];
+  const files = [...pageFiles, "day-with-atlasade/index.html", explorerPath.slice(1) + "index.html", "app/index.html", "404.html"];
   for (const path of files) {
     const html = await read(path);
     const current = path === "index.html" ? "/" : `/${path.replace(/index.html$/, "")}`;
@@ -138,6 +138,8 @@ test("preview exclusion never changes the production artifact", async () => {
   assert.match(production, /https:\/\/:worker\.:account\.workers\.dev\/\*/);
   assert.match(await read("_headers", "dist-preview"), /^\/\*\n\s+X-Robots-Tag: noindex/m);
   assert.equal(canonical(await read("index.html", "dist-preview")), `${site}/`);
+  assert.doesNotMatch(await read(explorerPath.slice(1) + "index.html"), /name="robots" content="noindex"/);
+  assert.match(await read(explorerPath.slice(1) + "index.html", "dist-preview"), /name="robots" content="noindex"/);
 });
 
 test("robots permits search and user retrieval while opting GPTBot out; sitemap stays canonical", async () => {
@@ -160,7 +162,7 @@ test("robots permits search and user retrieval while opting GPTBot out; sitemap 
   assert.ok(robots.includes(`Sitemap: ${site}/sitemap.xml`));
   const sitemap = await read("sitemap.xml");
   const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-  assert.deepEqual(urls, [...[...(await featureDocuments()).keys()].map(path => site + path), `${site}/agents/`, `${site}/`, `${site}/day-with-atlasade/`, ...pages.map((page) => `${site}${page.path}`)]);
+  assert.deepEqual(urls, [...[...(await featureDocuments()).keys()].map(path => site + path), `${site}/agents/`, `${site}/`, `${site}/day-with-atlasade/`, site + explorerPath, ...pages.map((page) => `${site}${page.path}`)]);
   assert.ok(!sitemap.includes("workers.dev") && !sitemap.includes("/app/") && !sitemap.includes("404"));
 });
 
